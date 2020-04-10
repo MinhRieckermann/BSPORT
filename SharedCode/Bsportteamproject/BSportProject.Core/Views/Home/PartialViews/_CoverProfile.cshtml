@@ -1,0 +1,101 @@
+﻿@model BSportProject.Core.Models.UserViewModels
+
+<div class="col-md-12">
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="bg-picture" style="background-image:url('/img/Cover/Bg/coverphoto.jpeg')">
+            <span class="bg-picture-overlay"></span><!-- overlay -->
+            <!-- meta -->
+            <div class="box-layout meta bottom">
+                <div class="col-md-6 clearfix">
+                    <div class="main">
+                        <div class="view view-first">
+                            <img src="/img/Cover/Bg/coverphoto.jpeg" />
+                            <div class="mask">
+                                <div class="mask-content">
+                                    <a href="#" data-toggle="modal" data-target="#changeAvt" class="info"><i class="fa fa-camera-retro" aria-hidden="true"></i>&nbsp;Change Avatar</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="media-body">
+                        <h3 class="text-white mb-2 m-t-10 ellipsis">@Model.User.AccountName</h3>
+                        <h5 class="text-white"> @Html.Raw("@")@Model.User.AccountId</h5>
+                    </div>
+                </div>
+            </div><!--/ meta -->
+        </div>
+    }
+</div>
+
+<div class="modal fade" id="changeAvt" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">           
+            <div id="actions" class="row">
+
+                <div class="col-lg-12">
+                    <!-- The fileinput-button span is used to style the file input field as button -->
+                    <span class="btn btn-success fileinput-button">
+                        <i class="glyphicon glyphicon-plus"></i>
+                        <span>Add files...</span>
+                    </span>
+                    <button type="submit" class="btn btn-primary start">
+                        <i class="glyphicon glyphicon-upload"></i>
+                        <span>Start upload</span>
+                    </button>
+                    <button type="reset" class="btn btn-warning cancel">
+                        <i class="glyphicon glyphicon-ban-circle"></i>
+                        <span>Cancel upload</span>
+                    </button>
+                </div>
+
+                <div class="col-lg-5">
+                    <!-- The global file processing state -->
+                    <span class="fileupload-process">
+                        <div id="total-progress" class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                            <div class="progress-bar progress-bar-success" style="width:0%;" data-dz-uploadprogress></div>
+                        </div>
+                    </span>
+                </div>
+
+            </div>
+
+            <div class="table table-striped files" id="previews">
+
+                <div id="template" class="file-row">
+                    <!-- This is used as the file preview template -->
+                    <div>
+                        <span class="preview"><img data-dz-thumbnail /></span>
+                    </div>
+                    <div>
+                        <p class="name" data-dz-name></p>
+                        <strong class="error text-danger" data-dz-errormessage></strong>
+                    </div>
+                    <div>
+                        <p class="size" data-dz-size></p>
+                        <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                            <div class="progress-bar progress-bar-success" style="width:0%;" data-dz-uploadprogress></div>
+                        </div>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary start">
+                            <i class="glyphicon glyphicon-upload"></i>
+                            <span>Start</span>
+                        </button>
+                        <button data-dz-remove class="btn btn-warning cancel">
+                            <i class="glyphicon glyphicon-ban-circle"></i>
+                            <span>Cancel</span>
+                        </button>
+                        <button data-dz-remove class="btn btn-danger delete">
+                            <i class="glyphicon glyphicon-trash"></i>
+                            <span>Delete</span>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+

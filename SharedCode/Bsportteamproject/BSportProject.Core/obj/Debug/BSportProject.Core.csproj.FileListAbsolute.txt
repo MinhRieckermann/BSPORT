@@ -1,0 +1,2 @@
+D:\TFS_BsportteamMinh\BSportTeam\SharedCode\BSportProject\BSportProject.Core\obj\Debug\BSportProject.Core.csprojAssemblyReference.cache
+D:\TFS_BsportteamMinh\BSportTeam\SharedCode\BSportProject\BSportProject.Core\obj\Debug\BSportProject.Core.csproj.CoreCompileInputs.cache

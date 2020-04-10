@@ -1,0 +1,115 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container-fluid">
+    <div class="row content">
+        <div class="col-lg-12">
+            <!-- Top menu -->
+            <nav class="navbar navbar-inverse" role="navigation">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle  collapsed" data-toggle="collapse" data-target="#top-navbar-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="" style="height: 70px;">Bootstrap Long Multi-Step Form</a>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="top-navbar-1">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown">
+                                <span class="li-text">
+                                    Already have an account?
+                                </span>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
+                                <ul id="login-dp" class="dropdown-menu">
+                                    <li>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <form class="form" role="form" method="post" accept-charset="UTF-8" id="login-nav">
+                                                    <div class="form-group">
+                                                        <label class="sr-only" for="exampleInputEmail2">Email address</label>
+                                                        <input type="email" class="form-control" id="exampleInputEmail2" ng-model="Email" placeholder="Email address" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="sr-only" for="exampleInputPassword2">Password</label>
+                                                        <input type="password" class="form-control" id="exampleInputPassword2" ng-model="Password" placeholder="Password" required>
+                                                        <div class="help-block text-right">
+                                                            <a href="">Forget the password ?</a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <button type="submit" class="btn btn-primary btn-block" ng-click="Login()">Sign in</button>
+                                                    </div>
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox"> keep me logged-in
+                                                        </label>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!-- Multi Step Form -->
+            <section id="main-content" class="">
+                <div class="msf-container">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12 msf-title">
+                                <h3>Fill In The Form</h3>
+                                <p>Please complete the form below to get instant access to our application and all its features:</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-4">
+                                <div class="col-sm-12 msf-form">
+                                    <form class="form" role="form" method="post" accept-charset="UTF-8">
+                                        <fieldset>
+                                            <div class="form-group">
+                                                <label for="birth-city">Email:</label><br>
+                                                <input type="email" name="birth-city" class="form-control" ng-model="REmail" required id="birth-city" placeholder="myusername or mymail@mail.com">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="password">Password:</label>
+                                                <input type="password" class="form-control" pattern=".{3,}" id="password" ng-model="RPassword" placeholder="eg. X8df!90EO" title="3 characters minimum" required maxlength="20">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="confirm_password">Confirm Password:</label><br>
+                                                <input type="password" class="form-control" placeholder="Confirm Password" id="confirm_password" required>
+                                            </div>
+                                                <button type="submit" class="btn btn-primary sharp" ng-click="Register()" data-target="#myModal">Sign up</button>
+                                        </fieldset>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="myModal" role="dialog">
+                    <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <h3>{{NotifyMessage}}</h3>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+
+
+

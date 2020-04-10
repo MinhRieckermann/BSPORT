@@ -1,0 +1,838 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BSportTeamDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AppFunction">
+          <Key>
+            <PropertyRef Name="FeatureId" />
+          </Key>
+          <Property Name="FeatureId" Type="int" Nullable="false" />
+          <Property Name="FeatureName" Type="varchar" MaxLength="50" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="CreateBy" Type="varchar" MaxLength="50" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="UpdateBy" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="RoleName" Type="varchar" MaxLength="50" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="CreateBy" Type="varchar" MaxLength="50" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="UpdateBy" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BSportTeamDB.adm.UserFunction' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="UserFunction">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="RoleId" Type="int" />
+          <Property Name="FeatureId" Type="int" />
+          <Property Name="Create" Type="bit" />
+          <Property Name="Update" Type="bit" />
+          <Property Name="Delete" Type="bit" />
+          <Property Name="FullControl" Type="bit" />
+          <Property Name="CreateBy" Type="varchar" MaxLength="50" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UpdateBy" Type="varchar" MaxLength="50" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="DeleteFlag" Type="bit" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="CreateBy" Type="varchar" MaxLength="50" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="UpdateBy" Type="varchar" MaxLength="50" />
+          <Property Name="DeleteFlag" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BSportTeamDB.Audit.AuditData' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="AuditData">
+          <Key>
+            <PropertyRef Name="AuditDataID" />
+          </Key>
+          <Property Name="AuditDataID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="char" MaxLength="1" />
+          <Property Name="TableName" Type="varchar" MaxLength="128" />
+          <Property Name="PrimaryKeyField" Type="varchar" MaxLength="1000" />
+          <Property Name="PrimaryKeyValue" Type="varchar" MaxLength="1000" />
+          <Property Name="FieldName" Type="varchar" MaxLength="128" />
+          <Property Name="OldValue" Type="nvarchar(max)" />
+          <Property Name="NewValue" Type="nvarchar(max)" />
+          <Property Name="UpdateDate" Type="datetime" />
+          <Property Name="UserName" Type="varchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="AuditMonitorTableColumns">
+          <Key>
+            <PropertyRef Name="AuditMonitorTableColumnsID" />
+          </Key>
+          <Property Name="AuditMonitorTableColumnsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SchemaName" Type="nvarchar" MaxLength="250" />
+          <Property Name="TableName" Type="nvarchar" MaxLength="250" />
+          <Property Name="ColumnName" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="ErrorLog">
+          <Key>
+            <PropertyRef Name="ErrorLogID" />
+          </Key>
+          <Property Name="ErrorLogID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ErrorTime" Type="datetime" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ErrorNumber" Type="int" Nullable="false" />
+          <Property Name="ErrorSeverity" Type="int" />
+          <Property Name="ErrorState" Type="int" />
+          <Property Name="ErrorProcedure" Type="nvarchar" MaxLength="126" />
+          <Property Name="ErrorLine" Type="int" />
+          <Property Name="ErrorMessage" Type="nvarchar" MaxLength="4000" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="AccountId" />
+          </Key>
+          <Property Name="AccountId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AccountName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="1000" />
+          <Property Name="BirthDay" Type="datetime" />
+          <Property Name="Desc" Type="nvarchar(max)" />
+          <Property Name="ImageId" Type="nvarchar" MaxLength="100" />
+          <Property Name="PosPlay" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="ConfirmPassword" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="CreateBy" Type="varchar" MaxLength="50" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="UpdateBy" Type="varchar" MaxLength="50" />
+          <Property Name="ConfirmEmail" Type="bit" />
+          <Property Name="isUpdate" Type="bit" />
+          <Property Name="Mobile" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Image">
+          <Key>
+            <PropertyRef Name="ImageId" />
+          </Key>
+          <Property Name="ImageId" Type="bigint" Nullable="false" />
+          <Property Name="ImagePath" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="PlayerTeam">
+          <Key>
+            <PropertyRef Name="TeamId" />
+          </Key>
+          <Property Name="AccountId" Type="int" />
+          <Property Name="TeamId" Type="int" Nullable="false" />
+          <Property Name="CreateBy" Type="varchar" MaxLength="50" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UpdateBy" Type="varchar" MaxLength="50" />
+          <Property Name="UpdateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Schedule">
+          <Key>
+            <PropertyRef Name="DateId" />
+          </Key>
+          <Property Name="DateId" Type="int" Nullable="false" />
+          <Property Name="DateValue" Type="date" />
+        </EntityType>
+        <EntityType Name="ScheduleBook">
+          <Key>
+            <PropertyRef Name="ScheduleBookId" />
+          </Key>
+          <Property Name="ScheduleBookId" Type="int" Nullable="false" />
+          <Property Name="DateId" Type="int" />
+          <Property Name="TimeId" Type="int" />
+          <Property Name="Team1" Type="int" />
+          <Property Name="Team2" Type="int" />
+          <Property Name="StadiumId" Type="int" />
+          <Property Name="HostId" Type="int" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="CreateBy" Type="varchar" MaxLength="50" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UpdateBy" Type="varchar" MaxLength="50" />
+          <Property Name="UpdateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="TeamSport">
+          <Key>
+            <PropertyRef Name="TeamId" />
+          </Key>
+          <Property Name="TeamId" Type="int" Nullable="false" />
+          <Property Name="TeamName" Type="nchar" MaxLength="10" />
+          <Property Name="ImageId" Type="int" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="CreateBy" Type="varchar" MaxLength="50" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="UpdateBy" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Time">
+          <Key>
+            <PropertyRef Name="TimeId" />
+          </Key>
+          <Property Name="TimeId" Type="int" Nullable="false" />
+          <Property Name="time" Type="time" Precision="1" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="CityId" />
+          </Key>
+          <Property Name="CityId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="CreateBy" Type="varchar" MaxLength="50" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="UpdateBy" Type="varchar" MaxLength="50" />
+          <Property Name="DeleteFlag" Type="bit" />
+        </EntityType>
+        <EntityType Name="Stadium">
+          <Key>
+            <PropertyRef Name="StadiumId" />
+          </Key>
+          <Property Name="StadiumId" Type="int" Nullable="false" />
+          <Property Name="StadiumName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="ImageId" Type="int" />
+          <Property Name="HostId" Type="int" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="CreateBy" Type="varchar" MaxLength="50" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="UpdateBy" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Function Name="CreateAccount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Email" Type="varchar" Mode="In" />
+          <Parameter Name="Pass" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="fn_Split" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="String" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Delimiter" Type="char" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="col1" Type="nvarchar(max)" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="fnConvertTitleCaseToSpacedString" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+          <Parameter Name="List" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="fnGetParameterValue" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+          <Parameter Name="ParameterName" Type="varchar" Mode="In" />
+          <Parameter Name="BuildTags" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="fnValidateIdentifier" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Identifier" Type="varchar" Mode="In" />
+          <Parameter Name="IncludeInBuild" Type="bit" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="ViolatedRule" Type="int" />
+                <Property Name="Severity" Type="varchar" MaxLength="40" />
+                <Property Name="ViolatedDescription" Type="varchar" MaxLength="200" />
+                <Property Name="Mitigation" Type="varchar" MaxLength="250" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="uspLogError" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ErrorMessage" Type="nvarchar" Mode="In" />
+          <Parameter Name="ErrorNumber" Type="int" Mode="In" />
+          <Parameter Name="ErrorSeverity" Type="int" Mode="In" />
+          <Parameter Name="ErrorState" Type="int" Mode="In" />
+          <Parameter Name="ErrorLine" Type="int" Mode="In" />
+          <Parameter Name="ErrorProcedure" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="uspPrintError" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="BSportTeamDBModelStoreContainer">
+          <EntitySet Name="AppFunction" EntityType="Self.AppFunction" Schema="adm" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="adm" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="adm" store:Type="Tables" />
+          <EntitySet Name="AuditMonitorTableColumns" EntityType="Self.AuditMonitorTableColumns" Schema="Audit" store:Type="Tables" />
+          <EntitySet Name="ErrorLog" EntityType="Self.ErrorLog" Schema="Audit" store:Type="Tables" />
+          <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Image" EntityType="Self.Image" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PlayerTeam" EntityType="Self.PlayerTeam" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Schedule" EntityType="Self.Schedule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ScheduleBook" EntityType="Self.ScheduleBook" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TeamSport" EntityType="Self.TeamSport" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Time" EntityType="Self.Time" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="City" EntityType="Self.City" Schema="mst" store:Type="Tables" />
+          <EntitySet Name="Stadium" EntityType="Self.Stadium" Schema="mst" store:Type="Tables" />
+          <EntitySet Name="UserFunction" EntityType="Self.UserFunction" store:Type="Tables" store:Schema="adm">
+            <DefiningQuery>SELECT 
+    [UserFunction].[UserId] AS [UserId], 
+    [UserFunction].[RoleId] AS [RoleId], 
+    [UserFunction].[FeatureId] AS [FeatureId], 
+    [UserFunction].[Create] AS [Create], 
+    [UserFunction].[Update] AS [Update], 
+    [UserFunction].[Delete] AS [Delete], 
+    [UserFunction].[FullControl] AS [FullControl], 
+    [UserFunction].[CreateBy] AS [CreateBy], 
+    [UserFunction].[CreateTime] AS [CreateTime], 
+    [UserFunction].[UpdateBy] AS [UpdateBy], 
+    [UserFunction].[UpdateTime] AS [UpdateTime], 
+    [UserFunction].[DeleteFlag] AS [DeleteFlag]
+    FROM [adm].[UserFunction] AS [UserFunction]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="AuditData" EntityType="Self.AuditData" store:Type="Tables" store:Schema="Audit">
+            <DefiningQuery>SELECT 
+    [AuditData].[AuditDataID] AS [AuditDataID], 
+    [AuditData].[Type] AS [Type], 
+    [AuditData].[TableName] AS [TableName], 
+    [AuditData].[PrimaryKeyField] AS [PrimaryKeyField], 
+    [AuditData].[PrimaryKeyValue] AS [PrimaryKeyValue], 
+    [AuditData].[FieldName] AS [FieldName], 
+    [AuditData].[OldValue] AS [OldValue], 
+    [AuditData].[NewValue] AS [NewValue], 
+    [AuditData].[UpdateDate] AS [UpdateDate], 
+    [AuditData].[UserName] AS [UserName]
+    FROM [Audit].[AuditData] AS [AuditData]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BSportTeamDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <ComplexType Name="fn_Split_Result">
+          <Property Name="col1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </ComplexType>
+        <ComplexType Name="fnValidateIdentifier_Result">
+          <Property Name="ViolatedRule" Type="Int32" />
+          <Property Name="Severity" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="ViolatedDescription" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Mitigation" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+        </ComplexType>
+        <EntityType Name="AppFunction">
+          <Key>
+            <PropertyRef Name="FeatureId" />
+          </Key>
+          <Property Name="FeatureId" Type="Int32" Nullable="false" />
+          <Property Name="FeatureName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DeleteFlag" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="AuditMonitorTableColumn">
+          <Key>
+            <PropertyRef Name="AuditMonitorTableColumnsID" />
+          </Key>
+          <Property Name="AuditMonitorTableColumnsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SchemaName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="TableName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ColumnName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ErrorLog">
+          <Key>
+            <PropertyRef Name="ErrorLogID" />
+          </Key>
+          <Property Name="ErrorLogID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ErrorTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserName" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ErrorNumber" Type="Int32" Nullable="false" />
+          <Property Name="ErrorSeverity" Type="Int32" />
+          <Property Name="ErrorState" Type="Int32" />
+          <Property Name="ErrorProcedure" Type="String" MaxLength="126" FixedLength="false" Unicode="true" />
+          <Property Name="ErrorLine" Type="Int32" />
+          <Property Name="ErrorMessage" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Image">
+          <Key>
+            <PropertyRef Name="ImageId" />
+          </Key>
+          <Property Name="ImageId" Type="Int64" Nullable="false" />
+          <Property Name="ImagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="PlayerTeam">
+          <Key>
+            <PropertyRef Name="TeamId" />
+          </Key>
+          <Property Name="AccountId" Type="Int32" />
+          <Property Name="TeamId" Type="Int32" Nullable="false" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Schedule">
+          <Key>
+            <PropertyRef Name="DateId" />
+          </Key>
+          <Property Name="DateId" Type="Int32" Nullable="false" />
+          <Property Name="DateValue" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="ScheduleBook">
+          <Key>
+            <PropertyRef Name="ScheduleBookId" />
+          </Key>
+          <Property Name="ScheduleBookId" Type="Int32" Nullable="false" />
+          <Property Name="DateId" Type="Int32" />
+          <Property Name="TimeId" Type="Int32" />
+          <Property Name="Team1" Type="Int32" />
+          <Property Name="Team2" Type="Int32" />
+          <Property Name="StadiumId" Type="Int32" />
+          <Property Name="HostId" Type="Int32" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="TeamSport">
+          <Key>
+            <PropertyRef Name="TeamId" />
+          </Key>
+          <Property Name="TeamId" Type="Int32" Nullable="false" />
+          <Property Name="TeamName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="ImageId" Type="Int32" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Time">
+          <Key>
+            <PropertyRef Name="TimeId" />
+          </Key>
+          <Property Name="TimeId" Type="Int32" Nullable="false" />
+          <Property Name="time1" Type="Time" Precision="1" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="CityId" />
+          </Key>
+          <Property Name="CityId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DeleteFlag" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Stadium">
+          <Key>
+            <PropertyRef Name="StadiumId" />
+          </Key>
+          <Property Name="StadiumId" Type="Int32" Nullable="false" />
+          <Property Name="StadiumName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ImageId" Type="Int32" />
+          <Property Name="HostId" Type="Int32" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="UserFunction">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="RoleId" Type="Int32" />
+          <Property Name="FeatureId" Type="Int32" />
+          <Property Name="Create" Type="Boolean" />
+          <Property Name="Update" Type="Boolean" />
+          <Property Name="Delete" Type="Boolean" />
+          <Property Name="FullControl" Type="Boolean" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="DeleteFlag" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="AuditData">
+          <Key>
+            <PropertyRef Name="AuditDataID" />
+          </Key>
+          <Property Name="AuditDataID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="TableName" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="PrimaryKeyField" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="PrimaryKeyValue" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="FieldName" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="OldValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NewValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="UserName" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="BSportDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AppFunctions" EntityType="Self.AppFunction" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="AuditMonitorTableColumns" EntityType="Self.AuditMonitorTableColumn" />
+          <EntitySet Name="ErrorLogs" EntityType="Self.ErrorLog" />
+          <EntitySet Name="Images" EntityType="Self.Image" />
+          <EntitySet Name="PlayerTeams" EntityType="Self.PlayerTeam" />
+          <EntitySet Name="Schedules" EntityType="Self.Schedule" />
+          <EntitySet Name="ScheduleBooks" EntityType="Self.ScheduleBook" />
+          <EntitySet Name="TeamSports" EntityType="Self.TeamSport" />
+          <EntitySet Name="Times" EntityType="Self.Time" />
+          <EntitySet Name="Cities" EntityType="Self.City" />
+          <EntitySet Name="Stadia" EntityType="Self.Stadium" />
+          <EntitySet Name="UserFunctions" EntityType="Self.UserFunction" />
+          <EntitySet Name="AuditDatas" EntityType="Self.AuditData" />
+          <FunctionImport Name="fn_Split" IsComposable="true" ReturnType="Collection(BSportTeamDBModel.fn_Split_Result)">
+            <Parameter Name="String" Mode="In" Type="String" />
+            <Parameter Name="Delimiter" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="fnValidateIdentifier" IsComposable="true" ReturnType="Collection(BSportTeamDBModel.fnValidateIdentifier_Result)">
+            <Parameter Name="Identifier" Mode="In" Type="String" />
+            <Parameter Name="IncludeInBuild" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="CreateAccount">
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Pass" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="uspLogError">
+            <Parameter Name="ErrorMessage" Mode="In" Type="String" />
+            <Parameter Name="ErrorNumber" Mode="In" Type="Int32" />
+            <Parameter Name="ErrorSeverity" Mode="In" Type="Int32" />
+            <Parameter Name="ErrorState" Mode="In" Type="Int32" />
+            <Parameter Name="ErrorLine" Mode="In" Type="Int32" />
+            <Parameter Name="ErrorProcedure" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="uspPrintError" />
+          <EntitySet Name="Accounts" EntityType="BSportTeamDBModel.Account" />
+        </EntityContainer>
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="AccountId" />
+          </Key>
+          <Property Name="AccountId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccountName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="BirthDay" Type="DateTime" Precision="3" />
+          <Property Name="Desc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ImageId" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PosPlay" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ConfirmPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ConfirmEmail" Type="Boolean" />
+          <Property Name="isUpdate" Type="Boolean" />
+          <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BSportTeamDBModelStoreContainer" CdmEntityContainer="BSportDBEntities">
+          <EntitySetMapping Name="AppFunctions">
+            <EntityTypeMapping TypeName="BSportTeamDBModel.AppFunction">
+              <MappingFragment StoreEntitySet="AppFunction">
+                <ScalarProperty Name="FeatureId" ColumnName="FeatureId" />
+                <ScalarProperty Name="FeatureName" ColumnName="FeatureName" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="BSportTeamDBModel.Role">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="BSportTeamDBModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="DeleteFlag" ColumnName="DeleteFlag" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AuditMonitorTableColumns">
+            <EntityTypeMapping TypeName="BSportTeamDBModel.AuditMonitorTableColumn">
+              <MappingFragment StoreEntitySet="AuditMonitorTableColumns">
+                <ScalarProperty Name="AuditMonitorTableColumnsID" ColumnName="AuditMonitorTableColumnsID" />
+                <ScalarProperty Name="SchemaName" ColumnName="SchemaName" />
+                <ScalarProperty Name="TableName" ColumnName="TableName" />
+                <ScalarProperty Name="ColumnName" ColumnName="ColumnName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ErrorLogs">
+            <EntityTypeMapping TypeName="BSportTeamDBModel.ErrorLog">
+              <MappingFragment StoreEntitySet="ErrorLog">
+                <ScalarProperty Name="ErrorLogID" ColumnName="ErrorLogID" />
+                <ScalarProperty Name="ErrorTime" ColumnName="ErrorTime" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="ErrorNumber" ColumnName="ErrorNumber" />
+                <ScalarProperty Name="ErrorSeverity" ColumnName="ErrorSeverity" />
+                <ScalarProperty Name="ErrorState" ColumnName="ErrorState" />
+                <ScalarProperty Name="ErrorProcedure" ColumnName="ErrorProcedure" />
+                <ScalarProperty Name="ErrorLine" ColumnName="ErrorLine" />
+                <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Images">
+            <EntityTypeMapping TypeName="BSportTeamDBModel.Image">
+              <MappingFragment StoreEntitySet="Image">
+                <ScalarProperty Name="ImageId" ColumnName="ImageId" />
+                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PlayerTeams">
+            <EntityTypeMapping TypeName="BSportTeamDBModel.PlayerTeam">
+              <MappingFragment StoreEntitySet="PlayerTeam">
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+                <ScalarProperty Name="TeamId" ColumnName="TeamId" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Schedules">
+            <EntityTypeMapping TypeName="BSportTeamDBModel.Schedule">
+              <MappingFragment StoreEntitySet="Schedule">
+                <ScalarProperty Name="DateId" ColumnName="DateId" />
+                <ScalarProperty Name="DateValue" ColumnName="DateValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ScheduleBooks">
+            <EntityTypeMapping TypeName="BSportTeamDBModel.ScheduleBook">
+              <MappingFragment StoreEntitySet="ScheduleBook">
+                <ScalarProperty Name="ScheduleBookId" ColumnName="ScheduleBookId" />
+                <ScalarProperty Name="DateId" ColumnName="DateId" />
+                <ScalarProperty Name="TimeId" ColumnName="TimeId" />
+                <ScalarProperty Name="Team1" ColumnName="Team1" />
+                <ScalarProperty Name="Team2" ColumnName="Team2" />
+                <ScalarProperty Name="StadiumId" ColumnName="StadiumId" />
+                <ScalarProperty Name="HostId" ColumnName="HostId" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TeamSports">
+            <EntityTypeMapping TypeName="BSportTeamDBModel.TeamSport">
+              <MappingFragment StoreEntitySet="TeamSport">
+                <ScalarProperty Name="TeamId" ColumnName="TeamId" />
+                <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+                <ScalarProperty Name="ImageId" ColumnName="ImageId" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Times">
+            <EntityTypeMapping TypeName="BSportTeamDBModel.Time">
+              <MappingFragment StoreEntitySet="Time">
+                <ScalarProperty Name="TimeId" ColumnName="TimeId" />
+                <ScalarProperty Name="time1" ColumnName="time" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cities">
+            <EntityTypeMapping TypeName="BSportTeamDBModel.City">
+              <MappingFragment StoreEntitySet="City">
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="DeleteFlag" ColumnName="DeleteFlag" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stadia">
+            <EntityTypeMapping TypeName="BSportTeamDBModel.Stadium">
+              <MappingFragment StoreEntitySet="Stadium">
+                <ScalarProperty Name="StadiumId" ColumnName="StadiumId" />
+                <ScalarProperty Name="StadiumName" ColumnName="StadiumName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="ImageId" ColumnName="ImageId" />
+                <ScalarProperty Name="HostId" ColumnName="HostId" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserFunctions">
+            <EntityTypeMapping TypeName="BSportTeamDBModel.UserFunction">
+              <MappingFragment StoreEntitySet="UserFunction">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="FeatureId" ColumnName="FeatureId" />
+                <ScalarProperty Name="Create" ColumnName="Create" />
+                <ScalarProperty Name="Update" ColumnName="Update" />
+                <ScalarProperty Name="Delete" ColumnName="Delete" />
+                <ScalarProperty Name="FullControl" ColumnName="FullControl" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="DeleteFlag" ColumnName="DeleteFlag" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AuditDatas">
+            <EntityTypeMapping TypeName="BSportTeamDBModel.AuditData">
+              <MappingFragment StoreEntitySet="AuditData">
+                <ScalarProperty Name="AuditDataID" ColumnName="AuditDataID" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="TableName" ColumnName="TableName" />
+                <ScalarProperty Name="PrimaryKeyField" ColumnName="PrimaryKeyField" />
+                <ScalarProperty Name="PrimaryKeyValue" ColumnName="PrimaryKeyValue" />
+                <ScalarProperty Name="FieldName" ColumnName="FieldName" />
+                <ScalarProperty Name="OldValue" ColumnName="OldValue" />
+                <ScalarProperty Name="NewValue" ColumnName="NewValue" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionName="BSportTeamDBModel.Store.fn_Split" FunctionImportName="fn_Split">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BSportTeamDBModel.fn_Split_Result">
+                <ScalarProperty Name="col1" ColumnName="col1" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="BSportTeamDBModel.Store.fnValidateIdentifier" FunctionImportName="fnValidateIdentifier">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BSportTeamDBModel.fnValidateIdentifier_Result">
+                <ScalarProperty Name="ViolatedRule" ColumnName="ViolatedRule" />
+                <ScalarProperty Name="Severity" ColumnName="Severity" />
+                <ScalarProperty Name="ViolatedDescription" ColumnName="ViolatedDescription" />
+                <ScalarProperty Name="Mitigation" ColumnName="Mitigation" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CreateAccount" FunctionName="BSportTeamDBModel.Store.CreateAccount" />
+          <FunctionImportMapping FunctionImportName="uspLogError" FunctionName="BSportTeamDBModel.Store.uspLogError" />
+          <FunctionImportMapping FunctionImportName="uspPrintError" FunctionName="BSportTeamDBModel.Store.uspPrintError" />
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="BSportTeamDBModel.Account">
+              <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="isUpdate" ColumnName="isUpdate" />
+                <ScalarProperty Name="ConfirmEmail" ColumnName="ConfirmEmail" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="ConfirmPassword" ColumnName="ConfirmPassword" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PosPlay" ColumnName="PosPlay" />
+                <ScalarProperty Name="ImageId" ColumnName="ImageId" />
+                <ScalarProperty Name="Desc" ColumnName="Desc" />
+                <ScalarProperty Name="BirthDay" ColumnName="BirthDay" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="AccountName" ColumnName="AccountName" />
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

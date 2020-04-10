@@ -1,0 +1,43 @@
+﻿@model BSportProject.Core.Models.UserViewModels
+<div class="col-md-3">
+    <div class="user-info-left">
+        @if (!string.IsNullOrEmpty(Model.User.ImageURL))
+        {
+            <img src="@Model.User.ImageURL" id='img-upload' class="img" alt="Profile Picture">
+        }
+        else
+        {
+            <img src="~/img/Friends/guy-3.jpg" id='img-upload' class="img" alt="Profile Picture">}
+
+        <h2>@Model.User.AccountName</h2>
+        <ul class="list-inline social">
+            <li><a href="#" title="Facebook"><i class="fa fa-facebook-square"></i></a></li>
+            <li><a href="#" title="Twitter"><i class="fa fa-twitter-square"></i></a></li>
+            <li><a href="#" title="Google Plus"><i class="fa fa-google-plus-square"></i></a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="modal fade" id="coverModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <p><i class="fa fa-tablet" aria-hidden="true"></i>	&nbsp; Change Cover Picture</p>
+            </div>
+            <div class="modal-body">
+                @using (Ajax.BeginForm("UploadCoverImage", "Home", FormMethod.Post, new AjaxOptions { UpdateTargetId = "user-info-left", InsertionMode = InsertionMode.Replace }, new { enctype = "multipart/form-data" }))
+            {
+                    @Html.AntiForgeryToken()
+                    <p>
+                        <span class="file-input btn btn-azure btn-file-cover">
+                            Change Avatar <input type="file" name="file" id="imgCover">
+                        </span>
+                    </p>
+                }
+                <img src="" id='img-cover-upload' class="img-responsive" alt="Profile Picture">
+            </div>
+        </div>
+    </div>
+</div>

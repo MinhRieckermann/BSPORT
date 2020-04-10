@@ -1,0 +1,746 @@
+
+.nav.nav-tabs-custom-colored > li.active > a, 
+.nav.nav-tabs-custom-colored > li.active > a:hover, 
+.nav.nav-tabs-custom-colored > li.active > a:focus {
+  background-color: #3ecdf1;
+  color: #fff;
+  cursor: pointer;
+}
+
+.tab-content.profile-page {
+  padding: 35px 15px;
+}
+
+.profile .user-info-left {
+  text-align: center;
+}
+
+.profile .user-info-left, 
+.profile .user-info-right {
+  padding: 10px 0;
+}
+
+.profile .user-info-left img {
+  border: 3px solid #fff;
+}
+
+.profile .user-info-left h2 {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 1.3em;
+  margin-bottom: 20px;
+}
+
+#btn-save-avt{
+    border-radius:10px;
+}
+
+.user-info-left .btn{
+    border-radius:0px;    
+}
+
+.profile .user-info-left ul.social a {
+  font-size: 20px;
+  color: #b9b9b9;
+}
+
+.profile .user-info-right {
+  border-left: 1px solid #ddd;
+  padding-left: 30px;
+}
+
+.profile h3, .activity h3, .settings h3 {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 1.2em;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.data-row .data-name, .data-row .data-value {
+  display: inline-block;
+  vertical-align: middle;
+  padding: 5px;
+}
+
+.data-row .data-name {
+  width: 12em;
+    color: #fff;
+  background-color: #3ecdf1;
+  border-color: #3ecdf1;
+  font-size: 0.9em;
+  vertical-align: top;
+}
+
+ul.activity-list > li:not(:last-child) {
+  border-bottom: 1px solid #ddd;
+}
+
+ul.activity-list > li {
+  padding: 15px;
+}
+
+ul.activity-list > li .activity-icon {
+  display: inline-block;
+  vertical-align: middle;
+  -moz-border-radius: 30px;
+  -webkit-border-radius: 30px;
+  border-radius: 30px;
+  width: 34px;
+  height: 34px;
+  background-color: #e4e4e4;
+  font-size: 16px;
+  color: #656565;
+  line-height: 34px;
+  text-align: center;
+  margin-right: 10px;
+}
+
+fieldset {
+  margin-bottom: 40px;
+}
+
+hr {
+  border-top-color: #ddd;
+}
+
+.form-horizontal .control-label {
+  text-align: left;
+}
+
+.form-control, .input-group .form-control {
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.basic-info {
+    margin-bottom:30px;
+
+}
+
+
+.controls {
+  margin-bottom: 10px;
+}
+
+.collapse-group {
+  padding: 10px;
+  border: 1px solid darkgrey;
+  margin-bottom: 10px;
+}
+
+.panel-title .trigger:before {
+  content: '\e082';
+  font-family: 'Glyphicons Halflings';
+  vertical-align: text-bottom;
+}
+
+.panel-title .trigger.collapsed:before {
+  content: '\e081';
+}
+
+.account-management {
+    font-size: 15px;
+    color: #666
+}
+
+.account-management .dropdown-toggle {
+    display: none
+}
+
+.account-management .sidebar {
+    font-size: 16px;
+    padding-top: 52px
+}
+
+.account-management .sidebar li {
+    padding-top: 22px
+}
+
+.account-management .sidebar li:first-child {
+    padding-top: 0
+}
+
+.account-management .sidebar li.active a {
+    color: #000;
+    font-family: AvenirLTStd-Heavy
+}
+
+.account-management .sidebar a {
+    color: grey
+}
+
+.no-touch .account-management .sidebar a:hover {
+    color: #000
+}
+
+.account-management .item-setting-sa .title.title-col {
+    min-height: 25px
+}
+
+.account-management .title {
+    font-family: AvenirLTStd-Black;
+    color: #000;
+    position: relative
+}
+
+.account-management .title .button {
+    position: absolute;
+    top: -3px;
+    right: 0;
+    margin: 0
+}
+
+.account-management .title.title-block {
+    font-size: 22px;
+    margin-bottom: 0
+}
+
+.account-management .title.title-block .tooltip-wrap {
+    top: -8px
+}
+
+.account-management .title.title-col {
+    font-size: 18px
+}
+
+.account-management .title.title-col .tooltip-wrap {
+    top: -10px
+}
+
+.account-management input {
+    font-family: AvenirLTStd-Heavy;
+    outline: 0
+}
+
+.account-management .modal-footer {
+    text-align: left
+}
+
+.account-management .button {
+    font-size: 12px;
+    color: #fff;
+    background-color: #000;
+    font-family: AvenirLTStd-Heavy;
+    outline: 0;
+    padding: 20px 48px 21px 48px;
+    border: 1px solid #000;
+    transition: background-color .3s;
+    line-height: 1.42857143
+}
+
+.account-management .button.black,
+.account-management .button.white {
+    padding: 11px 18px 9px 18px;
+    background-color: transparent;
+    color: #000;
+    text-transform: uppercase
+}
+
+.account-management .button.black {
+    background-color: #000;
+    color: #fff;
+    width: 46%
+}
+
+.account-management .button.black:first-child {
+    margin-right: 15px
+}
+
+.account-management .button.full-width {
+    width: 100%
+}
+
+.no-touch .account-management .button:hover {
+    background-color: #fff;
+    color: #000
+}
+
+.no-touch .account-management .button:hover.white {
+    background-color: #000;
+    color: #fff
+}
+
+.no-touch .account-management .button:hover.black {
+    background-color: #fff;
+    color: #000
+}
+
+.account-management .button.no-border {
+    border: none
+}
+
+.account-management .form-group label {
+    font-size: 14px;
+    font-family: AvenirLTStd-Black;
+    display: block;
+    color: #000;
+    font-weight: 400
+}
+
+.account-management .form-group select {
+    height: 40px;
+    width:100%;
+}
+
+.account-management .form-group input {
+    width: 100%;
+    height: 56px;
+    padding: 0 19px;
+    color: #000;
+    background-color: transparent;
+    border: 1px solid #CCC;
+    transition: border-color .3s;
+    outline: 0
+}
+
+.account-management .form-group input:disabled {
+    background-color: #F8F8F8
+}
+
+.account-management .form-group input:invalid,
+.account-management .form-group input:required {
+    box-shadow: none
+}
+
+.account-management .form-group input:focus {
+    border-color: #000;
+    border-width: 2px;
+    padding: 0 18px
+}
+
+.account-management .form-group .custom-selectbox {
+    position: relative
+}
+
+.account-management .form-group .custom-selectbox:after {
+    content: "\e90e";
+    font-family: icons;
+    font-size: 7px;
+    position: absolute;
+    top: 50%;
+    margin-top: -3px;
+    right: 20px;
+    color: #000;
+    z-index: 1
+}
+
+.account-management .form-group .custom-selectbox select {
+    background-color: transparent;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    position: relative;
+    z-index: 2
+}
+
+.no-touch .account-management .form-group .custom-selectbox select:hover {
+    cursor: pointer
+}
+
+.account-management .form-group .custom-selectbox select::-ms-expand {
+    display: none
+}
+
+.account-management .form-group .input-error {
+    background-color: #FFD8D9;
+    border: 1px solid #ff0101
+}
+
+.account-management .form-group .small {
+    height: 46px
+}
+
+.account-management .error {
+    font-size: 15px;
+    color: #FE0000;
+    font-style: italic;
+    padding-top: 5px
+}
+
+.account-management .error:empty {
+    padding-top: 0
+}
+
+.dealer-settings {
+    padding-top: 43px;
+    padding-bottom: 46px;
+    color: #000
+}
+
+.dealer-settings .item-setting {
+    border-top: 1px solid #000;
+    padding: 51px 0;
+    font-size: 0
+}
+
+.dealer-settings .item-setting:last-child {
+    padding-bottom: 40px
+}
+
+.dealer-settings .item-setting:first-child {
+    font-size: inherit;
+    border-top: none;
+    padding-top: 0
+}
+
+.dealer-settings .item-setting .title-block {
+    padding-bottom: 46px
+}
+
+.dealer-settings .item-setting .title-block .button {
+    margin: 3px 0 0 0;
+    width: auto
+}
+
+.dealer-settings .item-setting .title-tooltip {
+    margin-top: -6px
+}
+
+.dealer-settings .item-setting.item-setting-sa .title-block {
+    padding-bottom: 0
+}
+
+.dealer-settings .info {
+    /*padding-top: 30px;*/
+    font-size: 14px
+}
+
+.dealer-settings .info p {
+    margin-bottom: 0;
+    padding-top: 4px
+}
+
+.dealer-settings .info p:first-child {
+    padding-top: 0
+}
+
+.dealer-settings .info .rad {
+    padding-top: 0;
+    margin-right: 37px
+}
+
+.dealer-settings .info .rad:last-child {
+    margin-left: 0
+}
+
+.dealer-settings .info .row-info {
+    padding-top: 29px
+}
+
+.dealer-settings .info .row-info:first-child {
+    padding-top: 0
+}
+
+.dealer-settings .info .error {
+    width: 100%
+}
+
+.dealer-settings .row-setting {
+    padding-top: 8px
+}
+
+.dealer-settings .row-setting:after,
+.dealer-settings .row-setting:before {
+    content: " ";
+    display: table
+}
+
+.dealer-settings .row-setting:after {
+    clear: both
+}
+
+.dealer-settings .row-setting:first-child {
+    padding-top: 0
+}
+
+.dealer-settings .row-setting .col-setting.col-setting-1 {
+    width: 144px
+}
+
+.dealer-settings .button {
+    display: inline-block;
+    margin-top: 33px;
+    margin-right: 5px
+}
+
+.dealer-settings .button:last-child {
+    margin: 33px 0 0 0
+}
+
+.dealer-settings .rad input[type=radio]:checked+label:before {
+    background-color: #000
+}
+
+.dealer-settings .rad input[type=radio]:checked+label:after {
+    opacity: 1
+}
+
+.dealer-settings .rad label {
+    min-height: 17px;
+    display: inline-block;
+    position: relative;
+    padding-left: 23px;
+    font-weight: 400
+}
+
+.dealer-settings .rad label:before {
+    content: '';
+    width: 17px;
+    height: 17px;
+    position: absolute;
+    top: 2px;
+    left: 0;
+    background-color: #fff;
+    border: 1px solid #000;
+    transition: background-color .3s;
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
+    border-bottom-left-radius: 50%;
+    border-bottom-right-radius: 50%
+}
+
+.dealer-settings .rad label:after {
+    content: '\e90f';
+    display: block;
+    font-family: icons;
+    font-size: 6px;
+    width: 17px;
+    height: 17px;
+    line-height: 17px;
+    text-align: center;
+    position: absolute;
+    top: 2px;
+    left: 0;
+    color: #fff;
+    opacity: 1;
+    transition: opacity .3s
+}
+
+.dealer-settings .form-price {
+    margin-top: -16px
+}
+
+.dealer-settings .form-price button {
+    border: 1px solid #CCC;
+    background-color: transparent;
+    color: #000;
+    line-height: 32px;
+    outline: 0;
+    width: 35px;
+    height: 35px;
+    padding: 0;
+    margin-top: 6px;
+    transition: background-color .3s
+}
+
+.no-touch .dealer-settings .form-price button:hover {
+    background-color: #000;
+    color: #fff;
+    border-color: #000
+}
+
+.dealer-settings .form-price input {
+    height: 46px;
+    width: 46px;
+    text-align: center;
+    color: #000;
+    border: 1px solid #CCC;
+    transition: border-color .3s;
+    margin: 0 10px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 0
+}
+
+.dealer-settings .form-price input:disabled {
+    color: #000;
+    background-color: transparent;
+    -webkit-text-fill-color: #000
+}
+
+.ie .dealer-settings .form-price input {
+    line-height: 44px
+}
+
+.android .dealer-settings .form-price input,
+.ios .dealer-settings .form-price input,
+.mac .dealer-settings .form-price input {
+    padding-top: 5px;
+    padding-bottom: 0
+}
+
+.ios.portrait .dealer-settings .form-price input {
+    padding-top: 2px
+}
+
+.ipad .dealer-settings .form-price input {
+    padding-top: 8px
+}
+
+.dealer-settings .view-mode .show-edit {
+    display: none
+}
+
+.dealer-settings .view-mode .show-view {
+    display: block
+}
+
+.dealer-settings .view-mode input[type=radio],
+.dealer-settings .view-mode input[type=radio]+label {
+    display: none
+}
+
+.dealer-settings .view-mode input[type=radio]:checked,
+.dealer-settings .view-mode input[type=radio]:checked+label {
+    display: block
+}
+
+.dealer-settings .view-mode input[type=radio]:checked+label:after,
+.dealer-settings .view-mode input[type=radio]:checked+label:before {
+    display: none;
+    padding-left: 0
+}
+
+.dealer-settings .view-mode input[type=radio] .form-price input {
+    pointer-events: none
+}
+
+.dealer-settings .view-mode .form-price input {
+    margin: 0;
+    width: auto;
+    border: none;
+    text-align: left;
+    opacity: 1
+}
+
+.dealer-settings .edit-mode .show-edit {
+    display: block
+}
+
+.dealer-settings .edit-mode .black.show-edit {
+    width: auto
+}
+
+.dealer-settings .edit-mode .show-view {
+    display: none
+}
+
+.dealer-settings .edit-mode input[type=radio],
+.dealer-settings .edit-mode input[type=radio]+label {
+    display: block
+}
+
+.dealer-settings .ico-check,
+.dealer-settings .ico-close,
+.dealer-settings .ico-edit {
+    font-size: 11px;
+    margin-right: 8px
+}
+
+.dealer-settings .item-sa {
+    padding-top: 45px
+}
+
+.dealer-settings .item-sa:nth-child(2n+1) {
+    clear: left
+}
+
+.dealer-settings .approval {
+    font-size: 18px;
+    /*margin-top: 49px*/
+}
+
+.dealer-settings .approval p {
+    margin-bottom: 0
+}
+
+.dealer-settings .approval .confirm {
+    width: 100%;
+    padding: 20px 20px 20px 74px;
+    background-color: #D0859A;
+    color: #fff;
+    position: relative
+}
+
+.dealer-settings .approval .name {
+    font-family: AvenirLTStd-Black;
+    padding-right: 40px;
+    position: relative;
+    max-width: 340px;
+    display: table-cell;
+    vertical-align: middle;
+    word-break: break-all
+}
+
+@media only screen and (min-width:768px) and (max-width:1200px) {
+    .dealer-settings .approval .name {
+        max-width: 240px
+    }
+}
+
+.dealer-settings .approval .name:after {
+    content: '';
+    width: 1px;
+    height: 100%;
+    background-color: #000;
+    position: absolute;
+    top: 0;
+    right: 20px
+}
+
+.dealer-settings .approval a {
+    color: #000;
+    display: table-cell;
+    vertical-align: middle;
+    max-width: 300px;
+    word-break: break-all
+}
+
+@media only screen and (min-width:768px) and (max-width:1200px) {
+    .dealer-settings .approval a {
+        max-width: 200px
+    }
+}
+
+.dealer-settings .approval .button {
+    margin-top: 0
+}
+
+.dealer-settings .approval .info-user {
+    padding: 28px 0px 28px 25px;
+    background-color: #F2F2F2
+}
+
+.dealer-settings .approval .icon {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    text-align: center;
+    line-height: 35px;
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
+    border-bottom-left-radius: 50%;
+    border-bottom-right-radius: 50%;
+    color: #D0859A;
+    background-color: #fff;
+    margin-right: 19px;
+    position: absolute;
+    top: 15px;
+    left: 20px
+}
+
+.dealer-settings .fancy-select .trigger {
+    line-height: 44px;
+    height: 46px;
+    padding: 1px 38px 1px 19px
+}
+
+.dealer-settings .fancy-select select:focus+.trigger {
+    border: 2px solid #000;
+    outline: 0;
+    padding: 0 37px 0 18px
+}

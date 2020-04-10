@@ -1,0 +1,34 @@
+﻿@model BSportProject.Core.Models.UserViewModels
+<div class="widget">
+    <div class="widget-header">
+        <h3 class="widget-caption">About</h3>
+    </div>
+    <div class="widget-body bordered-top bordered-sky">
+        <ul class="list-unstyled profile-about margin-none">
+            <li class="padding-v-5">
+                <div class="row">
+                    <div class="col-sm-4"><span class="text-muted">Date of Birth</span></div>
+                    <div class="col-sm-8">@Model.User.BirthDay</div>
+                </div>
+            </li>
+            <li class="padding-v-5">
+                <div class="row">
+                    <div class="col-sm-4"><span class="text-muted">Address</span></div>
+                    <div class="col-sm-8">@Model.User.Address</div>
+                </div>
+            </li>
+            <li class="padding-v-5">
+                <div class="row">
+                    <div class="col-sm-4"><span class="text-muted">Mobile</span></div>
+                    <div class="col-sm-8">@Model.User.Mobile</div>
+                </div>
+            </li>
+            <li class="padding-v-5">
+                <div class="row">
+                    <div class="col-sm-4"><span class="text-muted">Email</span></div>
+                    <div class="col-sm-8">@Model.User.Email</div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

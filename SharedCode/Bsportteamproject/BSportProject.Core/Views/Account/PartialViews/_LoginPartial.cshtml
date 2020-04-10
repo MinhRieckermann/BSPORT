@@ -1,0 +1,63 @@
+﻿@using BSportProject.Core.Models
+@model LoginViewModel
+<nav class="navbar navbar-inverse" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle  collapsed" data-toggle="collapse" data-target="#top-navbar-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="" style="height: 70px;">Bootstrap Long Multi-Step Form</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="top-navbar-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <span class="li-text">
+                        Already have an account?
+                    </span>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
+                    <ul id="login-dp" class="dropdown-menu">
+                        <li>
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                   @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form", @id = "login-nav", role = "form" }))
+                                   {
+                                    @Html.AntiForgeryToken()
+                                    <h4>Use an email to log in.</h4>
+                                    <hr />
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger"})
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.Email, new { @class = "sr-only" })
+                                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email Adress" })
+                                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger"})
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.Password, new { @class = "sr-only" })
+                                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })
+                                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                                        <div class="help-block text-right">
+                                            <a href="">Forget the password ?</a>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.CheckBoxFor(m => m.RememberMe, new { @class = "checkbox" })
+                                        @Html.LabelFor(m => m.RememberMe, new { @class = "sr-only" })
+                                    </div>
+                                    <div class="form-group">
+                                            <input type="submit" value="Log in" class="btn btn-primary btn-block" />
+                                    </div>                           
+                                   }
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</nav>

@@ -1,0 +1,110 @@
+﻿@model BSportProject.Core.Models.UserViewModels
+<script src="~/Scripts/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker1').datetimepicker({
+            viewMode: 'years',
+            format: 'MM/DD/YYYY'
+        });
+    });
+</script>
+<section>
+    @{
+        <div class="panel-body bio-graph-info">
+            <div class="row">
+                <div class="col-xs-6 viewprofile">
+                    <h1>Profile Info<a class="btnEdit" href="#" data-toggle="modal" data-target="#profileModal"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></h1>
+                    <div class="bio-row">
+                        <p>
+                            <span>First Name </span>: @Model.Account.FirstName
+                        </p>
+                    </div>
+                    <div class="bio-row">
+                        <p>
+                            <span>Last Name </span>: @Model.Account.LastName
+                        </p>
+                    </div>
+                    <div class="bio-row">
+                        <p>
+                            <span>Birthday</span>: @Model.Account.BirthDay
+                        </p>
+                    </div>
+                    <div class="bio-row">
+                        <p>
+                            <span>Country </span>: United
+                        </p>
+                    </div>
+                    <div class="bio-row">
+                        <p>
+                            <span>Play Position </span>: @Model.Account.PosPlay
+                        </p>
+                    </div>
+                    <div class="bio-row">
+                        <p>
+                            <span>Email </span>: @Model.Account.Email
+                        </p>
+                    </div>
+                    <div class="bio-row">
+                        <p>
+                            <span>Mobile </span>: @Model.Account.Mobile
+                        </p>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <h1>Sport Info<a class="btnEdit" href="#" data-toggle="modal" data-target="#sportModal"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></h1>
+                    <div class="bio-row">
+                        <p>
+                            <span>Sport </span>: @Model.Account.LastName
+                        </p>
+                    </div>
+                    <div class="bio-row">
+                        <p>
+                            <span>Position Play </span>: @Model.Account.LastName
+                        </p>
+                    </div>
+                    <div class="bio-row">
+                        <p>
+                            <span>Experience</span>: @Model.Account.LastName
+                        </p>
+                    </div>
+                    <div class="bio-row">
+                        <p>
+                            <span>Country </span>: United
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <!-- Modal Profile Info -->
+        <div class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">Profile Information</h4>
+                    </div>
+                    <div class="modal-body">
+                        @Html.Partial("PartialViews/_EditProfile", Model)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <!-- Modal Sport Infor -->
+        <div class="modal fade" id="sportModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">Sport Informtion</h4>
+                    </div>
+                    <div class="modal-body">
+                        @Html.Partial("PartialViews/_EditSport", Model)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+</section>
+
+

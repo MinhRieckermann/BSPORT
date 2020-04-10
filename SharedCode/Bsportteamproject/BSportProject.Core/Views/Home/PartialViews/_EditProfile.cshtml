@@ -1,0 +1,36 @@
+﻿@model BSportProject.Core.Models.UserViewModels
+
+<div class="title title-block">
+    <i class="fa fa-square"></i>&nbsp;&nbsp;Personal Profile
+    <button class="button black" data-toggle="modal" data-target="#infoModal" data-add-new-shipping=""><i class="fa fa-pencil" aria-hidden="true">&nbsp;&nbsp;</i>Edit</button>
+</div>
+<div class="basic-info" id="userInfo">    
+    <div class="row">
+        <div class="col-sm-9">
+            <div class="info" id="id-billing-1">
+                @if (!string.IsNullOrEmpty(Model.User.AccountName))
+            {
+                    <p data-address="@Model.User.AccountName"><strong>Account Name:</strong> @Model.User.AccountName</p>
+                }
+                @if (!string.IsNullOrEmpty(Model.User.BirthDay))
+            {
+                    <p data-address2="@Model.User.BirthDay"><strong>BirthDate:</strong> @Model.User.BirthDay</p>
+                }
+                @if (!string.IsNullOrEmpty(Model.User.Address))
+            {
+                    <p data-address2="@Model.User.Address"><strong>Address:</strong> @Model.User.Address</p>
+                }
+                @if (!string.IsNullOrEmpty(Model.User.Email))
+            {
+                    <p data-address2="@Model.User.Email"><strong>Email:</strong> @Model.User.Email</p>
+                }
+                @if (!string.IsNullOrEmpty(Model.User.Mobile))
+            {
+                    <p data-phone="@Model.User.Mobile"><strong>Phone:</strong> @Model.User.Mobile</p>
+                }
+                <p><strong>Country:</strong>Viet Nam</p>
+            </div>
+        </div>
+    </div>
+</div>
+    <!-- END PROFILE TAB CONTENT -->

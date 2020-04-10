@@ -1,0 +1,95 @@
+﻿@model BSportProject.Models.Entity_Model.Account
+
+<script src="~/Scripts/jquery-1.8.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Account</legend>
+
+        @Html.HiddenFor(model => model.AccountId)
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Address)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Address)
+            @Html.ValidationMessageFor(model => model.Address)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.BirthDay)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.BirthDay)
+            @Html.ValidationMessageFor(model => model.BirthDay)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Desc)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Desc)
+            @Html.ValidationMessageFor(model => model.Desc)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ImageId)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ImageId)
+            @Html.ValidationMessageFor(model => model.ImageId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PosPlay)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PosPlay)
+            @Html.ValidationMessageFor(model => model.PosPlay)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Email)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Email)
+            @Html.ValidationMessageFor(model => model.Email)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Mobile)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Mobile)
+            @Html.ValidationMessageFor(model => model.Mobile)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.LastName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.LastName)
+            @Html.ValidationMessageFor(model => model.LastName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FirstName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FirstName)
+            @Html.ValidationMessageFor(model => model.FirstName)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

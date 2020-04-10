@@ -1,0 +1,94 @@
+﻿@model BSportProject.Core.Models.UserViewModels
+@using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+            { @Html.AntiForgeryToken()  @Html.ValidationSummary(true)
+
+            @Html.HiddenFor(model => model.Account.AccountId)
+            @*First Name*@
+            <div class="form-group">
+                <label class="col-lg-2 control-label">First Name</label>
+                <div class="col-lg-9">
+                    @Html.TextBoxFor(model => model.Account.FirstName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Account.FirstName)
+                </div>
+            </div>
+            @*Last Name*@
+            <div class="form-group">
+                <label class="col-lg-2 control-label">Last Name</label>
+                <div class="col-lg-9">
+                    @Html.TextBoxFor(model => model.Account.LastName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Account.LastName)
+                </div>
+            </div>
+                @*First Name*@
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Address</label>
+                    <div class="col-lg-9">
+                        @Html.TextBoxFor(model => model.Account.Address, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Account.Address)
+                    </div>
+                </div>
+                @*BirthDay*@
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">BirthDay</label>
+                    <div class="col-lg-9">
+                        <div class='input-group date' id='datetimepicker1'>
+                            @Html.TextBoxFor(model => model.Account.BirthDay, new { @class = "form-control", @id = "txtBirthDay" })
+                            @Html.ValidationMessageFor(model => model.Account.BirthDay)
+                            <span class="input-group-addon">
+                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                @*Position play*@
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Position Play</label>
+                    <div class="col-lg-9">
+                        @Html.TextBoxFor(model => model.Account.PosPlay, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Account.PosPlay)
+                    </div>
+                </div>
+                @*Email*@
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Email</label>
+                    <div class="col-lg-9">
+                        @Html.TextBoxFor(model => model.Account.Email, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Account.Email)
+                    </div>
+                </div>
+                @*Mobile*@
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Mobile</label>
+                    <div class="col-lg-9">
+                        @Html.TextBoxFor(model => model.Account.Mobile, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Account.Mobile)
+                    </div>
+                </div>
+                @*Image*@
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Image</label>
+                    <div class="col-lg-9">
+                        <div class="input-group image-preview">
+                            <input type="text" class="form-control image-preview-filename" disabled="disabled"> <!-- don't give a name === doesn't send on POST/GET -->
+                            <span class="input-group-btn">
+                                <!-- image-preview-clear button -->
+                                <button type="button" class="btn btn-default image-preview-clear" style="display:none;">
+                                    <span class="glyphicon glyphicon-remove"></span> Clear
+                                </button>
+                                <!-- image-preview-input -->
+                                <div class="btn btn-default image-preview-input">
+                                    <span class="glyphicon glyphicon-folder-open"></span>
+                                    <span class="image-preview-input-title">Browse</span>
+                                    <input type="file" accept="image/png, image/jpeg, image/gif" id="fileUpload" name="files" /> <!-- rename it -->
+                                </div>
+                            </span>
+                        </div><!-- /input-group image-preview [TO HERE]-->
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+}
+

@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html lang="en" ng-app="BSportApp">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title- BSPORT</title>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="shortcut icon" href="~/BSporteam-favicon64x64.png">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,700">
+
+    <!-- Bootstrap CSS -->
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/Content/bootstrap-datetimepicker.min.css" />
+    <!-- bootstrap theme -->
+    <link href="~/Content/bootstrap-theme.min.css" rel="stylesheet">
+
+    @Styles.Render("~/Content/css")
+</head>
+<body>
+    @RenderBody()
+    <!--/.footer-->
+    <!-- Javascript -->
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/customscripts")
+    @Scripts.Render("~/bundles/customJS")
+    @Scripts.Render("~/bundles/profilescripts")
+
+    <script type="text/javascript" src="~/Scripts/moment.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
+    <script>
+        //knob
+        $(".knob").knob();
+    </script>
+
+    <footer class="container-fluid text-center">
+        <div class="container-fluid">
+            <div class="footer" id="footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
+                            <h3> MEN </h3>
+                            <ul>
+                                <li> <a href="#"> Lorem Ipsum </a> </li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
+                            <h3> WOMEN </h3>
+                            <ul>
+                                <li> <a href="#"> Lorem Ipsum </a> </li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
+                            <h3> KIDS </h3>
+                            <ul>
+                                <li> <a href="#"> Lorem Ipsum </a> </li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
+                            <h3> HELP </h3>
+                            <ul>
+                                <li> <a href="#"> Lorem Ipsum </a> </li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-3  col-md-3 col-sm-6 col-xs-12 ">
+                            <h3> Get social with : </h3>
+                            <ul class="social">
+                                <li> <a href="#"> <i class="fa fa-facebook"> </i> </a> </li>
+                                <li> <a href="#"> <i class="fa fa-twitter"> </i> </a> </li>
+                                <li> <a href="#"> <i class="fa fa-google-plus"> </i> </a> </li>
+                                <li> <a href="#"> <i class="fa fa-youtube"> </i> </a> </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--/.row-->
+                </div>
+                <!--/.container-->
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
