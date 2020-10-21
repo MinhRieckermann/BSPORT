@@ -1,0 +1,14 @@
+D:\BetLearning\SSIS_ProcessBettingData\CodeReferenceHelper\bin\Debug\CodeReferenceHelper.dll
+D:\BetLearning\SSIS_ProcessBettingData\CodeReferenceHelper\bin\Debug\CodeReferenceHelper.pdb
+D:\BetLearning\SSIS_ProcessBettingData\CodeReferenceHelper\bin\Debug\Newtonsoft.Json.dll
+D:\BetLearning\SSIS_ProcessBettingData\CodeReferenceHelper\bin\Debug\Newtonsoft.Json.pdb
+D:\BetLearning\SSIS_ProcessBettingData\CodeReferenceHelper\bin\Debug\Newtonsoft.Json.xml
+D:\BetLearning\SSIS_ProcessBettingData\CodeReferenceHelper\obj\Debug\CodeReferenceHelper.csprojAssemblyReference.cache
+D:\BetLearning\SSIS_ProcessBettingData\CodeReferenceHelper\obj\Debug\CodeReferenceHelper.csproj.CoreCompileInputs.cache
+D:\BetLearning\SSIS_ProcessBettingData\CodeReferenceHelper\obj\Debug\CodeReferenceHelper.csproj.CopyComplete
+D:\BetLearning\SSIS_ProcessBettingData\CodeReferenceHelper\obj\Debug\CodeReferenceHelper.dll
+D:\BetLearning\SSIS_ProcessBettingData\CodeReferenceHelper\obj\Debug\CodeReferenceHelper.pdb
+D:\BetLearning\SSIS_ProcessBettingData\CodeReferenceHelper\bin\Debug\Microsoft.SqlServer.Dts.Design.dll
+D:\BetLearning\SSIS_ProcessBettingData\CodeReferenceHelper\bin\Debug\Microsoft.SQLServer.ManagedDTS.dll
+D:\BetLearning\SSIS_ProcessBettingData\CodeReferenceHelper\bin\Debug\Microsoft.SqlServer.PipelineHost.dll
+D:\BetLearning\SSIS_ProcessBettingData\CodeReferenceHelper\bin\Debug\Microsoft.SqlServer.VSTAScriptingLib.dll

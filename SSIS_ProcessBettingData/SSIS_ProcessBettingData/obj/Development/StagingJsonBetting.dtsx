@@ -1,0 +1,2353 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="4/11/2019 5:00:38 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="HCMNTB0004"
+  DTS:CreatorName="JR\hcm.tvm"
+  DTS:DTSID="{9FC0E9A8-6FB9-4539-9271-B347856EC4DF}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1300.371"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="62"
+  DTS:VersionGUID="{E43F1D1E-DE51-430F-A2B7-27933CF2FAA1}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[HCMNTB0004.Betting]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{9AFD398D-0E41-48BA-B015-C40D752BECF3}"
+      DTS:ObjectName="HCMNTB0004.Betting">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::ConnStr_Source]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=HCMNTB0004;Initial Catalog=Betting;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[HCMNTB0004.Betting 1]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{6F5CE133-539A-4CD0-B391-65E4A47044BB}"
+      DTS:ObjectName="HCMNTB0004.Betting 1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=HCMNTB0004;Initial Catalog=Betting;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{57F73859-9D42-4E69-AC88-177570935564}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="BulkUploadLoadSize">
+      <DTS:VariableValue
+        DTS:DataType="8">100</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{EE9D0D58-AAA0-457A-A2E4-62937DA662C8}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ConnStr_Source">
+      <DTS:VariableValue
+        DTS:DataType="8">Data Source=HCMNTB0004;Initial Catalog=Betting;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{82638406-9BBE-40A3-BE52-2161B2F2E589}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ConnStr_Staging">
+      <DTS:VariableValue
+        DTS:DataType="8">Data Source=HCMNTB0004;Initial Catalog=Betting;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{ACB19B07-669E-4157-9EFE-231ED075DD14}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="DelimiterChar">
+      <DTS:VariableValue
+        DTS:DataType="8">,</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{5642CDC5-EB03-4CD3-AA11-F56CA585E888}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Environment">
+      <DTS:VariableValue
+        DTS:DataType="8">DEV</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{FA21C8C3-C46A-4279-9269-DD55352401CE}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ErrorMessage">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{5CFEB33A-F31E-41C1-AD38-DA9003E7BCB1}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ErrorSource">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{AC827328-A777-4DCD-9AD6-A63DD67A562D}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ExtractEndTime">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{121BC2F0-1DDC-40E1-A7BC-9A4D4539FC21}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ExtractStartTime">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{BF35ACB5-9CA6-491A-8F80-325F934A0EED}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FileNameSeparator">
+      <DTS:VariableValue
+        DTS:DataType="8">_</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{F1C1C8FC-2750-46E3-BED4-DAB2F6DF0F7C}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FileTimeFormat">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{EBF5CFCF-4CE6-43C9-AAA7-4EFCC041885E}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FileTimeStampFormat">
+      <DTS:VariableValue
+        DTS:DataType="8">ddMMyyyy</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{DC8036F8-E2BF-439C-8150-CBDCD7A18715}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FolderBaseLocation">
+      <DTS:VariableValue
+        DTS:DataType="8">D:\BetLearning\DATABET</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{00B94ADF-FDDE-4F7F-954B-191EE1D944B1}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="HasFooter">
+      <DTS:VariableValue
+        DTS:DataType="11">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{11EA76F6-5247-4569-A66B-5DB14AE1D267}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="HasHeader">
+      <DTS:VariableValue
+        DTS:DataType="11">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{9A3DB1C7-F8BA-4FEE-B9AA-46D9C02769A9}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ManagerGUID">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{97AC549B-659A-4848-847C-A678BEFF0353}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="MergeQuery">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{F88428EF-1070-4C99-B809-07F16D27A985}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="NextExtractStartTime">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{AD08011E-007A-4863-BA06-6D1E2C467135}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ProcessType">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C1B5E7EF-E0E0-4AEC-B47F-ECF927F88604}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowsDeleted">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A1AD1002-1AA1-4D9A-AF74-6626C6224395}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowsInserted">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{E717685C-990E-47B4-8450-3944F9D7ACA9}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowsUpdated">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{D79502F8-AF03-4F96-8586-B68A55EA7AB6}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Server">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{32095DA2-FEC6-4C92-A745-C19DFA59633E}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SourceQuery">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{3A3A47EA-D409-4208-A514-AAABA3B3BB65}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SourceQueryEvaluated">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{B17D2EE1-A7B5-49BA-9176-B0047DDA4A3C}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SourceQueryMapping">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{7E9CAFB9-4674-4CE8-9B6D-356E288BE69E}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SourceTypeName">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{6074A82B-ECC3-43DC-A417-79A37C07335D}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="StagingControlID">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{2016CE20-C064-4B0B-B5E0-0F233E618BE0}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="StagingJobID">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{29EE7074-4F05-4013-A0BF-667B40592CEE}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="StagingPackageName">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A5CCF240-1698-4F12-9CE1-ACC08DAD63C2}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="StagingPackagePath">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{FE11BE92-5825-49DB-934E-49FD8F84F237}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="StagingPathAndName">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{6198BB28-25B7-4E87-B04E-1289587327FB}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="StagingRowCount">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{13DAF658-FAA5-4EDB-B9F5-8B312C35138A}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="StagingTable">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{9F333A3E-024A-4681-B0DB-D3D9384BCB10}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="StandVariablesResult">
+      <DTS:VariableValue
+        DTS:DataSubType="ManagedSerializable"
+        DTS:DataType="13">
+        <SOAP-ENV:Envelope xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+          <SOAP-ENV:Body>
+            <xsd:anyType
+              id="ref-1"></xsd:anyType>
+          </SOAP-ENV:Body>
+        </SOAP-ENV:Envelope>
+      </DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{89000838-2130-4FA3-8889-6B9196DB9436}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="StartTime">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{2ACBA93B-51E3-4EED-8AD6-1D5143F1B906}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Suite">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{20EEAD48-7DAD-4070-BDC8-A80B55FCA68D}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="TruncateStagingTable">
+      <DTS:VariableValue
+        DTS:DataType="11">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Bulk Process file Json"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{624CB45C-5204-4C52-B728-144765E8F9C2}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Bulk Process file Json">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Bulk Process file Json\Get Variables"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{F9863B48-BAFE-40B9-BA75-D9328EA6B0D2}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Get Variables"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{9AFD398D-0E41-48BA-B015-C40D752BECF3}"
+              SQLTask:SqlStatementSource="EXEC&#x9;[dbo].[spGetStagingVariables]"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="FolderBaseLocation"
+                SQLTask:DtsVariableName="User::FolderBaseLocation" />
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="ConnStr_Staging"
+                SQLTask:DtsVariableName="User::ConnStr_Staging" />
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="StartTime"
+                SQLTask:DtsVariableName="User::StartTime" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Bulk Process file Json\Script Task"
+          DTS:CreationName="Microsoft.ScriptTask"
+          DTS:Description="Script Task"
+          DTS:DTSID="{14FA512B-A2D4-48E1-A0B0-531DB398B694}"
+          DTS:ExecutableType="Microsoft.ScriptTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Script Task"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ScriptProject
+              Name="ST_71e36953d71f47ddb3218cb54cbe28db"
+              VSTAMajorVersion="14"
+              VSTAMinorVersion="0"
+              Language="CSharp">
+              <ProjectItem
+                Name="ST_71e36953d71f47ddb3218cb54cbe28db.csproj"
+                Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectTypeGuids>{30D016F9-3734-4E33-A861-5E7D899E18F3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B17A3137-9506-4CF5-ADF8-55EBE93A6C8C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ST_71e36953d71f47ddb3218cb54cbe28db</RootNamespace>
+    <AssemblyName>ST_71e36953d71f47ddb3218cb54cbe28db</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>true</ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>
+    <TargetFrameworkProfile></TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>.\bin\Debug\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <OutputPath>.\bin\Release\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>D:\BetLearning\SSIS_ProcessBettingData\CodeReferenceHelper\bin\Debug\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.SqlServer.ManagedDTS, Version=13.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.ScriptTask, Version=13.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="ScriptHelper.cs" />
+    <Compile Include="ScriptMain.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <!-- Include the build rules for a C# project.-->
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{30D016F9-3734-4E33-A861-5E7D899E18F3}">
+        <ProjectProperties HostName="VSTAHostName" HostPackage="{B3A685AA-7EAF-4BC6-9940-57959FA5AC07}" ApplicationType="usd" Language="cs" TemplatesPath="" />
+        <Host Name="ScriptTask" />
+        <ProjectClient>
+          <HostIdentifier>SSIS_ST130</HostIdentifier>
+        </ProjectClient>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>]]></ProjectItem>
+              <ProjectItem
+                Name="Properties\Resources.resx"
+                Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+</root>]]></ProjectItem>
+              <ProjectItem
+                Name="ScriptHelper.cs"
+                Encoding="UTF8"><![CDATA[using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Diagnostics;
+using System.Data;
+using System.Data.Common;
+using System.Data.OleDb;
+using System.Data.SqlClient;
+using System.IO;
+using System.Globalization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+
+namespace CodeReferenceHelper
+{
+    class ScriptHelper
+    {
+        #region Properties
+        public int RowsInserted { get; set; }
+        public int RowsDeleted { get; set; }
+        public int RowsUpdated { get; set; }
+        public int RowsStaged { get; set; }
+        public string SuiteFolderLocation { get; set; }
+        public string unProcessedFileFullName { get; set; }
+        public string InProcessedFileFullName { get; set; }
+        public Dictionary<int, ProcessInformation> ProcessControl = new Dictionary<int, ProcessInformation>();
+        public int SSISPackagesCount = 0;
+
+        public List<string> ORACLE = new List<string> { "OLEDB_ORACLE", "ODBC_ORACLE" };
+        public List<string> SQL = new List<string> { "OLEDB", "ODBC", "OLEDB_SQL", "ODBC_SQL" };
+
+        #endregion
+      
+        public void MainStagingExecutionFileBulkUpload(Dictionary<string, object> values)
+        {
+            //-----------------------------------------------------------------------
+            string FTResult = "";
+            string HTResult = "";
+            int HomeScores = 0;
+            int AwayScores = 0;
+            string TimeAwayScrore = "";
+            string TimeHomeScrore = "";
+            string DetailScore = "";
+            string Hometeam = "";
+            string Awayteam = "";
+            string country = "";
+            string tournament = "";
+            string season = "";
+            string Recard = "";
+            //----------------------------------------------------------------------
+            //string ConnStr_ETLReference = values["ConnStr_ETLReference"].ToString();
+            //string Environment = values["Environment"].ToString();
+            string FileNameSeparator = values["FileNameSeparator"].ToString();
+            //string StagingPackageName = values["StagingPackageName"].ToString();
+            string ConnStr_Staging = values["ConnStr_Staging"].ToString();
+            //string SourceQueryMapping = values["SourceQueryMapping"].ToString();
+            //char DelimiterChar = Convert.ToChar(values["DelimiterChar"]);
+            //string Suite = values["Suite"].ToString();
+            string FolderBaseLocation = values["FolderBaseLocation"].ToString();
+            string StagingTable = values["StagingTable"].ToString();
+            //string MergeQuery = values["MergeQuery"].ToString();
+            //bool bHasHeader = Convert.ToBoolean(values["HasHeader"]);
+            int BulkUploadLoadSize = Convert.ToInt32(values["BulkUploadLoadSize"]);
+            string StartTime = values["StartTime"].ToString();
+            string FileTimeStampFormat = values["FileTimeStampFormat"].ToString();
+            //int StagingControlID = Convert.ToInt32(values["StagingControlID"]);
+            //string ManagerGUID = values["ManagerGUID"].ToString();
+            //bool bTruncateStagingTable = Convert.ToBoolean(values["TruncateStagingTable"]);
+            // sheet variable to be used Bulk excel file 
+            //string Sheet = values["Sheet"].ToString();
+            //string FileTimeFormat = values["FileTimeFormat"].ToString();
+
+            SuiteFolderLocation = FolderBaseLocation;
+            bool IsOk = false;
+
+            var dsb = new System.Data.Common.DbConnectionStringBuilder();
+
+            checkConnection(ConnStr_Staging);
+            dsb.ConnectionString = ConnStr_Staging;
+            dsb.Remove("Provider");
+            ConnStr_Staging = dsb.ConnectionString + ";Connect Timeout=0";
+
+            //List<Mapping> Mappings = SplitMappings(SourceQueryMapping);
+
+            var fileFullNames = GetFiles(Path.Combine(SuiteFolderLocation, "Unprocess"));
+            //var OrderFiles = GetOrderFiles(fileFullNames, FileNameSeparator, StagingPackageName, FileTimeStampFormat);
+            var OrderFiles = GetOrderFilesFormatName(fileFullNames, FileNameSeparator, FileTimeStampFormat);
+            //if (OrderFiles != null)
+            //{
+
+            var listformatfilename = GetListFormatDataMatch(fileFullNames, FileNameSeparator, FileTimeStampFormat);
+
+            var ListFileSameFormats = GetListFileSameFormat(fileFullNames, listformatfilename, FileNameSeparator, FileTimeStampFormat);
+            foreach (var ListItem in ListFileSameFormats)
+            {
+                IsOk=combinedata(ListItem, FileNameSeparator);
+                if (IsOk==false)
+                {
+                    break;
+                }
+            }
+            var ALLDATA = GetAllFisrtFileSameFormat(fileFullNames, FileNameSeparator);
+            //Process Data in file 1 
+            foreach (var jsondata in ALLDATA)
+            {
+                unProcessedFileFullName = jsondata;
+                InProcessedFileFullName = moveFileToInProcess(unProcessedFileFullName, SuiteFolderLocation);
+                ProcessFile(InProcessedFileFullName, ConnStr_Staging, BulkUploadLoadSize, SuiteFolderLocation, StartTime);
+               
+            }
+            // moving data file 2 to folder Processed
+            var ALLDATA2 = GetAllSecondFileSameFormat(fileFullNames, FileNameSeparator);
+            string thelastfile = ALLDATA2.Last();
+            foreach ( var file in ALLDATA2)
+            {
+                unProcessedFileFullName = file;
+                string archiveFileFullName = Path.Combine(SuiteFolderLocation, "Processed", Path.GetFileName(unProcessedFileFullName));
+                if (File.Exists(archiveFileFullName))
+                {
+                    //TODO: Fix deletion
+                    File.Delete(archiveFileFullName);
+                }
+                if (unProcessedFileFullName!= thelastfile)
+                {
+                    File.Move(unProcessedFileFullName, archiveFileFullName);
+                }
+                
+
+              
+            }
+           
+            
+        }
+        public List<string> GetFiles(string suiteFolderLocation)
+        {// get more file with extention xlsx
+            if (Directory.Exists(suiteFolderLocation))
+            {
+                var files =
+                    Directory.GetFiles(suiteFolderLocation, "*.*")
+                        .Where(file => file.ToLower().EndsWith("json")
+                                       || file.ToLower().EndsWith("txt"))
+                        .ToList();
+                return files;
+            }
+            return null;
+        }
+        public SortedList<DateTime, String> GetOrderFiles(List<string> fileFullNames, string fileNameSeparator, string fileTimeStampFormat)
+        //, string PackageName
+        {
+            var files = new SortedList<DateTime, String>();
+            foreach (var filefullName in fileFullNames)
+            {
+
+                string timeStamp = GetTimeStamp(filefullName, fileNameSeparator);
+
+                CultureInfo provider = CultureInfo.InvariantCulture;
+                DateTime dt = DateTime.ParseExact(timeStamp, fileTimeStampFormat, provider);
+
+                files.Add(dt, filefullName);
+
+            }
+            if (files.Count > 0)
+            {
+                return files;
+            }
+            return null;
+        }
+        public string GetTimeStamp(string fileFullName, string fileNameSeparator)
+        {
+            string fileName = Path.GetFileName(fileFullName);
+            int index = fileName.LastIndexOf(fileNameSeparator);
+            string timeStamp = fileName.Substring((fileName.LastIndexOf(fileNameSeparator) + 1), (fileName.Length - 1 - index));
+            return Path.GetFileNameWithoutExtension(timeStamp);
+        }
+        public SortedList<String, String> GetOrderFilesFormatName(List<string> fileFullNames, string fileNameSeparator, string fileTimeStampFormat)
+        //, string PackageName
+        {
+            var files = new SortedList<String, String>();
+            foreach (var filefullName in fileFullNames)
+            {
+
+                string FilesFormatName = GetFileNameFormatWithTimeStamp(filefullName, fileNameSeparator);
+
+               // CultureInfo provider = CultureInfo.InvariantCulture;
+                //DateTime dt = DateTime.ParseExact(timeStamp, fileTimeStampFormat, provider);
+
+                files.Add(FilesFormatName, filefullName);
+
+            }
+            if (files.Count > 0)
+            {
+                return files;
+            }
+            return null;
+        }
+        // this function to get format file data to ensure the same football match with full format file name
+        public string GetFileNameFormatWithTimeStamp(string fileFullName, string fileNameSeparator)
+        {
+            string fileName = Path.GetFileName(fileFullName);
+            int index = fileName.IndexOf(fileNameSeparator);
+            string FileNameFormattimeStamp = fileName.Substring((fileName.IndexOf(fileNameSeparator) + 1), (fileName.Length - 1 - index));
+            return Path.GetFileNameWithoutExtension(FileNameFormattimeStamp);
+        }
+        // this function to get format file data to ensure the same football match
+        public string GetFormatDataMatch(string fileFullName, string fileNameSeparator)
+        {
+            string fileName = Path.GetFileName(fileFullName);
+            int index = fileName.IndexOf(fileNameSeparator);
+            string FileNameFormattimeStamp = fileName.Substring((fileName.IndexOf(fileNameSeparator) + 1), (fileName.Length - 8- index));
+            return Path.GetFileNameWithoutExtension(FileNameFormattimeStamp);
+        }
+        // get suffix of file Name
+        public string GetSuffixFileName(string fileFullName, string fileNameSeparator)
+        {
+            string fileName = Path.GetFileName(fileFullName);
+            int index = fileName.LastIndexOf(fileNameSeparator);
+            string FileNameFormattimeStamp = fileName.Substring((fileName.LastIndexOf(fileNameSeparator) + 1), (fileName.Length - 1 - index));
+            return Path.GetFileNameWithoutExtension(FileNameFormattimeStamp);
+        }
+        // get the week of file Name
+        public string GetWeekFileName(string fileFullName, string fileNameSeparator)
+        {
+            string fileName = Path.GetFileName(fileFullName);
+            int index = fileName.IndexOf(fileNameSeparator, fileName.IndexOf(fileNameSeparator)+1);
+            string FileNameFormattimeStamp = fileName.Substring(index+2,2);
+            return Path.GetFileNameWithoutExtension(FileNameFormattimeStamp);
+        }
+        // get list format data Match
+        public List<string> GetListFormatDataMatch(List<string> fileFullNames, string fileNameSeparator, string fileTimeStampFormat)
+        {
+            var listformat = new List<string>();
+            foreach (var filefullName in fileFullNames)
+            {
+
+                string FilesFormatName = GetFormatDataMatch(filefullName, fileNameSeparator);
+
+                // CultureInfo provider = CultureInfo.InvariantCulture;
+                //DateTime dt = DateTime.ParseExact(timeStamp, fileTimeStampFormat, provider);
+
+                listformat.Add(FilesFormatName);
+
+            }
+            if (listformat.Count > 0)
+            {
+                return listformat.Distinct().ToList();
+            }
+            return null;
+        }
+        // this function is finding file format between general info match and detail match in one file 
+        public List<List<string>> GetListFileSameFormat(List<string> fileFullNames, List<string> listformats, string fileNameSeparator, string fileTimeStampFormat)
+        {
+            var ListSameFormats = new List<List<string>>();
+
+           
+           
+            foreach (var listformat in listformats)
+            {
+                var listsameformat = new List<string>();
+                string format = listformat;
+                foreach (var filefullName in fileFullNames)
+                {
+                    string FilesFormatName = GetFormatDataMatch(filefullName, fileNameSeparator);
+                    if (FilesFormatName== format)
+                    {
+                        listsameformat.Add(filefullName);
+                    }
+
+                }
+                ListSameFormats.Add(listsameformat);
+            }
+           
+            //if (listsameformat.Count > 0)
+            //{
+            //    return listsameformat;
+            //}
+            return ListSameFormats;
+        }
+        // this function get the the first filename in list sameformatname
+        public string GetFisrtFileSameFormat(List<string> fileSameNames, string fileTimeStampFormat)
+        {
+            string FisrtFileSameFormat ="";
+            foreach (var filefullName in fileSameNames)
+            {
+                if (GetSuffixFileName(filefullName, fileTimeStampFormat)=="1")
+                {
+                    FisrtFileSameFormat = filefullName;
+                }
+            }
+            return FisrtFileSameFormat;
+
+         }
+        // this function get all fisrt file name 
+        public List<string> GetAllFisrtFileSameFormat(List<string> fileSameNames, string fileTimeStampFormat)
+        {
+            var ALLFisrtFileSameFormat = new List<string>();
+            foreach (var filefullName in fileSameNames)
+            {
+                if (GetSuffixFileName(filefullName, fileTimeStampFormat) == "1")
+                {
+                    ALLFisrtFileSameFormat.Add(filefullName);
+                }
+            }
+            return ALLFisrtFileSameFormat;
+
+        }
+        //get the second file name same format
+        public List<string> GetAllSecondFileSameFormat(List<string> fileSameNames, string fileTimeStampFormat)
+        {
+            var ALLFisrtFileSameFormat = new List<string>();
+            foreach (var filefullName in fileSameNames)
+            {
+                if (GetSuffixFileName(filefullName, fileTimeStampFormat) == "2")
+                {
+                    ALLFisrtFileSameFormat.Add(filefullName);
+                }
+            }
+            return ALLFisrtFileSameFormat;
+
+        }
+        //this function is combine data  between general info match and detail match in one file
+        public bool combinedata(List<string> fileSameNames, string fileTimeStampFormat)
+        {
+            bool IsOk = false;
+            bool IsOkFile1=false;
+            bool IsOkFile2=false;
+            string data = "[";
+            string filename1 = GetFisrtFileSameFormat(fileSameNames, fileTimeStampFormat);
+            try
+            {
+                foreach (var fileSameName in fileSameNames)
+                {
+
+                    if (GetSuffixFileName(fileSameName, fileTimeStampFormat) == "1")
+                    {
+                        IsOkFile1 = CheckDataDetailInfo(fileSameName);
+                    }
+                    if (GetSuffixFileName(fileSameName, fileTimeStampFormat) == "2")
+                    {
+                        IsOkFile2 = CheckDataGeneralInfo(fileSameName);
+                    }
+
+                }
+                foreach (var fileSameName in fileSameNames)
+                {
+                    if (IsOkFile1 == true && IsOkFile2 == true)
+                    {
+                        data = data + File.ReadAllText(fileSameName) + ",";
+                        IsOk = true;
+                    }
+                    else
+                    {
+                        IsOk = false;
+                        break;
+                    }
+
+
+                }
+                if (IsOkFile1 == true && IsOkFile2 == true)
+                {  
+                    data = data.Remove(data.Length - 1, 1) + "]";
+                    File.WriteAllText(filename1, data);
+                    string test = File.ReadAllText(filename1);
+                    IsOk = true;
+                }
+                else
+                {
+                    IsOk = false;
+                }
+                   
+            }
+            catch (System.Exception ex)
+            {
+                string errorMessage = "";
+                errorMessage = ex.ToString();
+
+                
+            }
+                return IsOk;
+            }
+        public string moveFileToInProcess(string unProcessedFileFullName, string SuiteFolderLocation)
+        {
+            string InProcessFileFullName = "";
+            string InProcessDirectory = Path.Combine(SuiteFolderLocation, "InProcess", Guid.NewGuid().ToString());
+
+
+            InProcessFileFullName = Path.Combine(InProcessDirectory, Path.GetFileName(unProcessedFileFullName));
+            Directory.CreateDirectory(InProcessDirectory);
+            System.IO.File.Move(unProcessedFileFullName, InProcessFileFullName);
+
+            return InProcessFileFullName;
+        }
+        public string GetFileTimeFormat(string fileFullName, string fileNameSeparator)
+        {
+
+            string fileName = Path.GetFileName(fileFullName);
+
+            string FileTimeFormat = fileName.Substring(fileName.LastIndexOf(fileNameSeparator) + 1, 6);
+            return FileTimeFormat;
+        }
+        // this function checking Detail Info match Data 
+        public bool CheckDataDetailInfo (string DataJsonFile1)
+        {
+            bool Format = false;
+            string JsonDataGernal = File.ReadAllText(DataJsonFile1);
+            JObject JsonData = JObject.Parse(JsonDataGernal);
+            foreach(JProperty node  in JsonData.Properties())
+            {
+                if (node.Name.Equals("incidents"))
+                {
+                    Format = true;
+                }
+            }
+            return Format;
+        }
+        // this function checking General Info match Data 
+        public bool CheckDataGeneralInfo(string DataJsonFile2)
+        {
+            bool Format = false;
+            string JsonDataGernal = File.ReadAllText(DataJsonFile2);
+            JObject JsonData = JObject.Parse(JsonDataGernal);
+            foreach (JProperty node in JsonData.Properties())
+            {
+                if (node.Name.Equals("h2h"))
+                {
+                    Format = true;
+                }
+            }
+            return Format;
+        }
+        public void ProcessFile(string InProcessedFileFullName, string ConnStr_Staging, int BulkUploadLoadSize,
+          string SuiteFolderLocation,string starttime)
+        //int StagingJobID, , List<Mapping> Mappings, string StagingExtractTable, , bool HasHeader, string Sheet, string StagingPackageName
+        {
+            string FTResult = "";
+            string HTResult = "";
+            int HomeScores = 0;
+            int AwayScores = 0;
+            string TimeAwayScrore = "";
+            string TimeHomeScrore = "";
+            string DetailScore = "";
+            string Hometeam = "";
+            string Awayteam = "";
+            string country = "";
+            string tournament = "";
+            string season = "";
+            string Recard = "";
+            string Week = "";
+            Week = GetWeekFileName(InProcessedFileFullName, "_");
+            String JsonDetailMatch = File.ReadAllText(InProcessedFileFullName);
+            JArray DataDTMatch = JArray.Parse(JsonDetailMatch) as JArray;
+            string IndentMatch = "";
+            string DataOverviewMatch = "";
+            //JArray ArrayIndents = JArray.Parse(IndentMatch) as JArray;
+
+            foreach (JObject FootballInfor in DataDTMatch.Children<JObject>())
+            {
+
+                foreach (JProperty info in FootballInfor.Properties())
+                {
+                    if (info.Name.Equals("incidents"))
+                    {
+                        IndentMatch = FootballInfor["incidents"].ToString();
+                    }
+                    if (info.Name.Equals("h2h"))
+                    {
+                        DataOverviewMatch = FootballInfor.ToString();
+                    }
+                }
+
+
+            }
+            JArray ArrayIndents = JArray.Parse(IndentMatch) as JArray;
+            foreach (JObject eventmt in ArrayIndents.Children<JObject>())
+            {
+                foreach (JProperty evenProperty in eventmt.Properties())
+                {//get Full time result of match
+                    string propertyName = evenProperty.Name;
+                    if ((propertyName.Equals("incidentType")) & (evenProperty.Value.ToString().Equals("period")))
+                    {
+                        if (eventmt["text"].ToString().Substring(0, 2).Equals("FT"))
+                        {
+                            FTResult = eventmt["text"].ToString();
+                        }
+                        if (eventmt["text"].ToString().Substring(0, 2).Equals("HT"))
+                        {
+                            HTResult = eventmt["text"].ToString();
+                        }
+
+                    }
+                    //Get Detail of Goals 
+                    if ((propertyName.Equals("incidentType")) & (evenProperty.Value.ToString().Equals("goal")))
+                    {
+                        string IsHomeScore = eventmt["isHome"].ToString();
+                        if (eventmt["isHome"].ToString().Equals("True"))
+                        {
+                            HomeScores = HomeScores + 1;
+                            TimeHomeScrore = TimeHomeScrore + eventmt["time"].ToString() + ",";
+                        }
+                        if (eventmt["isHome"].ToString().Equals("False"))
+                        {
+                            AwayScores = AwayScores + 1;
+                            TimeAwayScrore = TimeAwayScrore + eventmt["time"].ToString() + ",";
+                        }
+
+                    }
+                    // Get Detail of Cards 
+                    if ((propertyName.Equals("incidentType")) & (evenProperty.Value.ToString().Equals("card")))
+                    {
+                        if (eventmt["type"].ToString().Equals("Red")|| eventmt["type"].ToString().Equals("YellowRed"))
+                        {
+                            Recard = Recard + eventmt["time"].ToString() + ",";
+                        }
+
+
+                    }
+
+                }
+            }
+            if (HomeScores==0)
+            {
+                TimeHomeScrore = TimeHomeScrore + ",";
+            }
+            if (AwayScores == 0)
+            {
+                TimeAwayScrore = TimeAwayScrore + ",";
+            }
+            DetailScore = TimeHomeScrore.Remove(TimeHomeScrore.Length - 1, 1) + "-" + TimeAwayScrore.Remove(TimeAwayScrore.Length - 1, 1);
+
+
+            JObject DataMatch = JObject.Parse(DataOverviewMatch);
+            JArray ArrayInforMatch = JArray.Parse(DataMatch["h2h"]["events"]["tournaments"].ToString());
+
+            //JObject data = ArrayInforMatch["0"] < JObject >;
+            //foreach (JObject data in ArrayInforMatch.Children<JObject>())
+            //{
+            country = ArrayInforMatch[0]["category"]["name"].ToString();
+            tournament = ArrayInforMatch[0]["tournament"]["name"].ToString();
+            season = ArrayInforMatch[0]["season"]["name"].ToString();
+            //}
+            Hometeam = DataMatch["home"]["team"]["name"].ToString();
+            Hometeam = Hometeam.Replace("'", "");
+            Awayteam = DataMatch["away"]["team"]["name"].ToString();
+            Awayteam = Awayteam.Replace("'", "");
+            //-------------------------------------------------------------------------------------------------------
+            InsertStaging(ConnStr_Staging, FTResult, HTResult, HomeScores, AwayScores, TimeAwayScrore, TimeHomeScrore, DetailScore, Hometeam, Awayteam, country, tournament, season, Recard, starttime,Week);
+            //-------------------------------------------------------------------------------------------------------
+            string archiveFileFullName = Path.Combine(SuiteFolderLocation, "Processed", Path.GetFileName(InProcessedFileFullName));
+
+            if (File.Exists(archiveFileFullName))
+            {
+                //TODO: Fix deletion
+                File.Delete(archiveFileFullName);
+            }
+
+            File.Move(InProcessedFileFullName, archiveFileFullName);
+           
+            /*-----------------------------------------------------*/
+            if (Directory.Exists(Path.GetDirectoryName(InProcessedFileFullName)))
+            {
+                Directory.Delete(Path.GetDirectoryName(InProcessedFileFullName), true);
+            }
+
+           
+        }
+        public void InsertStaging(string ConnStr_Staging, string FTResult, string HTResult, int HomeScores, int AwayScores,
+            string TimeAwayScrore,
+            string TimeHomeScrore,
+            string DetailScore,
+           string Hometeam,
+            string Awayteam,
+            string country,
+            string tournament,
+            string season,
+            string Recard,
+            string starttime,
+            string Week
+            )
+        {
+            //string tempMessage = Message.Replace("'", "''");
+
+            string sqlCmdLog = "[spInsertSTG_SportData] "
+                                + "@country = '" + country + "', "
+                                + "@tournament = '" + tournament + "', "
+                               + "@season = '" + season + "', "
+                               + "@Hometeam = '" + Hometeam + "', "
+                               + "@Awayteam = '" + Awayteam + "', "
+                               + "@FTResult = '" + FTResult + "', "
+                               + "@HTResult = '" + HTResult + "', "
+                               + "@HomeScores = '" + HomeScores.ToString() + "', "
+                               + "@AwayScores = '" + AwayScores.ToString() + "', "
+                               + "@DetailScore = '" + DetailScore + "', "
+                               + "@Recard = '" + Recard + "', "
+                               + "@LoadTime = '" + starttime + "', "
+                               + "@LastChangeTime = '" + starttime + "',"
+                               + "@Week = '" + Week + "'";
+
+
+           
+
+
+
+            var dsb = new System.Data.Common.DbConnectionStringBuilder();
+
+            dsb.ConnectionString = ConnStr_Staging;
+            dsb.Remove("Provider");
+            ConnStr_Staging = dsb.ConnectionString;
+
+            var SrcConn = new SqlConnection(ConnStr_Staging);
+
+            var sCommand = new SqlCommand(sqlCmdLog, SrcConn);
+            SrcConn.Open();
+            sCommand.ExecuteNonQuery();
+            SrcConn.Close();
+            SrcConn.Dispose();
+        }
+        #region JsonProcess
+        public static List<string> ReadContentFile(string filename)
+        {
+            List<string> Line = new List<string>();
+            var filestream = File.OpenRead(filename);
+            var streamReader = new StreamReader(filestream, Encoding.UTF8, true);
+            String str;
+            while ((str = streamReader.ReadLine()) != null)
+            {
+                Line.Add(str);
+            }
+            return Line;
+        }
+        public static bool IsJson(string textline)
+        {
+            textline = textline.Trim();
+            if ((textline.StartsWith("{") && textline.EndsWith("}")) || //for  object
+                (textline.StartsWith("[") && textline.EndsWith("]"))) //for array
+            {
+
+                try
+                {
+                    var obj = JToken.Parse(textline);
+                    return true;
+                }
+                catch (JsonReaderException jex)
+                {
+                    //Exception in parsing json
+                    Console.WriteLine(jex.Message);
+                    return false;
+                }
+                catch (Exception ex) //some other exception
+                {
+                    Console.WriteLine(ex.ToString());
+                    return false;
+                }
+
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+        public static bool IsJsonObject(string textline)
+        {
+            textline = textline.Trim();
+            if ((textline.StartsWith("{") && textline.EndsWith("}")))//for  object
+
+            {
+
+                try
+                {
+                    var obj = JObject.Parse(textline);
+                    return true;
+                }
+                catch (JsonReaderException jex)
+                {
+                    //Exception in parsing json
+                    Console.WriteLine(jex.Message);
+                    return false;
+                }
+                catch (Exception ex) //some other exception
+                {
+                    Console.WriteLine(ex.ToString());
+                    return false;
+                }
+
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+        public static bool IsJArray(string textline)
+        {
+            textline = textline.Trim();
+            if ((textline.StartsWith("[") && textline.EndsWith("]"))) //for array
+            {
+
+                try
+                {
+                    var obj = JArray.Parse(textline);
+                    return true;
+                }
+                catch (JsonReaderException jex)
+                {
+                    //Exception in parsing json
+                    Console.WriteLine(jex.Message);
+                    return false;
+                }
+                catch (Exception ex) //some other exception
+                {
+                    Console.WriteLine(ex.ToString());
+                    return false;
+                }
+
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+        public static JObject ConvertToJsonObj(string textline)
+        {
+
+            bool str = IsJson(textline);
+            if (str == true)
+            {
+                JObject jsonObj = JObject.Parse(textline);
+
+                return jsonObj;
+            }
+            else
+                return null;
+
+        }
+        public static List<string> GetPropertiesJsonObject(JObject jObj)
+        {
+            List<string> ListKeyJsonObj = new List<string>();
+            foreach (var property in jObj.Properties())
+            {
+                ListKeyJsonObj.Add(property.Name);
+            }
+            return ListKeyJsonObj;
+        }
+        public static List<string> GetListKeyJsonArray(JArray Jarr)
+        {
+            List<string> ListKeyJson = new List<string>();
+            foreach (JObject parsedObject in Jarr.Children<JObject>())
+            {
+                foreach (JProperty parsedProperty in parsedObject.Properties())
+                {
+                    ListKeyJson.Add(parsedProperty.Name);
+
+                }
+
+            }
+            return ListKeyJson;
+        }
+        public static Dictionary<string, string> GetAllProperties(JObject parent)
+        {
+
+            Dictionary<string, string> listOfProperties = new Dictionary<string, string>();
+            GetAllProperties(parent, listOfProperties);
+            return listOfProperties;
+
+        }
+        private static void GetAllProperties(JObject parent, Dictionary<string, string> listofKey)
+        {
+            if (parent.Type == JTokenType.Object)
+            {
+                foreach (JProperty child in parent.Children<JProperty>())
+                {
+                    listofKey.Add(child.Name.ToString(), child.Value.ToString());
+                    if (child.Value.Type == JTokenType.Object)
+                    {
+                        GetAllProperties(JObject.Parse(child.Value.ToString()), listofKey);
+                    }
+
+                }
+
+            }
+            else if (parent.Type == JTokenType.Array)
+            {
+                foreach (JProperty child in parent.Children<JProperty>())
+                {
+                    listofKey.Add(parent.Path.ToString(), child.Value.ToString());
+                    GetAllProperties(JObject.Parse(child.Value.ToString()), listofKey);
+                }
+            }
+
+
+        }
+        #endregion
+        #region Common
+        public void checkConnection(string ConnStr, string SourceTypeName = "OLEDB")
+        {
+            var dsb = new DbConnectionStringBuilder();
+
+            dsb.ConnectionString = ConnStr;
+            dsb.Remove("Provider");
+            if (SQL.Contains(SourceTypeName))
+            {
+
+                var con = new SqlConnection(dsb.ConnectionString);
+                con.Open();
+                con.Close();
+            }
+
+        }
+        public DataSet GetData(string connnectionString, string sqlQuery)
+        {
+            var dsb = new System.Data.Common.DbConnectionStringBuilder();
+
+            dsb.ConnectionString = connnectionString;
+            dsb.Remove("Provider");
+
+            var ds = new DataSet();
+            using (var conn = new SqlConnection(dsb.ConnectionString))
+            {
+                conn.Open();
+                SqlCommand cm = new SqlCommand();
+                cm.Connection = conn;
+                cm.CommandText = sqlQuery;
+                cm.CommandTimeout = 0;
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                adapter.SelectCommand = cm;
+                adapter.Fill(ds);
+                conn.Close();
+            }
+
+            return ds;
+        }
+        public void TruncateTable(string Table, string ConnStr_Destination, bool bTruncateTable)
+        {
+            if (bTruncateTable)
+            {
+                var trcConn = new SqlConnection(ConnStr_Destination);
+
+                var trcCommand = new SqlCommand("TRUNCATE TABLE " + Table, trcConn);
+                trcCommand.CommandTimeout = 0;
+
+                trcConn.Open();
+                trcCommand.ExecuteNonQuery();
+                trcConn.Close();
+                trcConn.Dispose();
+            }
+        }
+        public string GenerateListToString(List<string> list)
+        {
+            string str = list.Aggregate(string.Empty, (current, item) => current + (item + ","));
+            if (str.Length > 1)
+            {
+                str = str.Substring(0, str.Length - 1);
+            }
+
+            return str;
+        }
+        #endregion
+    }
+    public class ProcessInformation : Process
+    {
+        public int ControlID { get; set; }
+        public string OutputMessage { get; set; }
+    }
+}]]></ProjectItem>
+              <ProjectItem
+                Name="Properties\Settings.Designer.cs"
+                Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_71e36953d71f47ddb3218cb54cbe28db.Properties.Settings.get_Default():ST_71e36953d71f47ddb3218cb54cbe28db.Properties.Sett" +
+    "ings")]
+
+namespace ST_71e36953d71f47ddb3218cb54cbe28db.Properties {
+    
+    
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+        
+        [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+        private static Settings defaultInstance = new Settings();
+        
+        public static Settings Default {
+            get {
+                return defaultInstance;
+            }
+        }
+    }
+}]]></ProjectItem>
+              <ProjectItem
+                Name="ScriptMain.cs"
+                Encoding="UTF8"><![CDATA[#region Help:  Introduction to the script task
+/* The Script Task allows you to perform virtually any operation that can be accomplished in
+ * a .Net application within the context of an Integration Services control flow. 
+ * 
+ * Expand the other regions which have "Help" prefixes for examples of specific ways to use
+ * Integration Services features within this script task. */
+#endregion
+
+
+#region Namespaces
+using System;
+using System.Collections;
+using System.Data;
+using System.Data.OleDb;
+using System.IO;
+using System.IO.Compression;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Text;
+using Microsoft.SqlServer.Dts.Runtime;
+using System.Windows.Forms;
+using System.Data.SqlClient;
+using System.Reflection;
+using System.Collections.Generic;
+using CodeReferenceHelper;
+#endregion
+
+namespace ST_71e36953d71f47ddb3218cb54cbe28db
+{
+    /// <summary>
+    /// ScriptMain is the entry point class of the script.  Do not change the name, attributes,
+    /// or parent of this class.
+    /// </summary>
+	[Microsoft.SqlServer.Dts.Tasks.ScriptTask.SSISScriptTaskEntryPointAttribute]
+	public partial class ScriptMain : Microsoft.SqlServer.Dts.Tasks.ScriptTask.VSTARTScriptObjectModelBase
+	{
+        #region Help:  Using Integration Services variables and parameters in a script
+        /* To use a variable in this script, first ensure that the variable has been added to 
+         * either the list contained in the ReadOnlyVariables property or the list contained in 
+         * the ReadWriteVariables property of this script task, according to whether or not your
+         * code needs to write to the variable.  To add the variable, save this script, close this instance of
+         * Visual Studio, and update the ReadOnlyVariables and 
+         * ReadWriteVariables properties in the Script Transformation Editor window.
+         * To use a parameter in this script, follow the same steps. Parameters are always read-only.
+         * 
+         * Example of reading from a variable:
+         *  DateTime startTime = (DateTime) Dts.Variables["System::StartTime"].Value;
+         * 
+         * Example of writing to a variable:
+         *  Dts.Variables["User::myStringVariable"].Value = "new value";
+         * 
+         * Example of reading from a package parameter:
+         *  int batchId = (int) Dts.Variables["$Package::batchId"].Value;
+         *  
+         * Example of reading from a project parameter:
+         *  int batchId = (int) Dts.Variables["$Project::batchId"].Value;
+         * 
+         * Example of reading from a sensitive project parameter:
+         *  int batchId = (int) Dts.Variables["$Project::batchId"].GetSensitiveValue();
+         * */
+
+        #endregion
+
+        #region Help:  Firing Integration Services events from a script
+        /* This script task can fire events for logging purposes.
+         * 
+         * Example of firing an error event:
+         *  Dts.Events.FireError(18, "Process Values", "Bad value", "", 0);
+         * 
+         * Example of firing an information event:
+         *  Dts.Events.FireInformation(3, "Process Values", "Processing has started", "", 0, ref fireAgain)
+         * 
+         * Example of firing a warning event:
+         *  Dts.Events.FireWarning(14, "Process Values", "No values received for input", "", 0);
+         * */
+        #endregion
+
+        #region Help:  Using Integration Services connection managers in a script
+        /* Some types of connection managers can be used in this script task.  See the topic 
+         * "Working with Connection Managers Programatically" for details.
+         * 
+         * Example of using an ADO.Net connection manager:
+         *  object rawConnection = Dts.Connections["Sales DB"].AcquireConnection(Dts.Transaction);
+         *  SqlConnection myADONETConnection = (SqlConnection)rawConnection;
+         *  //Use the connection in some code here, then release the connection
+         *  Dts.Connections["Sales DB"].ReleaseConnection(rawConnection);
+         *
+         * Example of using a File connection manager
+         *  object rawConnection = Dts.Connections["Prices.zip"].AcquireConnection(Dts.Transaction);
+         *  string filePath = (string)rawConnection;
+         *  //Use the connection in some code here, then release the connection
+         *  Dts.Connections["Prices.zip"].ReleaseConnection(rawConnection);
+         * */
+        #endregion
+
+
+		/// <summary>
+        /// This method is called when this script task executes in the control flow.
+        /// Before returning from this method, set the value of Dts.TaskResult to indicate success or failure.
+        /// To open Help, press F1.
+        /// </summary>
+		public void Main()
+		{
+            // TODO: Add your code here
+            ScriptHelper sh = new ScriptHelper();
+            Dictionary<string, object> values = new Dictionary<string, object>();
+            try
+            {
+                #region SSIS Variables
+                Variables vars = null;
+                vars = null;
+                Dts.VariableDispenser.LockOneForRead("User::ConnStr_Staging", ref vars);
+                values.Add("ConnStr_Staging", vars[0].Value.ToString());
+                vars.Unlock();
+                vars = null;
+                Dts.VariableDispenser.LockOneForRead("User::FolderBaseLocation", ref vars);
+                values.Add("FolderBaseLocation", vars[0].Value.ToString());
+                vars.Unlock();
+                vars = null;
+                Dts.VariableDispenser.LockOneForRead("User::StagingTable", ref vars);
+                values.Add("StagingTable", vars[0].Value.ToString());
+                vars.Unlock();
+                vars = null;
+                Dts.VariableDispenser.LockOneForRead("User::BulkUploadLoadSize", ref vars);
+                values.Add("BulkUploadLoadSize", vars[0].Value);
+                vars.Unlock();
+                vars = null;
+                Dts.VariableDispenser.LockOneForRead("User::StartTime", ref vars);
+                values.Add("StartTime", vars[0].Value.ToString());
+                vars.Unlock();
+                vars = null;
+                Dts.VariableDispenser.LockOneForRead("User::FileTimeStampFormat", ref vars);
+                values.Add("FileTimeStampFormat", vars[0].Value.ToString());
+                vars.Unlock();
+                vars = null;
+                Dts.VariableDispenser.LockOneForRead("User::FileNameSeparator", ref vars);
+                values.Add("FileNameSeparator", vars[0].Value.ToString());
+                vars.Unlock();
+
+                #endregion
+                sh.MainStagingExecutionFileBulkUpload(values);
+                Dts.TaskResult = (int)ScriptResults.Success;
+            }
+            catch (System.Exception ex)
+            {
+                Variables vars = null;
+                Dts.VariableDispenser.LockOneForRead("System::TaskName", ref vars);
+                string TaskName = vars[0].Value.ToString();
+                vars.Unlock();
+                string errorMessage = "";
+
+                Dts.Events.FireError(1, TaskName, ex.ToString() + " " + errorMessage, "", 0);
+                Dts.TaskResult = (int)ScriptResults.Failure;
+            }
+            
+		}
+
+        #region ScriptResults declaration
+        /// <summary>
+        /// This enum provides a convenient shorthand within the scope of this class for setting the
+        /// result of the script.
+        /// 
+        /// This code was generated automatically.
+        /// </summary>
+        enum ScriptResults
+        {
+            Success = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Success,
+            Failure = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Failure
+        };
+        #endregion
+
+	}
+}]]></ProjectItem>
+              <ProjectItem
+                Name="Project"
+                Encoding="UTF16LE"><![CDATA[<?xml version="1.0" encoding="UTF-16" standalone="yes"?>
+<c:Project xmlns:c="http://schemas.microsoft.com/codeprojectml/2010/08/main" xmlns:msb="http://schemas.microsoft.com/developer/msbuild/2003" runtimeVersion="4.0" schemaVersion="1.0">
+	<msb:PropertyGroup>
+		<msb:Language>msBuild</msb:Language>
+		<msb:CodeName>ST_71e36953d71f47ddb3218cb54cbe28db</msb:CodeName>
+		<msb:DisplayName>ST_71e36953d71f47ddb3218cb54cbe28db</msb:DisplayName>
+		<msb:ProjectId>{C6BE978C-676C-4EDD-95E7-CF424BD03DAF}</msb:ProjectId>
+	</msb:PropertyGroup>
+	<msb:ItemGroup>
+		<msb:Project Include="ST_71e36953d71f47ddb3218cb54cbe28db.csproj"/>
+		<msb:File Include="ScriptMain.cs"/>
+		<msb:File Include="Properties\AssemblyInfo.cs"/>
+		<msb:File Include="Properties\Settings.settings"/>
+		<msb:File Include="Properties\Resources.resx"/>
+		<msb:File Include="Properties\Resources.Designer.cs"/>
+		<msb:File Include="Properties\Settings.Designer.cs"/>
+		<msb:File Include="ScriptHelper.cs"/>
+	</msb:ItemGroup>
+</c:Project>]]></ProjectItem>
+              <ProjectItem
+                Name="Properties\AssemblyInfo.cs"
+                Encoding="UTF8"><![CDATA[using System.Reflection;
+using System.Runtime.CompilerServices;
+
+//
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+//
+[assembly: AssemblyTitle("ST_71e36953d71f47ddb3218cb54cbe28db")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("ST_71e36953d71f47ddb3218cb54cbe28db")]
+[assembly: AssemblyCopyright("Copyright @  2019")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+//
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Revision and Build Numbers 
+// by using the '*' as shown below:
+
+[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
+              <ProjectItem
+                Name="Properties\Settings.settings"
+                Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></ProjectItem>
+              <ProjectItem
+                Name="Properties\Resources.Designer.cs"
+                Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_71e36953d71f47ddb3218cb54cbe28db.Properties.Resources.get_ResourceManager():System.Resources.Resou" +
+    "rceManager")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_71e36953d71f47ddb3218cb54cbe28db.Properties.Resources.get_Culture():System.Globalization.CultureIn" +
+    "fo")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_71e36953d71f47ddb3218cb54cbe28db.Properties.Resources.set_Culture(System.Globalization.CultureInfo" +
+    "):Void")]
+
+namespace ST_71e36953d71f47ddb3218cb54cbe28db.Properties {
+    
+    
+    /// <summary>
+    ///   A strongly-typed resource class, for looking up localized strings, etc.
+    /// </summary>
+    // This class was auto-generated by the StronglyTypedResourceBuilder
+    // class via a tool like ResGen or Visual Studio.
+    // To add or remove a member, edit your .ResX file then rerun ResGen
+    // with the /str option, or rebuild your VS project.
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    internal class Resources {
+        
+        private static global::System.Resources.ResourceManager resourceMan;
+        
+        private static global::System.Globalization.CultureInfo resourceCulture;
+        
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        internal Resources() {
+        }
+        
+        /// <summary>
+        ///   Returns the cached ResourceManager instance used by this class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Resources.ResourceManager ResourceManager {
+            get {
+                if ((resourceMan == null)) {
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ST_71e36953d71f47ddb3218cb54cbe28db.Properties.Resources", typeof(Resources).Assembly);
+                    resourceMan = temp;
+                }
+                return resourceMan;
+            }
+        }
+        
+        /// <summary>
+        ///   Overrides the current thread's CurrentUICulture property for all
+        ///   resource lookups using this strongly typed resource class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Globalization.CultureInfo Culture {
+            get {
+                return resourceCulture;
+            }
+            set {
+                resourceCulture = value;
+            }
+        }
+    }
+}]]></ProjectItem>
+              <BinaryItem
+                Name="ST_71e36953d71f47ddb3218cb54cbe28db.dll">TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAgAAAAA4fug4AtAnNIbgBTM0hVGhpcyBwcm9ncmFtIGNhbm5vdCBiZSBydW4gaW4gRE9TIG1v
+ZGUuDQ0KJAAAAAAAAABQRQAATAEDACGBw14AAAAAAAAAAOAAIiALATAAAEwAAAAIAAAAAAAAUmoA
+AAAgAAAAgAAAAAAAEAAgAAAAAgAABAAAAAAAAAAGAAAAAAAAAADAAAAAAgAAAAAAAAMAYIUAABAA
+ABAAAAAAEAAAEAAAAAAAABAAAAAAAAAAAAAAAABqAABPAAAAAIAAAHgEAAAAAAAAAAAAAAAAAAAA
+AAAAAKAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAIAAACAAAAAAAAAAAAAAACCAAAEgAAAAAAAAAAAAAAC50ZXh0AAAAWEoAAAAgAAAATAAAAAIA
+AAAAAAAAAAAAAAAAACAAAGAucnNyYwAAAHgEAAAAgAAAAAYAAABOAAAAAAAAAAAAAAAAAABAAABA
+LnJlbG9jAAAMAAAAAKAAAAACAAAAVAAAAAAAAAAAAAAAAAAAQAAAQgAAAAAAAAAAAAAAAAAAAAA0
+agAAAAAAAEgAAAACAAUALDoAABwvAAABAAAAAAAAAEhpAAC4AAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4CewEAAAQqIgIDfQEAAAQqHgJ7AgAABCoiAgN9AgAABCoe
+AnsDAAAEKiICA30DAAAEKh4CewQAAAQqIgIDfQQAAAQqHgJ7BQAABCoiAgN9BQAABCoeAnsGAAAE
+KiICA30GAAAEKh4CewcAAAQqIgIDfQcAAAQqABswBgAiAgAAAQAAEQNyAQAAcG8QAAAKbxEAAAoK
+A3IlAABwbxAAAApvEQAACgsDckUAAHBvEAAACm8RAAAKDANyawAAcG8QAAAKbxEAAAomA3KFAABw
+bxAAAAooEgAACg0DcqsAAHBvEAAACm8RAAAKEwQDcr8AAHBvEAAACm8RAAAKEwUCCCgKAAAGcxMA
+AAoCB3LnAABwKC0AAAYlB28UAAAKJXLzAABwbxUAAAombxYAAApyBQEAcCgXAAAKCwICKAkAAAZy
+KwEAcCgYAAAKKBAAAAYTBgIRBgYRBSgTAAAGJgIRBgYRBSgYAAAGEwcCEQYRBwYRBSgZAAAGbxkA
+AAoTCSsWEgkoGgAAChMKAhEKBigdAAAGLQLeGRIJKBsAAAot4d4OEgn+FgMAABtvHAAACtwCEQYG
+KBsAAAZvHQAAChMLKz8SCygeAAAKEwwCEQwoDAAABgICAigLAAAGAigJAAAGKB4AAAYoDgAABgIC
+KA0AAAYHCQIoCQAABhEEKCIAAAYSCygfAAAKLbjeDhIL/hYFAAAbbxwAAArcAhEGBigcAAAGJSgB
+AAArEwhvHQAAChMLK1oSCygeAAAKEw0CEQ0oDAAABgIoCQAABnI/AQBwAigLAAAGKCEAAAooIgAA
+ChMOEQ4oIwAACiwHEQ4oJAAACgIoCwAABhEIKCUAAAosDQIoCwAABhEOKCYAAAoSCygfAAAKLZ3e
+DhIL/hYFAAAbbxwAAArcKgAAASgAAAIA+QAjHAEOAAAAAAIAOgFMhgEOAAAAAAIArAFnEwIOAAAA
+AP4DKCcAAAosNQNyUwEAcCgoAAAKfhIAAAQlLRcmfhEAAAT+BkIAAAZzKQAACiWAEgAABCgCAAAr
+KAMAACsqFCobMAMAXQAAAAIAABFzLAAACgoDbx0AAAoLKygSASgeAAAKDAIIBCgSAAAGKC0AAAoN
+BQkoLgAAChMEBhEECG8vAAAKEgEoHwAACi3P3g4SAf4WBQAAG28cAAAK3AZvMAAAChYxAgYqFCoA
+AAABEAAAAgANADVCAA4AAAAAEzAEAC4AAAADAAARAyghAAAKCgYEbzEAAAoLBgYEbzEAAAoXWAZv
+MgAAChdZB1lvMwAACig0AAAKKgAAGzADAE4AAAAEAAARczUAAAoKA28dAAAKCysZEgEoHgAACgwC
+CAQoFAAABg0GCQhvNgAAChIBKB8AAAot3t4OEgH+FgUAABtvHAAACtwGbzcAAAoWMQIGKhQqAAAB
+EAAAAgANACYzAA4AAAAAEzAEAC4AAAADAAARAyghAAAKCgYEbzgAAAoLBgYEbzgAAAoXWAZvMgAA
+ChdZB1lvMwAACig0AAAKKgAAEzAEAC4AAAADAAARAyghAAAKCgYEbzgAAAoLBgYEbzgAAAoXWAZv
+MgAACh5ZB1lvMwAACig0AAAKKgAAEzAEAC4AAAADAAARAyghAAAKCgYEbzEAAAoLBgYEbzEAAAoX
+WAZvMgAAChdZB1lvMwAACig0AAAKKgAAEzAEACgAAAADAAARAyghAAAKCgYEBgRvOAAAChdYbzkA
+AAoLBgcYWBhvMwAACig0AAAKKhswAwBXAAAABQAAEXM6AAAKCgNvHQAACgsrGBIBKB4AAAoMAggE
+KBUAAAYNBglvOwAAChIBKB8AAAot394OEgH+FgUAABtvHAAACtwGbzwAAAoWMQwGKAQAACsoAwAA
+KyoUKgABEAAAAgANACUyAA4AAAAAGzADAIQAAAAGAAARcz4AAAoKBG8dAAAKCytaEgEoHgAACnM6
+AAAKDA0Dbx0AAAoTBCsiEgQoHgAAChMFAhEFBSgVAAAGCSg/AAAKLAgIEQVvOwAAChIEKB8AAAot
+1d4OEgT+FgUAABtvHAAACtwGCG9AAAAKEgEoHwAACi2d3g4SAf4WBQAAG28cAAAK3AYqARwAAAIA
+JQAvVAAOAAAAAAIADQBndAAOAAAAABswAwBIAAAABwAAEXJbAQBwCgNvHQAACgsrHhIBKB4AAAoM
+AggEKBYAAAZyXQEAcCg/AAAKLAIIChIBKB8AAAot2d4OEgH+FgUAABtvHAAACtwGKgEQAAACAA0A
+KzgADgAAAAAbMAMATQAAAAgAABFzOgAACgoDbx0AAAoLKyMSASgeAAAKDAIIBCgWAAAGcl0BAHAo
+PwAACiwHBghvOwAAChIBKB8AAAot1N4OEgH+FgUAABtvHAAACtwGKgAAAAEQAAACAA0AMD0ADgAA
+AAAbMAMATQAAAAgAABFzOgAACgoDbx0AAAoLKyMSASgeAAAKDAIIBCgWAAAGcmEBAHAoPwAACiwH
+BghvOwAAChIBKB8AAAot1N4OEgH+FgUAABtvHAAACtwGKgAAAAEQAAACAA0AMD0ADgAAAAAbMAMA
+DQEAAAkAABEWChYLFgxyZQEAcA0CAwQoGgAABhMEA28dAAAKEwUrRRIFKB4AAAoTBgIRBgQoFgAA
+BnJdAQBwKD8AAAosCQIRBiggAAAGCwIRBgQoFgAABnJhAQBwKD8AAAosCQIRBighAAAGDBIFKB8A
+AAotst4OEgX+FgUAABtvHAAACtwDbx0AAAoTBSsqEgUoHgAAChMHBywaCCwXCREHKEEAAApyaQEA
+cChCAAAKDRcKKwQWCisJEgUoHwAACi3N3g4SBf4WBQAAG28cAAAK3AcsMQgsLgkJbzIAAAoXWRdv
+QwAACnJtAQBwKBcAAAoNEQQJKEQAAAoRBChBAAAKJhcKKwIWCt4IbxEAAAom3gAGKgAAAAEoAAAC
+AB4AUnAADgAAAAACAIYAN70ADgAAAAAAABYA7QMBCBUAAAETMAMAQAAAAAoAABFyWwEAcAoEcnEB
+AHAoRQAACgsSAf4WFgAAAW8RAAAKKCIAAAolAyghAAAKKBgAAAoKKEYAAAomAwYoJgAACgYqWgMo
+IQAACiUEbzEAAAoXWBxvMwAACioAGzACAEkAAAALAAARFgoDKEEAAAooRwAACm9IAAAKb0kAAAoL
+KxkHb0oAAApvSwAACnKFAQBwb0wAAAosAhcKB29NAAAKLd/eCgcsBgdvHAAACtwGKgAAAAEQAAAC
+ABgAJT0ACgAAAAAbMAIASQAAAAsAABEWCgMoQQAACihHAAAKb0gAAApvSQAACgsrGQdvSgAACm9L
+AAAKcpkBAHBvTAAACiwCFwoHb00AAAot394KBywGB28cAAAK3AYqAAAAARAAAAIAGAAlPQAKAAAA
+ABswEQAaBQAADAAAEXJbAQBwCnJbAQBwCxYMFg1yWwEAcBMEclsBAHATBXJbAQBwEwZyWwEAcBMH
+clsBAHATCHJbAQBwEwlyWwEAcBMKclsBAHATC3JbAQBwEwxyWwEAcBMNAgNyoQEAcCgXAAAGEw0D
+KEEAAAooTgAACnJbAQBwEw5yWwEAcBMPbwUAACsTEhISKFAAAAoTESt2ERFvUQAAChMTERNvSAAA
+Cm9JAAAKExQrRhEUb0oAAAolb0sAAApyhQEAcG9MAAAKLBMRE3KFAQBwb1IAAApvEQAAChMOb0sA
+AApymQEAcG9MAAAKLAkRE28RAAAKEw8RFG9NAAAKLbHeDBEULAcRFG8cAAAK3BERb00AAAotgd4M
+EREsBxERbxwAAArcEQ4oTgAACm8FAAArExISEihQAAAKExE4CwIAABERb1EAAAoTFREVb0gAAApv
+SQAAChMUONUBAAARFG9KAAAKExYRFm9LAAAKJXKlAQBwb0wAAAoRFm9TAAAKbxEAAApyvwEAcG9M
+AAAKXyxsERVyzQEAcG9SAAAKbxEAAAoWGG8zAAAKctcBAHBvTAAACiwSERVyzQEAcG9SAAAKbxEA
+AAoKERVyzQEAcG9SAAAKbxEAAAoWGG8zAAAKct0BAHBvTAAACiwSERVyzQEAcG9SAAAKbxEAAAoL
+JXKlAQBwb0wAAAoRFm9TAAAKbxEAAApy4wEAcG9MAAAKXzmSAAAAERVy7QEAcG9SAAAKbxEAAAom
+ERVy7QEAcG9SAAAKbxEAAApy+wEAcG9MAAAKLCMIF1gMEQURFXIFAgBwb1IAAApvEQAACnJpAQBw
+KEIAAAoTBREVcu0BAHBvUgAACm8RAAAKcg8CAHBvTAAACiwjCRdYDREEERVyBQIAcG9SAAAKbxEA
+AApyaQEAcChCAAAKEwRypQEAcG9MAAAKERZvUwAACm8RAAAKchsCAHBvTAAACl8sWREVciUCAHBv
+UgAACm8RAAAKci8CAHBvTAAACi0dERVyJQIAcG9SAAAKbxEAAApyNwIAcG9MAAAKLB8RDBEVcgUC
+AHBvUgAACm8RAAAKcmkBAHAoQgAAChMMERRvTQAACjof/v//3gwRFCwHERRvHAAACtwREW9NAAAK
+Oun9///eDBERLAcREW8cAAAK3AgtDhEFcmkBAHAoFwAAChMFCS0OEQRyaQEAcCgXAAAKEwQRBREF
+bzIAAAoXWRdvQwAACnJLAgBwEQQRBG8yAAAKF1kXb0MAAAooQgAAChMGEQ8oRwAACiVymQEAcG9S
+AAAKck8CAHBvVAAACnJdAgBwb1QAAApvEQAACihOAAAKJRZvVQAACnJ1AgBwb1QAAApyhwIAcG9U
+AAAKbxEAAAoTCSUWb1UAAApykQIAcG9UAAAKcocCAHBvVAAACm8RAAAKEwoWb1UAAApypwIAcG9U
+AAAKcocCAHBvVAAACm8RAAAKEwslcrUCAHBvUgAACnK/AgBwb1QAAApyhwIAcG9UAAAKbxEAAAoT
+BxEHcskCAHByWwEAcG9WAAAKEwdyzQIAcG9SAAAKcr8CAHBvVAAACnKHAgBwb1QAAApvEQAAChMI
+EQhyyQIAcHJbAQBwb1YAAAoTCAIEBgcICREEEQURBhEHEQgRCREKEQsRDA4FEQ0oIwAABg4Ecj8B
+AHADKCEAAAooIgAAChMQERAoIwAACiwHERAoJAAACgMRECgmAAAKAyhXAAAKKCcAAAosDAMoVwAA
+ChcoWAAACioAAEFkAAACAAAApgAAAFMAAAD5AAAADAAAAAAAAAACAAAAjQAAAIMAAAAQAQAADAAA
+AAAAAAACAAAATwEAAOgBAAA3AwAADAAAAAAAAAACAAAAMwEAAB4CAABRAwAADAAAAAAAAAATMAQA
+KwEAAA0AABEfHY0vAAABJRZy1wIAcKIlFw4LoiUYciEDAHCiJRkODKIlGnJHAwBwoiUbDg2iJRxy
+ZQMAcKIlHQ4JoiUecocDAHCiJR8JDgqiJR8KcqkDAHCiJR8LBKIlHwxyywMAcKIlHw0FoiUfDnLt
+AwBwoiUfDw8EKFkAAAqiJR8QchMEAHCiJR8RDwUoWQAACqIlHxJyOQQAcKIlHxMOCKIlHxRyYQQA
+cKIlHxUODqIlHxZyfwQAcKIlHxcOD6IlHxhyoQQAcKIlHxkOD6IlHxpyzwQAcKIlHxsOEKIlHxxy
+yQIAcKIoWgAACnMTAAAKJQNvFAAACiVy8wAAcG8VAAAKJm8WAAAKEAEDc1sAAAoKBnNcAAAKBm9d
+AAAKb14AAAomBm9fAAAKBm9gAAAKKgATMAMALQAAAA4AABFzOgAACgoCKGEAAAooYgAAChdzYwAA
+CgsrBwYIbzsAAAoHb2QAAAolDC3vBioAAAAbMAIAaAAAAA8AABECb2UAAAoQAAJy5wQAcG9mAAAK
+LA0CcusEAHBvZwAACi0aAnJlAQBwb2YAAAosNQJybQEAcG9nAAAKLCgAAihoAAAKJhcK3h5vaQAA
+CihqAAAKFgreEG8RAAAKKGoAAAoWCt4CFioGKgEcAAAAAD0AC0gADh0AAAEAAD0AC1YADhUAAAEb
+MAIATQAAAA8AABECb2UAAAoQAAJy5wQAcG9mAAAKLDQCcusEAHBvZwAACiwnAihHAAAKJhcK3h5v
+aQAACihqAAAKFgreEG8RAAAKKGoAAAoWCt4CFioGKgAAAAEcAAAAACIACy0ADh0AAAEAACIACzsA
+DhUAAAEbMAIATQAAAA8AABECb2UAAAoQAAJyZQEAcG9mAAAKLDQCcm0BAHBvZwAACiwnAihOAAAK
+JhcK3h5vaQAACihqAAAKFgreEG8RAAAKKGoAAAoWCt4CFioGKgAAAAEcAAAAACIACy0ADh0AAAEA
+ACIACzsADhUAAAFGAiglAAAGLAcCKEcAAAoqFCoAABswAgA9AAAAEAAAEXM6AAAKCgJvSAAACm9J
+AAAKCysTB29KAAAKDAYIb0sAAApvOwAACgdvTQAACi3l3goHLAYHbxwAAArcBioAAAABEAAAAgAS
+AB8xAAoAAAAAGzACAGkAAAARAAARczoAAAoKAm8FAAArDBICKFAAAAoLKzwHb1EAAApvSAAACm9J
+AAAKDSsVCW9KAAAKEwQGEQRvSwAACm87AAAKCW9NAAAKLePeCgksBglvHAAACtwHb00AAAotvN4K
+BywGB28cAAAK3AYqAAAAARwAAAIAKAAhSQAKAAAAAAIAFQBIXQAKAAAAABMwAgAPAAAAEgAAEXNr
+AAAKCgIGKCwAAAYGKgAbMAMA3QAAABMAABECb2wAAAoXM2wCbwYAACsLEgEobQAACgorRwZvSgAA
+CgwDCG9LAAAKbxEAAAoIb1MAAApvEQAACm9uAAAKCG9TAAAKb2wAAAoXMxYIb1MAAApvEQAACihH
+AAAKAygsAAAGBm9NAAAKLbHecQYsBgZvHAAACtwCb2wAAAoYM14CbwYAACsLEgEobQAACgorOQZv
+SgAACg0DAm9vAAAKbxEAAAoJb1MAAApvEQAACm9uAAAKCW9TAAAKbxEAAAooRwAACgMoLAAABgZv
+TQAACi2/3goGLAYGbxwAAArcKgAAAAEcAAACABgAU2sACgAAAAACAI0ARdIACgAAAAATMAIAPgAA
+ABQAABFzEwAACgoGA28UAAAKBnLzAABwbxUAAAomAnsLAAAEBG9wAAAKLBYGbxYAAApzWwAACiVv
+XQAACm9fAAAKKgAAGzADAHEAAAAVAAARcxMAAAolA28UAAAKJXLzAABwbxUAAAomc3EAAAoKbxYA
+AApzWwAACgsHb10AAApzcgAACgwIB29zAAAKCARvdAAACggWb3UAAApzdgAACiUIb3cAAAoGb3gA
+AAomB29fAAAK3goHLAYHbxwAAArcBioAAAABEAAAAgApADxlAAoAAAAAEzADADsAAAANAAARBSw3
+BHNbAAAKCnLvBABwAygXAAAKBnNcAAAKJRZvdQAACgZvXQAACm9eAAAKJgZvXwAACgZvYAAACioA
+EzAEAEYAAAAWAAARA355AAAKfhMAAAQlLRcmfhEAAAT+BkMAAAZzegAACiWAEwAABCgHAAArCgZv
+MgAAChcxEAYWBm8yAAAKF1lvMwAACgoGKgAAEzAEAGoAAAAAAAAAAnN8AAAKfQgAAAQCczoAAAol
+cg8FAHBvOwAACiVyKQUAcG87AAAKfQoAAAQCczoAAAolcucAAHBvOwAACiVyQQUAcG87AAAKJXJL
+BQBwbzsAAAolcl8FAHBvOwAACn0LAAAEAih9AAAKKh4CewwAAAQqIgIDfQwAAAQqHgJ7DQAABCoi
+AgN9DQAABCoeAih+AAAKKhswBgBbAgAAFwAAEXMxAAAGCnN/AAAKCxQMFAwCKIAAAApvgQAACnJx
+BQBwEgJvggAACgdyJQAAcAgWjDoAAAFvgwAACm+EAAAKbxEAAApvhQAACghvhgAAChQMAiiAAAAK
+b4EAAApynQUAcBICb4IAAAoHckUAAHAIFow6AAABb4MAAApvhAAACm8RAAAKb4UAAAoIb4YAAAoU
+DAIogAAACm+BAAAKcs8FAHASAm+CAAAKB3JrAABwCBaMOgAAAW+DAAAKb4QAAApvEQAACm+FAAAK
+CG+GAAAKFAwCKIAAAApvgQAACnL1BQBwEgJvggAACgdyhQAAcAgWjDoAAAFvgwAACm+EAAAKb4UA
+AAoIb4YAAAoUDAIogAAACm+BAAAKcicGAHASAm+CAAAKB3KrAABwCBaMOgAAAW+DAAAKb4QAAApv
+EQAACm+FAAAKCG+GAAAKFAwCKIAAAApvgQAACnJHBgBwEgJvggAACgdyvwAAcAgWjDoAAAFvgwAA
+Cm+EAAAKbxEAAApvhQAACghvhgAAChQMAiiAAAAKb4EAAApyewYAcBICb4IAAAoHcgEAAHAIFow6
+AAABb4MAAApvhAAACm8RAAAKb4UAAAoIb4YAAAoGB28PAAAGAiiAAAAKFm+HAAAK3nwNFBMEAiiA
+AAAKb4EAAApyqwYAcBIEb4IAAAoRBBaMOgAAAW+DAAAKb4QAAApvEQAAChMFEQRvhgAACnJbAQBw
+EwYCKIAAAApviAAAChcRBQlvEQAACnLNBgBwEQYoQgAACnJbAQBwFm+JAAAKJgIogAAAChdvhwAA
+Ct4AKgBBHAAAAAAAAAwAAADSAQAA3gEAAHwAAAAVAAABHgIoigAACioeAih9AAAKKq5+DgAABC0e
+ctEGAHDQBQAAAiiLAAAKb4wAAApzjQAACoAOAAAEfg4AAAQqGn4PAAAEKh4CgA8AAAQqGn4QAAAE
+Kh4CKI4AAAoqLnM+AAAGgBAAAAQqLnNBAAAGgBEAAAQqlgNvjwAACnJDBwBwb2cAAAotEQNvjwAA
+CnJNBwBwb2cAAAoqFyo2AwRyaQEAcChCAAAKKgAAQlNKQgEAAQAAAAAADAAAAHY0LjAuMzAzMTkA
+AAAABQBsAAAAaA8AACN+AADUDwAAqBEAACNTdHJpbmdzAAAAAHwhAABYBwAAI1VTANQoAAAQAAAA
+I0dVSUQAAADkKAAAOAYAACNCbG9iAAAAAAAAAAIAAAFXHaIJCQsAAAD6ATMAFgAAAQAAAEwAAAAI
+AAAAFgAAAEMAAABbAAAAjwAAAAMAAAAsAAAAFwAAAAQAAAAMAAAAFgAAABAAAAABAAAABwAAAAEA
+AAACAAAABwAAAAAAHQoBAAAAAAAGALUHrg0GAEQIrg0GAAEHmw0PACIOAAAGAC4HcgsGAJgHcgsG
+AHkHcgsGACsIcgsGANUHcgsGAO4HcgsGAEUHcgsGAGAHxAgGAAcQhAoGAMkGrg0GAKAAgQEGAG8A
+gQFDAHYNAAAKAJMAgQEGAG8FhAoGAAMMXQsGAMgLhAoGAF4ChAoGAGEAgQEOAJ0RfgwOAOEPfgwO
+AFMAfgwSALALTBAGAJMM/wAOAL4L5QsOABoRfgwSALsM0gsSABcQMAESAJIDTBAGAIwAhAoGALsA
+hAoKAAsPmw0WAAkIzAkWAFsGzAkaAHEOeAUGAJAKhAoGAOQGmw0GANkMzg0KAK0GBwoKABUHBwoK
+AHcGSAsGAK4QhAoGACgJhAoGAGcJ/wAGACEEhAoeABYEcgwGAEUAgQEGAGgE/wAGAGsR/wAGAKsM
+hAoGADgM/wAGAGcN5A4OAKEKfgwGAIYAhAoSAJML0gsSAIgD0gsKAG0QBwoGAFkK/wAGAJ0I4xAG
+AF0K/wAGAKAM/wAGAHIEhAoOAM8FfgwSADQNTBASADcN0gsWAPUJzAkaACINeAUaAA0EeAUWAAoN
+zAkGANUFhAoGAC0EhAoGAEMRcgsAAAAAzwAAAAAAAQABAAAAEAD9DOkMNQABAAEAAQAQACEL6QyR
+AAwAMgABABAAtgpQAZkADgA3AAAAEADVDTEONQAOADkAAAEQAMsOMQ61ABAAPQADIRAAfQEAADUA
+EQBAAAMBAAAnDwAAoQAUAEQAAQDUAiMEAQC3AiMEAQCaAiMEAQB+AiMEAQBjA2UDAQA6A2UDAQAR
+A2UDBgBKCiYEBgCcECMEBgD0AC8EBgD7AC8EAQBjAiMEAQDyAmUDEQCVCjYEEQA2BjsEEQC+Az8E
+NgDLAEMEFgABAEcEFgAdAFAEBgYoASMEVoD3DloEVoAWBloEUCAAAAAAhgg5AkABAQBYIAAAAACG
+CEoCAQABAGEgAAAAAIYIGQJAAQIAaSAAAAAAhggpAgEAAgByIAAAAACGCPkBQAEDAHogAAAAAIYI
+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
+5wHJAJ0G+AHJAGYO/gFMAHMNEAJUAH4QhQDBAHoEVAB5AdQOXQDBAdoQigDxAJ0GTALJAa0KUgJc
+AHMNEAJkAH4QhQDJAHYKbwLBAGIIdgLJAXYKfALxAHYKgwJ5AbYDigKBAVUFqwCpAcIGkALRASYJ
+VAB5AUcPmwLZAIENEAAJAYENoQLZAagKBgDhAVURQAHZAY8GBgDpAZUGBgChAZwBswL5AcIAugLh
+AIENwAIJAqIFVAB5AYsKVAB5AYAJXQB5AXcJXQDJAZ0GzwKpAM4DVAARAqsFvABsAIENBgDJAcYF
+JQN0AHMNEAJsANcBOAHJAWMJVAAkANsOPAMBAYENBgAJAYENBgAJAYQLTQPhAe8QEADhAccQAQAh
+AoENBgAhAp0DUwMpAkUKWgN5AZcRZQN8AIEN3ACRAaMGcQOEAIENBgBpAIENBgAhAYENBgAMAIEN
+BgAxARMPrQMxAh4NswM5AqUBuQM5AXYKwgNBAmIIyQMMANcBOAE5AaEJBgAxAj0QAQAxAjUPzQNJ
+AksN0wMxAYENBgBRAj8E3ANRAj8R5QNRAYEN6wNpAYENBgB5AUMNVAAIAFQADgQIAFgAEwQOAD0B
+GAQgAGMAEwQhAGMAEwQuAAsAdwUuABMAgAUuABsAnwUuACMAqAUuACsA0QUuADMA0QUuADsA0QUu
+AEMAqAUuAEsA1wUuAFMA0QUuAFsA7gVAAGMAEwRBAGMAEwRgAGMAEwRhAGMAEwSAAGMAEwSBAGMA
+EwSDAGsAEwSgAGMAEwShAGMAEwSjAHMAEwTAAGMAEwTBAGMAEwTgAGMAEwThAGMAEwTjAGMAEwQA
+AWMAEwQgAWMAEwRAAWMAEwRJAXsAnwVgAWMAEwRpAXsAnwWAAWMAEwSBAWMAEwSgAWMAEwShAWMA
+EwTAAWMAEwQBAmMAEwRABmMAEwRgBmMAEwSABmMAEwSgBmMAEwQcAA0BRAFUAXEBmAG1Ab8BzQHc
+Ae4BIAKWAqgCywLWAuYCAgMSAzcDQgNhA5gDAgABAAMACAAFAAoABgAMAAAATgJfBQAALQJfBQAA
+DQJfBQAA7gFfBQAA+QpjBQAAGAVjBQAA4ARjBQAA6gBfBQAA8ANjBQAA2QxnBQAAUwZtBQAAIxBy
+BQIAAQADAAEAAgADAAIAAwAFAAEABAAFAAIABQAHAAEABgAHAAIABwAJAAEACAAJAAIACQALAAEA
+CgALAAIACwANAAEADAANAAIADQAPAAEADgAPAAIAMgARAAEAMwARAAIANAATAAEANQATAAIAOgAV
+AAIAOwAXAAEAPAAXAAIAPQAZAEYAaAB7AI4AlADUACEBZAEIAhkCYQJoAgsDMANoA5ADBIAAAAEA
+AAAUHQhhAAAAAAAAUAEAAAQAAAAAAAAAAAAAAPMDdAEAAAAABAAAAAAAAAAAAAAA8wOECgAAAAAM
+AAAAAAAAAAAAAAD8A+ULAAAAAAQAAAAAAAAAAAAAAPMDMAEAAAAADQAAAAAAAAAAAAAABQStCQAA
+AAANAAAAAAAAAAAAAAAFBAkBAAAAAAQAAAAAAAAAAAAAAPMD4AUAAAAAAAAAAAEAAADfDQAABwAC
+AAgABABBAKcAVQCnAFcApwB7AKcAnwBcAp8AKwP3AIsDAAAAPD45X18zM18wADxHZXRGaWxlcz5i
+X18zM18wADw+OV9fNjVfMAA8R2VuZXJhdGVMaXN0VG9TdHJpbmc+Yl9fNjVfMABJRW51bWVyYWJs
+ZWAxAEpFbnVtZXJhYmxlYDEASUVudW1lcmF0b3JgMQBMaXN0YDEARGF0YUpzb25GaWxlMQBUb0lu
+dDMyAEZ1bmNgMgBTb3J0ZWRMaXN0YDIARGljdGlvbmFyeWAyAERhdGFKc29uRmlsZTIARnVuY2Az
+AGdldF9VVEY4ADw+OQA8TW9kdWxlPgBnZXRfQ29udHJvbElEAHNldF9Db250cm9sSUQAT1JBQ0xF
+AFNRTABTeXN0ZW0uSU8ATWljcm9zb2Z0LlNxbFNlcnZlci5NYW5hZ2VkRFRTAHZhbHVlX18AU3lz
+dGVtLkRhdGEAR2V0RGF0YQBjb21iaW5lZGF0YQBTVF83MWUzNjk1M2Q3MWY0N2RkYjMyMThjYjU0
+Y2JlMjhkYgBtc2NvcmxpYgA8PmMAU3lzdGVtLkNvbGxlY3Rpb25zLkdlbmVyaWMAT3BlblJlYWQA
+TG9ja09uZUZvclJlYWQATWFpblN0YWdpbmdFeGVjdXRpb25GaWxlQnVsa1VwbG9hZABBZGQAZ2V0
+X1Jvd3NTdGFnZWQAc2V0X1Jvd3NTdGFnZWQAZ2V0X1Jvd3NVcGRhdGVkAHNldF9Sb3dzVXBkYXRl
+ZABnZXRfUm93c0RlbGV0ZWQAc2V0X1Jvd3NEZWxldGVkAGdldF9Sb3dzSW5zZXJ0ZWQAc2V0X1Jv
+d3NJbnNlcnRlZABOZXdHdWlkADxDb250cm9sSUQ+a19fQmFja2luZ0ZpZWxkADxSb3dzU3RhZ2Vk
+PmtfX0JhY2tpbmdGaWVsZAA8Um93c1VwZGF0ZWQ+a19fQmFja2luZ0ZpZWxkADxSb3dzRGVsZXRl
+ZD5rX19CYWNraW5nRmllbGQAPFJvd3NJbnNlcnRlZD5rX19CYWNraW5nRmllbGQAPE91dHB1dE1l
+c3NhZ2U+a19fQmFja2luZ0ZpZWxkADxJblByb2Nlc3NlZEZpbGVGdWxsTmFtZT5rX19CYWNraW5n
+RmllbGQAPHVuUHJvY2Vzc2VkRmlsZUZ1bGxOYW1lPmtfX0JhY2tpbmdGaWVsZAA8U3VpdGVGb2xk
+ZXJMb2NhdGlvbj5rX19CYWNraW5nRmllbGQARGJDb21tYW5kAFNxbENvbW1hbmQAc2V0X1NlbGVj
+dENvbW1hbmQAUmVjYXJkAFJlcGxhY2UAZGVmYXVsdEluc3RhbmNlAGdldF9NZXNzYWdlAGdldF9P
+dXRwdXRNZXNzYWdlAHNldF9PdXRwdXRNZXNzYWdlAGJUcnVuY2F0ZVRhYmxlAFZhcmlhYmxlAEVu
+dW1lcmFibGUASURpc3Bvc2FibGUAUnVudGltZVR5cGVIYW5kbGUAR2V0VHlwZUZyb21IYW5kbGUA
+UHJvY2Vzc0ZpbGUAUmVhZENvbnRlbnRGaWxlAGZpbGUAQ29uc29sZQBnZXRfTmFtZQBHZXRXZWVr
+RmlsZU5hbWUAR2V0RmlsZU5hbWUAR2V0U3VmZml4RmlsZU5hbWUAU291cmNlVHlwZU5hbWUAZ2V0
+X0luUHJvY2Vzc2VkRmlsZUZ1bGxOYW1lAHNldF9JblByb2Nlc3NlZEZpbGVGdWxsTmFtZQBnZXRf
+dW5Qcm9jZXNzZWRGaWxlRnVsbE5hbWUAc2V0X3VuUHJvY2Vzc2VkRmlsZUZ1bGxOYW1lAGZpbGVG
+dWxsTmFtZQBHZXRPcmRlckZpbGVzRm9ybWF0TmFtZQBHZXREaXJlY3RvcnlOYW1lAGZpbGVuYW1l
+AERhdGVUaW1lAE1pY3Jvc29mdC5TcWxTZXJ2ZXIuRHRzLlJ1bnRpbWUAc3RhcnR0aW1lAFJlYWRM
+aW5lAFdyaXRlTGluZQBDb21iaW5lAHRleHRsaW5lAGdldF9UeXBlAEpUb2tlblR5cGUAV2hlcmUA
+U3lzdGVtLkNvcmUARGV0YWlsU2NvcmUAVGltZUhvbWVTY3JvcmUAVGltZUF3YXlTY3JvcmUARmFp
+bHVyZQBnZXRfQ3VsdHVyZQBzZXRfQ3VsdHVyZQByZXNvdXJjZUN1bHR1cmUAZ2V0X0ludmFyaWFu
+dEN1bHR1cmUAVlNUQVJUU2NyaXB0T2JqZWN0TW9kZWxCYXNlAEFwcGxpY2F0aW9uU2V0dGluZ3NC
+YXNlAENsb3NlAERpc3Bvc2UAUGFyc2UAQWdncmVnYXRlAEVkaXRvckJyb3dzYWJsZVN0YXRlAERl
+bGV0ZQBDb21waWxlckdlbmVyYXRlZEF0dHJpYnV0ZQBEZWJ1Z2dlck5vblVzZXJDb2RlQXR0cmli
+dXRlAERlYnVnZ2FibGVBdHRyaWJ1dGUARWRpdG9yQnJvd3NhYmxlQXR0cmlidXRlAEFzc2VtYmx5
+VGl0bGVBdHRyaWJ1dGUAQXNzZW1ibHlUcmFkZW1hcmtBdHRyaWJ1dGUAVGFyZ2V0RnJhbWV3b3Jr
+QXR0cmlidXRlAEFzc2VtYmx5Q29uZmlndXJhdGlvbkF0dHJpYnV0ZQBBc3NlbWJseURlc2NyaXB0
+aW9uQXR0cmlidXRlAENvbXBpbGF0aW9uUmVsYXhhdGlvbnNBdHRyaWJ1dGUAQXNzZW1ibHlQcm9k
+dWN0QXR0cmlidXRlAEFzc2VtYmx5Q29weXJpZ2h0QXR0cmlidXRlAFNTSVNTY3JpcHRUYXNrRW50
+cnlQb2ludEF0dHJpYnV0ZQBBc3NlbWJseUNvbXBhbnlBdHRyaWJ1dGUAUnVudGltZUNvbXBhdGli
+aWxpdHlBdHRyaWJ1dGUAZ2V0X1ZhbHVlAHZhbHVlAE1vdmUAUmVtb3ZlAEJ1bGtVcGxvYWRMb2Fk
+U2l6ZQBMYXN0SW5kZXhPZgBFbmNvZGluZwBDb25uU3RyX1N0YWdpbmcASW5zZXJ0U3RhZ2luZwBT
+eXN0ZW0uUnVudGltZS5WZXJzaW9uaW5nAGNvbm5uZWN0aW9uU3RyaW5nAGdldF9Db25uZWN0aW9u
+U3RyaW5nAHNldF9Db25uZWN0aW9uU3RyaW5nAEdlbmVyYXRlTGlzdFRvU3RyaW5nAFN1YnN0cmlu
+ZwBHZXRGb3JtYXREYXRhTWF0Y2gAR2V0TGlzdEZvcm1hdERhdGFNYXRjaABnZXRfUGF0aABnZXRf
+TGVuZ3RoAEVuZHNXaXRoAFN0YXJ0c1dpdGgAak9iagBDb252ZXJ0VG9Kc29uT2JqAFVubG9jawBX
+ZWVrAE1pY3Jvc29mdC5TcWxTZXJ2ZXIuU2NyaXB0VGFzawBNaWNyb3NvZnQuU3FsU2VydmVyLkR0
+cy5UYXNrcy5TY3JpcHRUYXNrAFNjcmlwdE9iamVjdE1vZGVsAFN5c3RlbS5Db21wb25lbnRNb2Rl
+bABTVF83MWUzNjk1M2Q3MWY0N2RkYjMyMThjYjU0Y2JlMjhkYi5kbGwARmlsbABQcm9jZXNzQ29u
+dHJvbABGaWxlU3RyZWFtAEhvbWV0ZWFtAEF3YXl0ZWFtAGdldF9JdGVtAGl0ZW0AU3lzdGVtAFRy
+aW0ARW51bQByZXNvdXJjZU1hbgBKVG9rZW4AT3BlbgBDaGlsZHJlbgBTY3JpcHRNYWluAEdldEZp
+bGVOYW1lV2l0aG91dEV4dGVuc2lvbgBnZXRfU3VpdGVGb2xkZXJMb2NhdGlvbgBzZXRfU3VpdGVG
+b2xkZXJMb2NhdGlvbgBzdWl0ZUZvbGRlckxvY2F0aW9uAFByb2Nlc3NJbmZvcm1hdGlvbgBDb25u
+U3RyX0Rlc3RpbmF0aW9uAFN5c3RlbS5Db25maWd1cmF0aW9uAFN5c3RlbS5HbG9iYWxpemF0aW9u
+AFN5c3RlbS5SZWZsZWN0aW9uAHNldF9Db25uZWN0aW9uAERiQ29ubmVjdGlvbgBjaGVja0Nvbm5l
+Y3Rpb24AU3FsQ29ubmVjdGlvbgBKc29uUmVhZGVyRXhjZXB0aW9uAFN5c3RlbS5EYXRhLkNvbW1v
+bgBOZXd0b25zb2Z0Lkpzb24ASXNKc29uAHNlYXNvbgBDdWx0dXJlSW5mbwBDaGVja0RhdGFHZW5l
+cmFsSW5mbwBDaGVja0RhdGFEZXRhaWxJbmZvAERpcmVjdG9yeUluZm8AR2V0RmlsZU5hbWVGb3Jt
+YXRXaXRoVGltZVN0YW1wAEdldFRpbWVTdGFtcABTeXN0ZW0uTGlucQBOZXd0b25zb2Z0Lkpzb24u
+TGlucQBTdHJlYW1SZWFkZXIAVGV4dFJlYWRlcgBJRm9ybWF0UHJvdmlkZXIARGJDb25uZWN0aW9u
+U3RyaW5nQnVpbGRlcgBnZXRfUmVzb3VyY2VNYW5hZ2VyAENvZGVSZWZlcmVuY2VIZWxwZXIAU2Ny
+aXB0SGVscGVyAEV2ZW50c09iamVjdFdyYXBwZXIAZ2V0X1ZhcmlhYmxlRGlzcGVuc2VyAFNxbERh
+dGFBZGFwdGVyAFRvTG93ZXIARmlyZUVycm9yAGZpbGVOYW1lU2VwYXJhdG9yAElFbnVtZXJhdG9y
+AEdldEVudW1lcmF0b3IALmN0b3IALmNjdG9yAEphcnIAQ29ublN0cgBTeXN0ZW0uRGlhZ25vc3Rp
+Y3MAU3lzdGVtLlJ1bnRpbWUuQ29tcGlsZXJTZXJ2aWNlcwBTeXN0ZW0uUmVzb3VyY2VzAFNUXzcx
+ZTM2OTUzZDcxZjQ3ZGRiMzIxOGNiNTRjYmUyOGRiLlByb3BlcnRpZXMuUmVzb3VyY2VzLnJlc291
+cmNlcwBEZWJ1Z2dpbmdNb2RlcwBTVF83MWUzNjk1M2Q3MWY0N2RkYjMyMThjYjU0Y2JlMjhkYi5Q
+cm9wZXJ0aWVzAEdldEFsbFByb3BlcnRpZXMAVmFyaWFibGVzAEdldE9yZGVyRmlsZXMAR2V0Rmls
+ZXMAZmlsZVNhbWVOYW1lcwBmaWxlRnVsbE5hbWVzAEhvbWVTY29yZXMAQXdheVNjb3JlcwB2YWx1
+ZXMAU2V0dGluZ3MARXF1YWxzAENvbnRhaW5zAFN5c3RlbS5Db2xsZWN0aW9ucwBTdWNjZXNzAG1v
+dmVGaWxlVG9JblByb2Nlc3MAZ2V0X0R0cwBsaXN0Zm9ybWF0cwBTY3JpcHRSZXN1bHRzAGdldF9F
+dmVudHMARXhpc3RzAENvbmNhdABHZXRBbGxTZWNvbmRGaWxlU2FtZUZvcm1hdABHZXRBbGxGaXNy
+dEZpbGVTYW1lRm9ybWF0AEdldEZpc3J0RmlsZVNhbWVGb3JtYXQAR2V0TGlzdEZpbGVTYW1lRm9y
+bWF0AEdldEZpbGVUaW1lRm9ybWF0AGZpbGVUaW1lU3RhbXBGb3JtYXQAUGFyc2VFeGFjdABKT2Jq
+ZWN0AElzSnNvbk9iamVjdABHZXRQcm9wZXJ0aWVzSnNvbk9iamVjdABEaXN0aW5jdABEYXRhU2V0
+AGdldF9EZWZhdWx0AEZUUmVzdWx0AEhUUmVzdWx0AHNldF9UYXNrUmVzdWx0AFN5c3RlbS5EYXRh
+LlNxbENsaWVudAB0b3VybmFtZW50AENvbXBvbmVudABwYXJlbnQAZ2V0X0N1cnJlbnQAY3VycmVu
+dABnZXRfQ291bnQAU1NJU1BhY2thZ2VzQ291bnQAQ29udmVydABMYXN0AFRvTGlzdABsaXN0AHNl
+dF9Db21tYW5kVGltZW91dABNb3ZlTmV4dABTeXN0ZW0uVGV4dABzZXRfQ29tbWFuZFRleHQAUmVh
+ZEFsbFRleHQAV3JpdGVBbGxUZXh0AElzSkFycmF5AEdldExpc3RLZXlKc29uQXJyYXkAbGlzdG9m
+S2V5AGdldF9Bc3NlbWJseQBzcWxRdWVyeQBFeGVjdXRlTm9uUXVlcnkAQ3JlYXRlRGlyZWN0b3J5
+AGNvdW50cnkAb3BfRXF1YWxpdHkAb3BfSW5lcXVhbGl0eQBFbXB0eQBKUHJvcGVydHkAAAAjRgBp
+AGwAZQBOAGEAbQBlAFMAZQBwAGEAcgBhAHQAbwByAAAfQwBvAG4AbgBTAHQAcgBfAFMAdABhAGcA
+aQBuAGcAACVGAG8AbABkAGUAcgBCAGEAcwBlAEwAbwBjAGEAdABpAG8AbgAAGVMAdABhAGcAaQBu
+AGcAVABhAGIAbABlAAAlQgB1AGwAawBVAHAAbABvAGEAZABMAG8AYQBkAFMAaQB6AGUAABNTAHQA
+YQByAHQAVABpAG0AZQAAJ0YAaQBsAGUAVABpAG0AZQBTAHQAYQBtAHAARgBvAHIAbQBhAHQAAAtP
+AEwARQBEAEIAABFQAHIAbwB2AGkAZABlAHIAACU7AEMAbwBuAG4AZQBjAHQAIABUAGkAbQBlAG8A
+dQB0AD0AMAAAE1UAbgBwAHIAbwBjAGUAcwBzAAATUAByAG8AYwBlAHMAcwBlAGQAAAcqAC4AKgAA
+AQADMQAAAzIAAANbAAADLAAAA10AABNJAG4AUAByAG8AYwBlAHMAcwAAE2kAbgBjAGkAZABlAG4A
+dABzAAAHaAAyAGgAAANfAAAZaQBuAGMAaQBkAGUAbgB0AFQAeQBwAGUAAA1wAGUAcgBpAG8AZAAA
+CXQAZQB4AHQAAAVGAFQAAAVIAFQAAAlnAG8AYQBsAAANaQBzAEgAbwBtAGUAAAlUAHIAdQBlAAAJ
+dABpAG0AZQAAC0YAYQBsAHMAZQAACWMAYQByAGQAAAl0AHkAcABlAAAHUgBlAGQAABNZAGUAbABs
+AG8AdwBSAGUAZAAAAy0AAQ1lAHYAZQBuAHQAcwAAF3QAbwB1AHIAbgBhAG0AZQBuAHQAcwAAEWMA
+YQB0AGUAZwBvAHIAeQAACW4AYQBtAGUAABV0AG8AdQByAG4AYQBtAGUAbgB0AAANcwBlAGEAcwBv
+AG4AAAloAG8AbQBlAAAJdABlAGEAbQAAAycAAQlhAHcAYQB5AABJWwBzAHAASQBuAHMAZQByAHQA
+UwBUAEcAXwBTAHAAbwByAHQARABhAHQAYQBdACAAQABjAG8AdQBuAHQAcgB5ACAAPQAgACcAASUn
+ACwAIABAAHQAbwB1AHIAbgBhAG0AZQBuAHQAIAA9ACAAJwABHScALAAgAEAAcwBlAGEAcwBvAG4A
+IAA9ACAAJwABIScALAAgAEAASABvAG0AZQB0AGUAYQBtACAAPQAgACcAASEnACwAIABAAEEAdwBh
+AHkAdABlAGEAbQAgAD0AIAAnAAEhJwAsACAAQABGAFQAUgBlAHMAdQBsAHQAIAA9ACAAJwABIScA
+LAAgAEAASABUAFIAZQBzAHUAbAB0ACAAPQAgACcAASUnACwAIABAAEgAbwBtAGUAUwBjAG8AcgBl
+AHMAIAA9ACAAJwABJScALAAgAEAAQQB3AGEAeQBTAGMAbwByAGUAcwAgAD0AIAAnAAEnJwAsACAA
+QABEAGUAdABhAGkAbABTAGMAbwByAGUAIAA9ACAAJwABHScALAAgAEAAUgBlAGMAYQByAGQAIAA9
+ACAAJwABIScALAAgAEAATABvAGEAZABUAGkAbQBlACAAPQAgACcAAS0nACwAIABAAEwAYQBzAHQA
+QwBoAGEAbgBnAGUAVABpAG0AZQAgAD0AIAAnAAEXJwAsAEAAVwBlAGUAawAgAD0AIAAnAAEDewAA
+A30AAB9UAFIAVQBOAEMAQQBUAEUAIABUAEEAQgBMAEUAIAAAGU8ATABFAEQAQgBfAE8AUgBBAEMA
+TABFAAAXTwBEAEIAQwBfAE8AUgBBAEMATABFAAAJTwBEAEIAQwAAE08ATABFAEQAQgBfAFMAUQBM
+AAARTwBEAEIAQwBfAFMAUQBMAAArVQBzAGUAcgA6ADoAQwBvAG4AbgBTAHQAcgBfAFMAdABhAGcA
+aQBuAGcAADFVAHMAZQByADoAOgBGAG8AbABkAGUAcgBCAGEAcwBlAEwAbwBjAGEAdABpAG8AbgAA
+JVUAcwBlAHIAOgA6AFMAdABhAGcAaQBuAGcAVABhAGIAbABlAAAxVQBzAGUAcgA6ADoAQgB1AGwA
+awBVAHAAbABvAGEAZABMAG8AYQBkAFMAaQB6AGUAAB9VAHMAZQByADoAOgBTAHQAYQByAHQAVABp
+AG0AZQAAM1UAcwBlAHIAOgA6AEYAaQBsAGUAVABpAG0AZQBTAHQAYQBtAHAARgBvAHIAbQBhAHQA
+AC9VAHMAZQByADoAOgBGAGkAbABlAE4AYQBtAGUAUwBlAHAAYQByAGEAdABvAHIAACFTAHkAcwB0
+AGUAbQA6ADoAVABhAHMAawBOAGEAbQBlAAADIAAAcVMAVABfADcAMQBlADMANgA5ADUAMwBkADcA
+MQBmADQANwBkAGQAYgAzADIAMQA4AGMAYgA1ADQAYwBiAGUAMgA4AGQAYgAuAFAAcgBvAHAAZQBy
+AHQAaQBlAHMALgBSAGUAcwBvAHUAcgBjAGUAcwAACWoAcwBvAG4AAAd0AHgAdAAAAAAA/LYyyfi+
+xkGjZgbgBgtGtAAEIAEBCAMgAAEFIAEBEREEIAEBDgYgAQERgK0pBw8ODg4IDg4VEkEBDhUSQQEO
+DhURRQEVEkEBDhUSQQEOFRFFAQ4ODg4GFRI9Ag4cBiABEwETAAMgAA4EAAEIHAQgAQIOBQACDg4O
+CRUSQQEVEkEBDgggABURRQETAAkVEUUBFRJBAQ4EIAATAAMgAAIFFRJBAQ4FFRFFAQ4MEAEBHgAV
+EoDNAR4AAwoBDgQAAQ4OBgADDg4ODgQAAQIOBAABAQ4FAAICDg4FAAIBDg4GAAIdDg4OBxUSgIkC
+DgIFIAIBHBgZEAECFRKAzQEeABUSgM0BHgAVEoCJAh4AAhAQAQEVEkEBHgAVEoDNAR4AEwcFFRJJ
+AhFNDhURRQEODhJREU0HFRJJAhFNDgQAABJRCQADEU0ODhKA2QcgAgETABMBAyAACAQHAg4IBCAB
+CA4FIAIOCAgPBwQVEkkCDg4VEUUBDg4OBhUSSQIODgUgAggOCA4HBBUSQQEOFRFFAQ4ODgUgAQET
+ABEQAQEVEoDNAR4AFRKAzQEeABwHBhUSQQEVEkEBDhURRQEOFRJBAQ4OFRFFAQ4OCQcDDhURRQEO
+Dg0HAxUSQQEOFRFFAQ4ODgcIAgICDg4VEUUBDg4OBQcCDhFZBAAAEVkGAAESgN0OCQcCAhUSXQES
+YQUAARJlDgkgABUSgM0BEmEHFRKAzQESYQggABUSXQETAAYVEl0BEmErBxcODggIDg4ODg4ODg4O
+Dg4ODhUSXQESZRURaQESZRJlFRJdARJhEmUSYQUAARJ5DgkwAQAVEWkBHgAECgESZQYVEWkBEmUG
+FRJdARJlBiABEoDlDgUgABKA5QYgARKA5RwGIAESgOUIBSACDg4OBQACAQ4CBAcBEm0FAAEOHQ4G
+IAIBDhJtCgcDFRJBAQ4ScQ4GAAESgPkOBQAAEoD9CiADARKBARKA/QIDBwECBgABEoDlDg8HAxUS
+QQEOFRJdARJhEmEbBwUVEkEBDhUSXQESZRURaQESZRUSXQESYRJhCAcBFRI9Ag4OBhUSPQIODhIH
+BBUSXQESYRURaQESYRJhEmEFIAARgQ0ECgESYQYVEWkBEmEEBwESfQUgAQITAAoHAxKAgRJtEoCF
+BSABARJtBiABARKAhQYgAQgSgIEDBwEOAgYOCBUSgI0DDg4OGRACAx4BFRKAzQEeAB4BFRKAjQMe
+AR4AHgEECgIODgcVEj0CCBIMFAcHEggVEj0CDhwSgJ0SVRKAnQ4OBSAAEoEZBSAAEoEdCCACAQ4Q
+EoCdBiABEoEhHAMgABwFIAASgSUIIAUCCA4ODggIAAESgSkRgS0FIAASgTEHIAIBDhKBMQi3elxW
+GTTgiQgwrU/msqau7QiJhF3NgIDMkQQAAAAABAEAAAAKTwBMAEUARABCAAIGCAgGFRI9AggSDAYG
+FRJBAQ4EBhKAqQMGElEDBhIYAwYSHAgGFRKAiQIOAgkGFRKAjQMODg4DBhEgCSABARUSPQIOHAgg
+ARUSQQEODhAgAxUSSQIRTQ4VEkEBDg4ODyADFRJJAg4OFRJBAQ4ODg4gAxUSQQEOFRJBAQ4ODhcg
+BBUSQQEVEkEBDhUSQQEOFRJBAQ4ODgkgAg4VEkEBDg4NIAIVEkEBDhUSQQEODgkgAgIVEkEBDg4I
+IAUBDg4IDg4TIBABDg4OCAgODg4ODg4ODg4ODggAARUSQQEODgkAARUSQQEOEmUJAAEVEkEBDhJ5
+CgABFRI9Ag4OEmULAAIBEmUVEj0CDg4FIAIBDg4HIAISgIEODgYgAwEODgIIIAEOFRJBAQ4FAAAS
+gKkFAAEBElEEAAASGAMAAAEDKAAIAygADgUIABKAqQQIABJRBAgAEhgIAQAIAAAAAAAeAQABAFQC
+FldyYXBOb25FeGNlcHRpb25UaHJvd3MBCAEAAgAAAAAAKAEAI1NUXzcxZTM2OTUzZDcxZjQ3ZGRi
+MzIxOGNiNTRjYmUyOGRiAAAFAQAAAAAWAQARQ29weXJpZ2h0IEAgIDIwMTkAAEkBABouTkVURnJh
+bWV3b3JrLFZlcnNpb249djQuNQEAVA4URnJhbWV3b3JrRGlzcGxheU5hbWUSLk5FVCBGcmFtZXdv
+cmsgNC41tAAAAM7K774BAAAAkQAAAGxTeXN0ZW0uUmVzb3VyY2VzLlJlc291cmNlUmVhZGVyLCBt
+c2NvcmxpYiwgVmVyc2lvbj00LjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2Vu
+PWI3N2E1YzU2MTkzNGUwODkjU3lzdGVtLlJlc291cmNlcy5SdW50aW1lUmVzb3VyY2VTZXQCAAAA
+AAAAAAAAAABQQURQQURQtAAAAChqAAAAAAAAAAAAAEJqAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAA0agAAAAAAAAAAAAAAAF9Db3JEbGxNYWluAG1zY29yZWUuZGxsAAAAAAD/JQAgABAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABABAAAAAYAACAAAAAAAAAAAAAAAAAAAAB
+AAEAAAAwAACAAAAAAAAAAAAAAAAAAAABAAAAAABIAAAAWIAAABoEAAAAAAAAAAAAABoENAAAAFYA
+UwBfAFYARQBSAFMASQBPAE4AXwBJAE4ARgBPAAAAAAC9BO/+AAABAAAAAQAIYRQdAAABAAhhFB0/
+AAAAAAAAAAQAAAACAAAAAAAAAAAAAAAAAAAARAAAAAEAVgBhAHIARgBpAGwAZQBJAG4AZgBvAAAA
+AAAkAAQAAABUAHIAYQBuAHMAbABhAHQAaQBvAG4AAAAAAAAAsAR6AwAAAQBTAHQAcgBpAG4AZwBG
+AGkAbABlAEkAbgBmAG8AAABWAwAAAQAwADAAMAAwADAANABiADAAAAAaAAEAAQBDAG8AbQBtAGUA
+bgB0AHMAAAAAAAAAIgABAAEAQwBvAG0AcABhAG4AeQBOAGEAbQBlAAAAAAAAAAAAcAAkAAEARgBp
+AGwAZQBEAGUAcwBjAHIAaQBwAHQAaQBvAG4AAAAAAFMAVABfADcAMQBlADMANgA5ADUAMwBkADcA
+MQBmADQANwBkAGQAYgAzADIAMQA4AGMAYgA1ADQAYwBiAGUAMgA4AGQAYgAAAD4ADwABAEYAaQBs
+AGUAVgBlAHIAcwBpAG8AbgAAAAAAMQAuADAALgA3ADQANAA0AC4AMgA0ADgANAAwAAAAAABwACgA
+AQBJAG4AdABlAHIAbgBhAGwATgBhAG0AZQAAAFMAVABfADcAMQBlADMANgA5ADUAMwBkADcAMQBm
+ADQANwBkAGQAYgAzADIAMQA4AGMAYgA1ADQAYwBiAGUAMgA4AGQAYgAuAGQAbABsAAAASAASAAEA
+TABlAGcAYQBsAEMAbwBwAHkAcgBpAGcAaAB0AAAAQwBvAHAAeQByAGkAZwBoAHQAIABAACAAIAAy
+ADAAMQA5AAAAKgABAAEATABlAGcAYQBsAFQAcgBhAGQAZQBtAGEAcgBrAHMAAAAAAAAAAAB4ACgA
+AQBPAHIAaQBnAGkAbgBhAGwARgBpAGwAZQBuAGEAbQBlAAAAUwBUAF8ANwAxAGUAMwA2ADkANQAz
+AGQANwAxAGYANAA3AGQAZABiADMAMgAxADgAYwBiADUANABjAGIAZQAyADgAZABiAC4AZABsAGwA
+AABoACQAAQBQAHIAbwBkAHUAYwB0AE4AYQBtAGUAAAAAAFMAVABfADcAMQBlADMANgA5ADUAMwBk
+ADcAMQBmADQANwBkAGQAYgAzADIAMQA4AGMAYgA1ADQAYwBiAGUAMgA4AGQAYgAAAEIADwABAFAA
+cgBvAGQAdQBjAHQAVgBlAHIAcwBpAG8AbgAAADEALgAwAC4ANwA0ADQANAAuADIANAA4ADQAMAAA
+AAAARgAPAAEAQQBzAHMAZQBtAGIAbAB5ACAAVgBlAHIAcwBpAG8AbgAAADEALgAwAC4ANwA0ADQA
+NAAuADIANAA4ADQAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAGAAAAwAAABUOgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAA=</BinaryItem>
+            </ScriptProject>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Bulk Process file Json.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{408DB5E9-1897-47CB-A218-C7AD7187A635}"
+          DTS:From="Package\Bulk Process file Json\Get Variables"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Bulk Process file Json\Script Task" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="141,42"
+          Id="Package\Bulk Process file Json\Get Variables"
+          TopLeft="147,25" />
+        <NodeLayout
+          Size="131,42"
+          Id="Package\Bulk Process file Json\Script Task"
+          TopLeft="160,141" />
+        <EdgeLayout
+          Id="Package\Bulk Process file Json.PrecedenceConstraints[Constraint]"
+          TopLeft="217.5,67">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="8,74"
+              Start="0,0"
+              End="8,66.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,33"
+                    Point2="0,37"
+                    Point3="4,37" />
+                  <mssgle:LineSegment
+                    End="4,37" />
+                  <mssgle:CubicBezierSegment
+                    Point1="4,37"
+                    Point2="8,37"
+                    Point3="8,41" />
+                  <mssgle:LineSegment
+                    End="8,66.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="436,407"
+          Size="436,450"
+          Id="Package\Bulk Process file Json"
+          TopLeft="419,61" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

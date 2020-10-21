@@ -1,0 +1,1543 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/5/2018 11:21:40 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="HCMNTB0004"
+  DTS:CreatorName="JR\hcm.tvm"
+  DTS:DTSID="{E9B0D163-070E-4FCC-9F36-1A1A1331F80D}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1300.371"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="TransformBettingData"
+  DTS:PackageType="5"
+  DTS:VersionBuild="10"
+  DTS:VersionGUID="{E5A1081C-2F10-4B95-A3F8-77E1CC33F733}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[HCMNTB0004.Betting]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{34028D97-4317-4DE8-8DAF-ABAA60D547EF}"
+      DTS:ObjectName="HCMNTB0004.Betting">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=HCMNTB0004;Initial Catalog=Betting;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Clean_DataTable"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{33367B4F-C0F6-4882-B873-D8C086EEA115}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Clean_DataTable"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{34028D97-4317-4DE8-8DAF-ABAA60D547EF}"
+          SQLTask:SqlStatementSource="truncate table [dw].[Dim_BetType]&#xA;truncate table [dw].[Dim_Stake]&#xA;truncate table [dw].[Fact_BetResult]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Dim_BetType"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{187EDA74-BA95-4C0D-A152-5BE6F7FEB685}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Dim_BetType"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Dim_BetType\Dim_BetType"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Dim_BetType"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dw].[Dim_BetType]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Dim_BetType\Dim_BetType.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[HCMNTB0004.Betting]"
+                  connectionManagerRefId="Package.ConnectionManagers[HCMNTB0004.Betting]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Dim_BetType\Dim_BetType.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Dim_BetType\Dim_BetType.Inputs[OLE DB Destination Input].Columns[BetType]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="BetType"
+                      externalMetadataColumnId="Package\Dim_BetType\Dim_BetType.Inputs[OLE DB Destination Input].ExternalColumns[BetType]"
+                      lineageId="Package\Dim_BetType\vDim_BetType.Outputs[OLE DB Source Output].Columns[BetType]" />
+                    <inputColumn
+                      refId="Package\Dim_BetType\Dim_BetType.Inputs[OLE DB Destination Input].Columns[BetTypeID]"
+                      cachedDataType="i8"
+                      cachedName="BetTypeID"
+                      externalMetadataColumnId="Package\Dim_BetType\Dim_BetType.Inputs[OLE DB Destination Input].ExternalColumns[BetTypeID]"
+                      lineageId="Package\Dim_BetType\vDim_BetType.Outputs[OLE DB Source Output].Columns[BetTypeID]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Dim_BetType\Dim_BetType.Inputs[OLE DB Destination Input].ExternalColumns[BetTypeID]"
+                      dataType="i8"
+                      name="BetTypeID" />
+                    <externalMetadataColumn
+                      refId="Package\Dim_BetType\Dim_BetType.Inputs[OLE DB Destination Input].ExternalColumns[BetType]"
+                      dataType="wstr"
+                      length="500"
+                      name="BetType" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Dim_BetType\Dim_BetType.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Dim_BetType\Dim_BetType.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Dim_BetType\Dim_BetType.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Dim_BetType\Dim_BetType.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Dim_BetType\Dim_BetType.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Dim_BetType\Dim_BetType.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Dim_BetType\vDim_BetType"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="vDim_BetType"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[vDim_BetType]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Dim_BetType\vDim_BetType.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[HCMNTB0004.Betting]"
+                  connectionManagerRefId="Package.ConnectionManagers[HCMNTB0004.Betting]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Dim_BetType\vDim_BetType.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Dim_BetType\vDim_BetType.Outputs[OLE DB Source Output].Columns[BetType]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Dim_BetType\vDim_BetType.Outputs[OLE DB Source Output].ExternalColumns[BetType]"
+                      length="50"
+                      lineageId="Package\Dim_BetType\vDim_BetType.Outputs[OLE DB Source Output].Columns[BetType]"
+                      name="BetType"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Dim_BetType\vDim_BetType.Outputs[OLE DB Source Output].Columns[BetTypeID]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Dim_BetType\vDim_BetType.Outputs[OLE DB Source Output].ExternalColumns[BetTypeID]"
+                      lineageId="Package\Dim_BetType\vDim_BetType.Outputs[OLE DB Source Output].Columns[BetTypeID]"
+                      name="BetTypeID"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Dim_BetType\vDim_BetType.Outputs[OLE DB Source Output].ExternalColumns[BetType]"
+                      dataType="nText"
+                      name="BetType" />
+                    <externalMetadataColumn
+                      refId="Package\Dim_BetType\vDim_BetType.Outputs[OLE DB Source Output].ExternalColumns[BetTypeID]"
+                      dataType="i8"
+                      name="BetTypeID" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Dim_BetType\vDim_BetType.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Dim_BetType\vDim_BetType.Outputs[OLE DB Source Error Output].Columns[BetType]"
+                      dataType="nText"
+                      lineageId="Package\Dim_BetType\vDim_BetType.Outputs[OLE DB Source Error Output].Columns[BetType]"
+                      name="BetType" />
+                    <outputColumn
+                      refId="Package\Dim_BetType\vDim_BetType.Outputs[OLE DB Source Error Output].Columns[BetTypeID]"
+                      dataType="i8"
+                      lineageId="Package\Dim_BetType\vDim_BetType.Outputs[OLE DB Source Error Output].Columns[BetTypeID]"
+                      name="BetTypeID" />
+                    <outputColumn
+                      refId="Package\Dim_BetType\vDim_BetType.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Dim_BetType\vDim_BetType.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Dim_BetType\vDim_BetType.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Dim_BetType\vDim_BetType.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Dim_BetType.Paths[OLE DB Source Output]"
+              endId="Package\Dim_BetType\Dim_BetType.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Dim_BetType\vDim_BetType.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Dim_Stake"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{8ca1922f-0a45-425d-a4a0-19e9c3ce7c32}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Dim_Stake"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Dim_Stake\Dim_Stake"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Dim_Stake"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dw].[Dim_Stake]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Dim_Stake\Dim_Stake.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[HCMNTB0004.Betting]"
+                  connectionManagerRefId="Package.ConnectionManagers[HCMNTB0004.Betting]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Dim_Stake\Dim_Stake.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Dim_Stake\Dim_Stake.Inputs[OLE DB Destination Input].Columns[Stake]"
+                      cachedDataType="wstr"
+                      cachedLength="2000"
+                      cachedName="Stake"
+                      externalMetadataColumnId="Package\Dim_Stake\Dim_Stake.Inputs[OLE DB Destination Input].ExternalColumns[Stake]"
+                      lineageId="Package\Dim_Stake\vDim_Stake.Outputs[OLE DB Source Output].Columns[Stake]" />
+                    <inputColumn
+                      refId="Package\Dim_Stake\Dim_Stake.Inputs[OLE DB Destination Input].Columns[StakeID]"
+                      cachedDataType="i8"
+                      cachedName="StakeID"
+                      externalMetadataColumnId="Package\Dim_Stake\Dim_Stake.Inputs[OLE DB Destination Input].ExternalColumns[StakeID]"
+                      lineageId="Package\Dim_Stake\vDim_Stake.Outputs[OLE DB Source Output].Columns[StakeID]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Dim_Stake\Dim_Stake.Inputs[OLE DB Destination Input].ExternalColumns[StakeID]"
+                      dataType="i8"
+                      name="StakeID" />
+                    <externalMetadataColumn
+                      refId="Package\Dim_Stake\Dim_Stake.Inputs[OLE DB Destination Input].ExternalColumns[Stake]"
+                      dataType="wstr"
+                      length="500"
+                      name="Stake" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Dim_Stake\Dim_Stake.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Dim_Stake\Dim_Stake.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Dim_Stake\Dim_Stake.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Dim_Stake\Dim_Stake.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Dim_Stake\Dim_Stake.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Dim_Stake\Dim_Stake.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Dim_Stake\vDim_Stake"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="vDim_Stake"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[vDim_Stake]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Dim_Stake\vDim_Stake.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[HCMNTB0004.Betting]"
+                  connectionManagerRefId="Package.ConnectionManagers[HCMNTB0004.Betting]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Dim_Stake\vDim_Stake.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Dim_Stake\vDim_Stake.Outputs[OLE DB Source Output].Columns[Stake]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Dim_Stake\vDim_Stake.Outputs[OLE DB Source Output].ExternalColumns[Stake]"
+                      length="2000"
+                      lineageId="Package\Dim_Stake\vDim_Stake.Outputs[OLE DB Source Output].Columns[Stake]"
+                      name="Stake"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Dim_Stake\vDim_Stake.Outputs[OLE DB Source Output].Columns[StakeID]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Dim_Stake\vDim_Stake.Outputs[OLE DB Source Output].ExternalColumns[StakeID]"
+                      lineageId="Package\Dim_Stake\vDim_Stake.Outputs[OLE DB Source Output].Columns[StakeID]"
+                      name="StakeID"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Dim_Stake\vDim_Stake.Outputs[OLE DB Source Output].ExternalColumns[Stake]"
+                      dataType="nText"
+                      name="Stake" />
+                    <externalMetadataColumn
+                      refId="Package\Dim_Stake\vDim_Stake.Outputs[OLE DB Source Output].ExternalColumns[StakeID]"
+                      dataType="i8"
+                      name="StakeID" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Dim_Stake\vDim_Stake.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Dim_Stake\vDim_Stake.Outputs[OLE DB Source Error Output].Columns[Stake]"
+                      dataType="nText"
+                      lineageId="Package\Dim_Stake\vDim_Stake.Outputs[OLE DB Source Error Output].Columns[Stake]"
+                      name="Stake" />
+                    <outputColumn
+                      refId="Package\Dim_Stake\vDim_Stake.Outputs[OLE DB Source Error Output].Columns[StakeID]"
+                      dataType="i8"
+                      lineageId="Package\Dim_Stake\vDim_Stake.Outputs[OLE DB Source Error Output].Columns[StakeID]"
+                      name="StakeID" />
+                    <outputColumn
+                      refId="Package\Dim_Stake\vDim_Stake.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Dim_Stake\vDim_Stake.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Dim_Stake\vDim_Stake.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Dim_Stake\vDim_Stake.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Dim_Stake.Paths[OLE DB Source Output]"
+              endId="Package\Dim_Stake\Dim_Stake.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Dim_Stake\vDim_Stake.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Fact_BetResult"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{38fa4dd1-e39b-42f3-bb5a-1febb5a7c69d}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Fact_BetResult"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Fact_BetResult\Fact_BetResult"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Fact_BetResult"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dw].[Fact_BetResult]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Fact_BetResult\Fact_BetResult.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[HCMNTB0004.Betting]"
+                  connectionManagerRefId="Package.ConnectionManagers[HCMNTB0004.Betting]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Fact_BetResult\Fact_BetResult.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Fact_BetResult\Fact_BetResult.Inputs[OLE DB Destination Input].Columns[StakeID]"
+                      cachedDataType="i8"
+                      cachedName="StakeID"
+                      externalMetadataColumnId="Package\Fact_BetResult\Fact_BetResult.Inputs[OLE DB Destination Input].ExternalColumns[StakeID]"
+                      lineageId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].Columns[StakeID]" />
+                    <inputColumn
+                      refId="Package\Fact_BetResult\Fact_BetResult.Inputs[OLE DB Destination Input].Columns[No_]"
+                      cachedDataType="i8"
+                      cachedName="No_"
+                      externalMetadataColumnId="Package\Fact_BetResult\Fact_BetResult.Inputs[OLE DB Destination Input].ExternalColumns[No_]"
+                      lineageId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].Columns[No_]" />
+                    <inputColumn
+                      refId="Package\Fact_BetResult\Fact_BetResult.Inputs[OLE DB Destination Input].Columns[BettingDate]"
+                      cachedDataType="wstr"
+                      cachedLength="500"
+                      cachedName="BettingDate"
+                      externalMetadataColumnId="Package\Fact_BetResult\Fact_BetResult.Inputs[OLE DB Destination Input].ExternalColumns[BettingDate]"
+                      lineageId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].Columns[BettingDate]" />
+                    <inputColumn
+                      refId="Package\Fact_BetResult\Fact_BetResult.Inputs[OLE DB Destination Input].Columns[BettingTime]"
+                      cachedDataType="wstr"
+                      cachedLength="500"
+                      cachedName="BettingTime"
+                      externalMetadataColumnId="Package\Fact_BetResult\Fact_BetResult.Inputs[OLE DB Destination Input].ExternalColumns[BettingTime]"
+                      lineageId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].Columns[BettingTime]" />
+                    <inputColumn
+                      refId="Package\Fact_BetResult\Fact_BetResult.Inputs[OLE DB Destination Input].Columns[BetDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="BetDate"
+                      externalMetadataColumnId="Package\Fact_BetResult\Fact_BetResult.Inputs[OLE DB Destination Input].ExternalColumns[BetDate]"
+                      lineageId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].Columns[BetDate]" />
+                    <inputColumn
+                      refId="Package\Fact_BetResult\Fact_BetResult.Inputs[OLE DB Destination Input].Columns[BettingType]"
+                      cachedDataType="wstr"
+                      cachedLength="500"
+                      cachedName="BettingType"
+                      externalMetadataColumnId="Package\Fact_BetResult\Fact_BetResult.Inputs[OLE DB Destination Input].ExternalColumns[BettingType]"
+                      lineageId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].Columns[BettingType]" />
+                    <inputColumn
+                      refId="Package\Fact_BetResult\Fact_BetResult.Inputs[OLE DB Destination Input].Columns[Selection]"
+                      cachedDataType="nText"
+                      cachedName="Selection"
+                      externalMetadataColumnId="Package\Fact_BetResult\Fact_BetResult.Inputs[OLE DB Destination Input].ExternalColumns[Selection]"
+                      lineageId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].Columns[Selection]" />
+                    <inputColumn
+                      refId="Package\Fact_BetResult\Fact_BetResult.Inputs[OLE DB Destination Input].Columns[BetTypeID]"
+                      cachedDataType="i8"
+                      cachedName="BetTypeID"
+                      externalMetadataColumnId="Package\Fact_BetResult\Fact_BetResult.Inputs[OLE DB Destination Input].ExternalColumns[BetTypeID]"
+                      lineageId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].Columns[BetTypeID]" />
+                    <inputColumn
+                      refId="Package\Fact_BetResult\Fact_BetResult.Inputs[OLE DB Destination Input].Columns[Win / Loss]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Win / Loss"
+                      externalMetadataColumnId="Package\Fact_BetResult\Fact_BetResult.Inputs[OLE DB Destination Input].ExternalColumns[Win / Loss]"
+                      lineageId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].Columns[Win / Loss]" />
+                    <inputColumn
+                      refId="Package\Fact_BetResult\Fact_BetResult.Inputs[OLE DB Destination Input].Columns[Status]"
+                      cachedDataType="wstr"
+                      cachedLength="500"
+                      cachedName="Status"
+                      externalMetadataColumnId="Package\Fact_BetResult\Fact_BetResult.Inputs[OLE DB Destination Input].ExternalColumns[Status]"
+                      lineageId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].Columns[Status]" />
+                    <inputColumn
+                      refId="Package\Fact_BetResult\Fact_BetResult.Inputs[OLE DB Destination Input].Columns[Createdate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="Createdate"
+                      externalMetadataColumnId="Package\Fact_BetResult\Fact_BetResult.Inputs[OLE DB Destination Input].ExternalColumns[Createdate]"
+                      lineageId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].Columns[Createdate]" />
+                    <inputColumn
+                      refId="Package\Fact_BetResult\Fact_BetResult.Inputs[OLE DB Destination Input].Columns[money]"
+                      cachedDataType="wstr"
+                      cachedLength="4000"
+                      cachedName="money"
+                      externalMetadataColumnId="Package\Fact_BetResult\Fact_BetResult.Inputs[OLE DB Destination Input].ExternalColumns[money]"
+                      lineageId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].Columns[money]" />
+                    <inputColumn
+                      refId="Package\Fact_BetResult\Fact_BetResult.Inputs[OLE DB Destination Input].Columns[Stake]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Stake"
+                      externalMetadataColumnId="Package\Fact_BetResult\Fact_BetResult.Inputs[OLE DB Destination Input].ExternalColumns[Stake]"
+                      lineageId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].Columns[Stake]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Fact_BetResult\Fact_BetResult.Inputs[OLE DB Destination Input].ExternalColumns[StakeID]"
+                      dataType="i8"
+                      name="StakeID" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_BetResult\Fact_BetResult.Inputs[OLE DB Destination Input].ExternalColumns[No_]"
+                      dataType="i8"
+                      name="No_" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_BetResult\Fact_BetResult.Inputs[OLE DB Destination Input].ExternalColumns[BettingDate]"
+                      dataType="wstr"
+                      length="50"
+                      name="BettingDate" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_BetResult\Fact_BetResult.Inputs[OLE DB Destination Input].ExternalColumns[BettingTime]"
+                      dataType="wstr"
+                      length="50"
+                      name="BettingTime" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_BetResult\Fact_BetResult.Inputs[OLE DB Destination Input].ExternalColumns[BetDate]"
+                      dataType="dbTimeStamp"
+                      name="BetDate" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_BetResult\Fact_BetResult.Inputs[OLE DB Destination Input].ExternalColumns[BettingType]"
+                      dataType="wstr"
+                      length="50"
+                      name="BettingType" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_BetResult\Fact_BetResult.Inputs[OLE DB Destination Input].ExternalColumns[Selection]"
+                      dataType="nText"
+                      name="Selection" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_BetResult\Fact_BetResult.Inputs[OLE DB Destination Input].ExternalColumns[BetTypeID]"
+                      dataType="i8"
+                      name="BetTypeID" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_BetResult\Fact_BetResult.Inputs[OLE DB Destination Input].ExternalColumns[Win / Loss]"
+                      dataType="wstr"
+                      length="50"
+                      name="Win / Loss" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_BetResult\Fact_BetResult.Inputs[OLE DB Destination Input].ExternalColumns[Status]"
+                      dataType="wstr"
+                      length="50"
+                      name="Status" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_BetResult\Fact_BetResult.Inputs[OLE DB Destination Input].ExternalColumns[Createdate]"
+                      dataType="dbTimeStamp"
+                      name="Createdate" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_BetResult\Fact_BetResult.Inputs[OLE DB Destination Input].ExternalColumns[money]"
+                      dataType="numeric"
+                      name="money"
+                      precision="18" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_BetResult\Fact_BetResult.Inputs[OLE DB Destination Input].ExternalColumns[Stake]"
+                      dataType="wstr"
+                      length="200"
+                      name="Stake" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Fact_BetResult\Fact_BetResult.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Fact_BetResult\Fact_BetResult.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Fact_BetResult\Fact_BetResult.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Fact_BetResult\Fact_BetResult.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Fact_BetResult\Fact_BetResult.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Fact_BetResult\Fact_BetResult.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Fact_BetResult\vFact_BetResult"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="vFact_BetResult"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[vFact_BetResult]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Fact_BetResult\vFact_BetResult.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[HCMNTB0004.Betting]"
+                  connectionManagerRefId="Package.ConnectionManagers[HCMNTB0004.Betting]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].Columns[StakeID]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].ExternalColumns[StakeID]"
+                      lineageId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].Columns[StakeID]"
+                      name="StakeID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].Columns[No_]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].ExternalColumns[No_]"
+                      lineageId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].Columns[No_]"
+                      name="No_"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].Columns[BettingDate]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].ExternalColumns[BettingDate]"
+                      length="500"
+                      lineageId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].Columns[BettingDate]"
+                      name="BettingDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].Columns[BettingTime]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].ExternalColumns[BettingTime]"
+                      length="500"
+                      lineageId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].Columns[BettingTime]"
+                      name="BettingTime"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].Columns[BetDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].ExternalColumns[BetDate]"
+                      lineageId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].Columns[BetDate]"
+                      name="BetDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].Columns[BettingType]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].ExternalColumns[BettingType]"
+                      length="500"
+                      lineageId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].Columns[BettingType]"
+                      name="BettingType"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].Columns[Selection]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].ExternalColumns[Selection]"
+                      lineageId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].Columns[Selection]"
+                      name="Selection"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].Columns[BetTypeID]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].ExternalColumns[BetTypeID]"
+                      lineageId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].Columns[BetTypeID]"
+                      name="BetTypeID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].Columns[Win / Loss]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].ExternalColumns[Win / Loss]"
+                      length="50"
+                      lineageId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].Columns[Win / Loss]"
+                      name="Win / Loss"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].Columns[Status]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].ExternalColumns[Status]"
+                      length="500"
+                      lineageId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].Columns[Status]"
+                      name="Status"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].Columns[Createdate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].ExternalColumns[Createdate]"
+                      lineageId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].Columns[Createdate]"
+                      name="Createdate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].Columns[money]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].ExternalColumns[money]"
+                      length="4000"
+                      lineageId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].Columns[money]"
+                      name="money"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].Columns[Stake]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].ExternalColumns[Stake]"
+                      length="50"
+                      lineageId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].Columns[Stake]"
+                      name="Stake"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].ExternalColumns[StakeID]"
+                      dataType="i8"
+                      name="StakeID" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].ExternalColumns[No_]"
+                      dataType="i8"
+                      name="No_" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].ExternalColumns[BettingDate]"
+                      dataType="wstr"
+                      length="500"
+                      name="BettingDate" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].ExternalColumns[BettingTime]"
+                      dataType="wstr"
+                      length="500"
+                      name="BettingTime" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].ExternalColumns[BetDate]"
+                      dataType="dbTimeStamp"
+                      name="BetDate" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].ExternalColumns[BettingType]"
+                      dataType="wstr"
+                      length="500"
+                      name="BettingType" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].ExternalColumns[Selection]"
+                      dataType="nText"
+                      name="Selection" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].ExternalColumns[BetTypeID]"
+                      dataType="i8"
+                      name="BetTypeID" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].ExternalColumns[Win / Loss]"
+                      dataType="nText"
+                      name="Win / Loss" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].ExternalColumns[Status]"
+                      dataType="wstr"
+                      length="500"
+                      name="Status" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].ExternalColumns[Createdate]"
+                      dataType="dbTimeStamp"
+                      name="Createdate" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].ExternalColumns[money]"
+                      dataType="wstr"
+                      length="4000"
+                      name="money" />
+                    <externalMetadataColumn
+                      refId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output].ExternalColumns[Stake]"
+                      dataType="nText"
+                      name="Stake" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Error Output].Columns[No_]"
+                      dataType="i8"
+                      lineageId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Error Output].Columns[No_]"
+                      name="No_" />
+                    <outputColumn
+                      refId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Error Output].Columns[BettingDate]"
+                      dataType="wstr"
+                      length="500"
+                      lineageId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Error Output].Columns[BettingDate]"
+                      name="BettingDate" />
+                    <outputColumn
+                      refId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Error Output].Columns[BettingTime]"
+                      dataType="wstr"
+                      length="500"
+                      lineageId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Error Output].Columns[BettingTime]"
+                      name="BettingTime" />
+                    <outputColumn
+                      refId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Error Output].Columns[BetDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Error Output].Columns[BetDate]"
+                      name="BetDate" />
+                    <outputColumn
+                      refId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Error Output].Columns[BettingType]"
+                      dataType="wstr"
+                      length="500"
+                      lineageId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Error Output].Columns[BettingType]"
+                      name="BettingType" />
+                    <outputColumn
+                      refId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Error Output].Columns[Selection]"
+                      dataType="nText"
+                      lineageId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Error Output].Columns[Selection]"
+                      name="Selection" />
+                    <outputColumn
+                      refId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Error Output].Columns[BetTypeID]"
+                      dataType="i8"
+                      lineageId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Error Output].Columns[BetTypeID]"
+                      name="BetTypeID" />
+                    <outputColumn
+                      refId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Error Output].Columns[StakeID]"
+                      dataType="i8"
+                      lineageId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Error Output].Columns[StakeID]"
+                      name="StakeID" />
+                    <outputColumn
+                      refId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Error Output].Columns[Stake]"
+                      dataType="nText"
+                      lineageId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Error Output].Columns[Stake]"
+                      name="Stake" />
+                    <outputColumn
+                      refId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Error Output].Columns[Win / Loss]"
+                      dataType="nText"
+                      lineageId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Error Output].Columns[Win / Loss]"
+                      name="Win / Loss" />
+                    <outputColumn
+                      refId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Error Output].Columns[Status]"
+                      dataType="wstr"
+                      length="500"
+                      lineageId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Error Output].Columns[Status]"
+                      name="Status" />
+                    <outputColumn
+                      refId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Error Output].Columns[Createdate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Error Output].Columns[Createdate]"
+                      name="Createdate" />
+                    <outputColumn
+                      refId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Error Output].Columns[money]"
+                      dataType="wstr"
+                      length="4000"
+                      lineageId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Error Output].Columns[money]"
+                      name="money" />
+                    <outputColumn
+                      refId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Fact_BetResult.Paths[OLE DB Source Output]"
+              endId="Package\Fact_BetResult\Fact_BetResult.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Fact_BetResult\vFact_BetResult.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{1964555A-E6E2-4BC2-AD09-DB4D3C11F426}"
+      DTS:From="Package\Clean_DataTable"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Dim_BetType" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{BB474D35-3403-4B08-8076-03304B73CB3C}"
+      DTS:From="Package\Dim_BetType"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Dim_Stake" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{8BE604F4-64CE-43C6-9EED-02F9408E3786}"
+      DTS:From="Package\Dim_Stake"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Fact_BetResult" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="159,42"
+          Id="Package\Clean_DataTable"
+          TopLeft="746,47" />
+        <NodeLayout
+          Size="142,42"
+          Id="Package\Dim_BetType"
+          TopLeft="749,155" />
+        <NodeLayout
+          Size="129,42"
+          Id="Package\Dim_Stake"
+          TopLeft="761,247" />
+        <NodeLayout
+          Size="149,42"
+          Id="Package\Fact_BetResult"
+          TopLeft="772,344" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="822.75,89">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,66"
+              Start="0,0"
+              End="0,58.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,58.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="822.75,197">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,50"
+              Start="0,0"
+              End="0,42.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,42.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="825.5,289">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="21,55"
+              Start="0,0"
+              End="21,47.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,23.5"
+                    Point2="0,27.5"
+                    Point3="4,27.5" />
+                  <mssgle:LineSegment
+                    End="17,27.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="17,27.5"
+                    Point2="21,27.5"
+                    Point3="21,31.5" />
+                  <mssgle:LineSegment
+                    End="21,47.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Dim_BetType">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="147,42"
+          Id="Package\Dim_BetType\vDim_BetType"
+          TopLeft="490,114" />
+        <NodeLayout
+          Size="142,42"
+          Id="Package\Dim_BetType\Dim_BetType"
+          TopLeft="493,226" />
+        <EdgeLayout
+          Id="Package\Dim_BetType.Paths[OLE DB Source Output]"
+          TopLeft="563.75,156">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,70"
+              Start="0,0"
+              End="0,62.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,62.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Dim_BetType\Dim_BetType">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Dim_BetType\vDim_BetType">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">View</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Dim_Stake">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="135,42"
+          Id="Package\Dim_Stake\vDim_Stake"
+          TopLeft="490,114" />
+        <NodeLayout
+          Size="129,42"
+          Id="Package\Dim_Stake\Dim_Stake"
+          TopLeft="493,226" />
+        <EdgeLayout
+          Id="Package\Dim_Stake.Paths[OLE DB Source Output]"
+          TopLeft="557.5,156">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,70"
+              Start="0,0"
+              End="0,62.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,62.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Dim_Stake\Dim_Stake">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Dim_Stake\vDim_Stake">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">View</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Fact_BetResult">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="149,42"
+          Id="Package\Fact_BetResult\Fact_BetResult"
+          TopLeft="493,226" />
+        <NodeLayout
+          Size="154,42"
+          Id="Package\Fact_BetResult\vFact_BetResult"
+          TopLeft="490,114" />
+        <EdgeLayout
+          Id="Package\Fact_BetResult.Paths[OLE DB Source Output]"
+          TopLeft="567.25,156">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,70"
+              Start="0,0"
+              End="0,62.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,62.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Fact_BetResult\Fact_BetResult">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Fact_BetResult\vFact_BetResult">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">View</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
