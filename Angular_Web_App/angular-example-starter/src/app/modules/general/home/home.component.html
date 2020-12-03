@@ -1,0 +1,41 @@
+  <div class="container-xxl bd-layout">
+    
+    <div class="bd-sidebar">
+      <nav class="collapse bd-links pt-4" id="bd-docs-nav">
+        <ul class="list-unstyled mb-0">
+            <!--
+          <li class="my-1 active d-lg-none">
+            <a class="d-inline-flex align-items-center rounded" data-toggle="collapse" href="#ganatan-collapse"
+              role="button" aria-expanded="true" aria-current="true">
+              About Ganatan
+            </a>
+            <ul class="list-unstyled font-weight-normal mb-2 collapse" id="ganatan-collapse">
+              <li><a (click)="onSelectMenu('about')" class="d-inline-flex align-items-center rounded active"
+                  aria-current="page">About</a>
+              </li>
+              <li><a (click)="onSelectMenu('contact')" class="d-inline-flex align-items-center rounded">Contact</a></li>
+            </ul>
+          </li>
+          -->
+          <li *ngFor="let item of items" class="my-1 active">
+            <a class="d-inline-flex align-items-center rounded" data-toggle="collapse" href="#{{ item.link }}-collapse"
+              role="button" aria-expanded="true" aria-current="true">
+              {{ item.name }}
+            </a>
+            
+            <ul class="list-unstyled font-weight-normal mb-2 collapse" id="{{ item.link }}-collapse">
+                <li *ngFor="let element of item.elements">
+                    <a (click)="onSelectMenu(element.link)" class="d-inline-flex align-items-center rounded">{{ element.name }}</a>
+                  </li>
+              </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="bd-content pt-4">
+      <p>Welcome,homework</p>
+      <h1 id="userName"><strong>{{userClaims.AccountName}}</strong></h1>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
