@@ -1,0 +1,74 @@
+<main>
+  <section class="container">
+    <div class="row">
+      <div class="col-12 top-container">
+        <p>Welcome,</p>
+        <h1 id="userName"><strong>{{userClaims.DispplayName}}</strong></h1>
+      </div>
+    </div>
+    <div class="row feature-box">
+      <div class="col-12">
+        <p><strong>FEATURES</strong></p>
+      </div>
+      <div id="expId" class="col-6 col-sm-6 col-lg-3 card-box">
+        <a routerLink="/home/skill-explaination">
+          <div class="card shadow-sm">
+            <img class="card-icon" src="assets/img/skill-icon.svg" />
+            <h1>Skill Explaination</h1>
+            <p class="text-fade">
+              Definitions of the abbreviations for skill levels and engineer background.
+            </p>
+          </div>
+        </a>
+      </div>
+      <div id="engiId" class="col-6 col-sm-6 col-lg-3 card-box">
+        <a routerLink="/home/list-engineer">
+          <div class="card shadow-sm">
+            <img class="card-icon" src="assets/img/engineer-icon.svg" />
+            <h1>Engineers</h1>
+            <p class="text-fade">
+              Searchable list of all TS Engineers.
+            </p>
+          </div>
+        </a>
+      </div>
+      <div id="addId" class="col-6 col-sm-6 col-lg-3 card-box" *ngIf="canEdit">
+        <a routerLink="/home/add-skill">
+          <div class="card shadow-sm">
+            <img class="card-icon" src="assets/img/add-engineer-icon.svg" />
+            <h1>Manager Engineer</h1>
+            <p class="text-fade">
+              Add, update or delete engineers from the engineer page.
+            </p>
+          </div>
+        </a>
+      </div>
+      <div id="addId" class="col-6 col-sm-6 col-lg-3 card-box" *ngIf="!canEdit">
+        <div class="card shadow-sm">
+          <img class="card-icon" src="assets/img/add-engineer-icon.svg" />
+          <h1>Add Engineer</h1>
+          <p class="text-fade">
+            Add, update or delete engineers from the engineer page.
+          </p>
+        </div>
+      </div>
+
+      <div id="machineId" class="col-6 col-sm-6 col-lg-3 card-box">
+        <a routerLink="/home/machine-maker">
+          <div class="card shadow-sm">
+            <img class="card-icon" src="assets/img/machine-maker-icon.svg" />
+            <h1>Manage Machine Maker</h1>
+            <p class="text-fade">
+              Add, update or delete machine makers.
+            </p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<ngx-spinner bdOpacity=0.6 bdColor="rgba(245,240,240,0)" size="medium" color="#b52d2d" type="ball-clip-rotate"
+  [fullScreen]="true">
+  <p style="color: white"> Loading... </p>
+</ngx-spinner>

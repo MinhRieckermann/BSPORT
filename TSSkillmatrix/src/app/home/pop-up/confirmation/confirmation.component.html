@@ -1,0 +1,8 @@
+<div mat-dialog-content>
+  <p class="text-center">{{data.message}}</p>
+</div>
+<br>
+<div mat-dialog-actions class="confirm-dialog">
+  <button mat-flat-button (click)="closeDialog()" class="no-button" [mat-dialog-close]="false">NO</button>
+  <button mat-flat-button color="primary" [mat-dialog-close]="true">YES</button>
+</div>

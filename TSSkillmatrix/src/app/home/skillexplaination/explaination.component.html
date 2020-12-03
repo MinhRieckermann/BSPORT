@@ -1,0 +1,43 @@
+<section class="jumbotron">
+  <div class="container d-flex justify-content-between">
+    <h1 class="text-white">
+      <strong>Skill Explaination</strong>
+    </h1>
+  </div>
+</section>
+<section class="container">
+  <div class="row">
+    <div class="col-12">
+      <p><strong>BACKGROUND</strong></p>
+      <div class="list-skill shadow-sm table-responsive">
+        <table class="table">
+          <tbody>
+            <tr *ngFor="let item of listProskill">
+              <td class="code">{{item.SkillCode}}</td>
+              <td class="meaning">{{item.SkillName}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <p><strong>MACHINE</strong></p>
+      <div class="list-skill shadow-sm table-responsive">
+        <table class="table">
+          <tbody>
+            <tr *ngFor="let item of listMachineSkill">
+              <td class="code">{{item.MSCode}}</td>
+              <td class="meaning">
+                <p>
+                  {{item.Explain}}
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,114 @@
+<section class="container">
+  <div class="row form-header">
+    <div class="col-12 right-box d-flex justify-content-end">
+      <div class="d-flex right-box-btn" *ngIf="Engineer.CanEdit">
+        <div class="top-add">
+          <button id="editId" (click)="GotoEdit()" type="button" class="btn btn-default" data-toggle="modal"
+            data-target="#addMachineModal">
+            <i class="fa fa-pencil"></i>
+            <span class="item-label">Edit</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <p><strong>BASIC INFORMATION</strong></p>
+      <div class="eng-details shadow-sm table-responsive">
+        <table class="table">
+          <tbody>
+            <tr>
+              <td class="title">Initial</td>
+              <td class="info">{{Engineer.Initials}}</td>
+            </tr>
+            <tr>
+              <td class="title">Username</td>
+              <td class="info">
+                <p>{{Engineer.UserName}}</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="title">Name</td>
+              <td class="info">
+                <p>{{Engineer.DisplayName}}</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="title">Email</td>
+              <td class="info">
+                <p>{{Engineer.EmailAddress}}</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="title">Stationed</td>
+              <td class="info">
+                <p>{{Engineer.StationName}}</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="title">Industry</td>
+              <td class="info">
+                <p>{{Engineer.IndustryName}}</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="title">Professional Background</td>
+              <td class="info">
+                <p>
+                  <span *ngFor="let subitem of Engineer.Professionals; let i = index"
+                    tooltip="{{subitem.Explain}}">{{subitem.SkillCode}}<span
+                      *ngIf="i < Engineer.Professionals.length -1">,</span></span>
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <p><strong>MACHINE SKILLS</strong></p>
+      <div class="eng-details shadow-sm table-responsive" *ngFor="let item of Engineer.listAssign">
+        <table class="table">
+          <tbody>
+            <tr>
+              <td class="title">Machine Name</td>
+              <td class="info">{{item.Maker.MakerName}}</td>
+            </tr>
+            <tr>
+              <td class="title">Skill(s)</td>
+              <!-- <td class="info">
+                  <p>{{item.SkillName}}</p>
+                </td> -->
+              <td class="info">
+                <p>
+                  <span *ngFor="let subitem of item.MachineSkill; let i = index" tooltip="{{subitem.Explain}}"
+                    [adaptivePosition]="false">
+                    {{subitem.MSName}}<span *ngIf="i < item.MachineSkill.length -1">,</span>
+                  </span>
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td class="title">Skill Summary</td>
+              <td class="info">
+                <p>
+                  {{item.Comment}}
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="col-12">
+      <pagination [totalItems]="totalItem" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)"></pagination>
+    </div>
+  </div>
+</section>
+
+<ngx-spinner bdOpacity=0.6 bdColor="rgba(245,240,240,0)" size="medium" color="#b52d2d" type="ball-clip-rotate">
+  <p style="color: white"> Loading... </p>
+</ngx-spinner>

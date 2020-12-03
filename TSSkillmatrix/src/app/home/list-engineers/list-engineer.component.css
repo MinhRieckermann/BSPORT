@@ -1,0 +1,15 @@
+.form-check-fix {
+  margin-bottom: 10px;
+}
+
+.top-container {
+  margin-top: 50px;
+}
+
+li {
+  cursor: pointer;
+}
+
+.example-form-field {
+  width: 200px;
+}

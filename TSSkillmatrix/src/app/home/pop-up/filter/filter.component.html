@@ -1,0 +1,86 @@
+<div mat-dialog-content>
+  <mat-toolbar color="primary">
+    <span class="fill-remaining-space text-center">SEARCH ENGINEER</span>
+    <button mat-icon-button class="close-icon" [mat-dialog-close]="false">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-toolbar>
+  <div fxLayout="column" fxLayoutGap="20px" fxLayoutAlign="space-between stretch">
+    <!-- full name -->
+    <div class="working-time" fxFlex="100">
+      <mat-form-field class="example-full-width">
+        <input matInput [(ngModel)]="filter.name" placeholder="User name/Full name" cdkFocusInitial>
+      </mat-form-field>
+    </div>
+    <div fxFlex="100" fxLayout="row" fxLayoutAlign="space-around start">
+      <!-- Professional Skills -->
+      <div fxFlex="50" fxLayout="column" fxLayoutAlign="start stretch">
+        <p class="title">Professional Skills</p>
+        <mat-selection-list #proskills>
+          <mat-list-option color="primary" [selected]="ProSkillIsSelected(proskill)" checkboxPosition="before"
+            (click)="onProSkillChanged(proskills)" *ngFor="let proskill of listProskill" [value]="proskill">
+            {{proskill.SkillName}}
+          </mat-list-option>
+        </mat-selection-list>
+      </div>
+      <!-- Machine SKills -->
+      <div fxFlex="50" fxLayout="column" fxLayoutAlign="start stretch">
+        <p class="title">Machine Skills</p>
+        <mat-selection-list #machineskill>
+          <mat-list-option color="primary" [selected]="MachineIsSelected(machine)" checkboxPosition="before"
+            (click)="onMachineSkillChanged(machineskill)" *ngFor="let machine of listMachineSkill" [value]="machine">
+            {{machine.MSName}}
+          </mat-list-option>
+        </mat-selection-list>
+      </div>
+    </div>
+    <!-- Maker -->
+    <!-- <div fxFlex="100">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Search Maker" aria-label="State" [matAutocomplete]="auto"
+          [formControl]="searchMoviesCtrl">
+        <mat-autocomplete (optionSelected)="optionSelected($event)" #auto="matAutocomplete" [displayWith]="displayFn">
+          <mat-option *ngIf="isLoading" class="is-loading">Loading...</mat-option>
+          <ng-container *ngIf="!isLoading">
+            <mat-option *ngFor="let movie of filteredMovies" [value]="movie">
+              <span><span>{{movie.MakerName}}</span></span>
+            </mat-option>
+          </ng-container>
+        </mat-autocomplete>
+      </mat-form-field>
+
+    </div> -->
+    <!-- Industry -->
+    <div fxFlex="100">
+      <mat-form-field class="example-full-width">
+        <mat-label>Industry</mat-label>
+        <mat-select [(value)]="filter.Industry" [(ngModel)]="filter.Industry"
+          (ngModelChange)='onOptionsSelected($event)' matNativeControl required>
+          <mat-option *ngFor="let item of listIndustries" value="{{item.IndId}}">
+            {{item.Description}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <!-- Stationed -->
+    <div fxFlex="100">
+      <mat-form-field class="example-full-width">
+        <mat-label>Stationed</mat-label>
+        <mat-select [(ngModel)]="filter.Stationed" (ngModelChange)='onOptionsStationSelected($event)' matNativeControl
+          [(value)]="filter.Stationed">
+          <mat-option *ngFor="let item of listStationed" value="{{item.StationId}}">
+            {{item.StationName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="col-md-12 text-center footer-group">
+    <button mat-raised-button class="no-button" [mat-dialog-close]="false">
+      Cancel
+    </button>
+    <button mat-raised-button color="primary" type="button" class="button" (click)="save()">
+      Submit
+    </button>
+  </div>
+</div>

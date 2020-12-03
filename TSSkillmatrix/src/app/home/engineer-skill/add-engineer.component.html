@@ -1,0 +1,152 @@
+<div>
+  <div class="container">
+    <form class="form-engineer">
+      <div class="form-section">
+        <div class="row">
+          <div class="col-12">
+            <h3>Engineer Details</h3>
+            <p>Please fill in all the engineer details below</p>
+          </div>
+        </div>
+        <div class="row info">
+          <div class="col-12 col-md-6 col-lg-6">
+            <div class="form-group">
+              <label for="initial">Initial</label>
+              <input class="form-control input-icon" id="initial" type="text" [(ngModel)]="asyncSelected"
+                [typeahead]="userSource" (typeaheadLoading)="changeTypeaheadLoading($event)"
+                (typeaheadOnSelect)="typeaheadOnSelect($event)" [typeaheadOptionsLimit]="10"
+                typeaheadOptionField="Initials" autocomplete="off" (typeaheadNoResults)="typeaheadNoResults($event)"
+                name="asyncSelected" placeholder="&#61442; Search User Initial">
+            </div>
+            <div class="form-group">
+              <label for="stationed">Stationed</label>
+              <select name="stationed" class="form-control" [disabled]="technician.UserName == null"
+                [(ngModel)]="technician.StationId" (ngModelChange)='onOptionsStationSelected($event)'>
+                <option *ngFor="let item of listStationed" value="{{item.StationId}}">
+                  {{item.StationName}}
+                </option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="industry">Industry</label>
+              <select style="margin-top:3px;" name="industry" class="form-control"
+                [disabled]="technician.UserName == null" [(ngModel)]="technician.IndustryId"
+                (ngModelChange)='onOptionsIndSelected($event)'>
+                <option *ngFor="let item of listEnIndustries" value="{{item.IndId}}">
+                  {{item.Description}}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-6">
+            <div class="form-group">
+              <label for="name">Full Name</label>
+              <input class="form-control" id="fullName" name="fullName" [(ngModel)]="technician.DisplayName"
+                type="text">
+            </div>
+            <div class="form-group">
+              <label for="uname">Username</label>
+              <input class="form-control" id="userName" name="userName" [(ngModel)]="technician.UserName" type="text">
+            </div>
+            <div class="form-group">
+              <label for="mail">Email Address</label>
+              <input class="form-control" name="EmailAddress" [(ngModel)]="technician.EmailAddress" id="emailAdd"
+                type="email">
+            </div>
+            <div class="form-group">
+              <label for="name">Title</label>
+              <input class="form-control" id="Title" name="Title" [(ngModel)]="technician.Title" type="text">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-section">
+        <div class="row">
+          <div class="col-12">
+            <h3>Professional Background</h3>
+            <p>Please select engineer professional background</p>
+          </div>
+          <div class="info eng-background col-12">
+            <div class="form-check" *ngFor="let item of listProskill">
+              <p-checkbox name="animation" (change)="changeOps($event)" [value]="item.SkillId" outline="true"
+                shape="curve" color="primary" animation="smooth">
+                {{item.SkillName}}
+              </p-checkbox>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-section">
+        <div class="row">
+          <div class="col-12">
+            <h3>Machine/Maker Skills</h3>
+            <p>Please assign machine skill to each machine</p>
+          </div>
+          <div class="info col-12">
+            <div class="add-machine">
+              <input class="input-icon" placeholder="&#61442; Search machine maker" type="text"
+                [(ngModel)]="maasyncSelected" [typeahead]="machinedustrySource"
+                (typeaheadLoading)="changeTypeaheadLoading($event)" (typeaheadOnSelect)="matypeaheadOnSelect($event)"
+                [typeaheadOptionsLimit]="10" typeaheadOptionField="MakerName" autocomplete="off"
+                (typeaheadNoResults)="matypeaheadNoResults($event)" name="maasyncSelected"
+                (ngModelChange)="onChange($event)">
+              <select class="shadow-sm" name="selectedInd" [(ngModel)]="selectedInd"
+                (ngModelChange)='onOptionsSelected($event)'>
+                <option *ngFor="let item of listIndustries" value="{{item.IndId}}">
+                  {{item.Description}}
+                </option>
+              </select>
+              <button id="addRowId" type="button" class="btn btn-default" (click)="AddMachineSkill()"
+                [disabled]="selectedRelMachine.MaId == 0">
+                <i class="fa fa-plus"></i>
+                <span class="item-label">Add Machine/Maker</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 section-title" *ngIf="technician.listAssign.length > 0">
+            <br>
+            <p><strong>List of Machine/Maker Skills</strong></p>
+          </div>
+          <div class="info col-12" *ngFor="let item of technician.listAssign;  trackBy: trackByItems">
+            <div class="selected-machine shadow-sm">
+              <div class="btn-icon-group">
+                <button (click)="RemoveMachineSkill(item)" aria-label="Close" class="close" data-dismiss="modal"
+                  type="button"><span aria-hidden="true"><i class="fa fa-times-circle"></i></span></button>
+
+              </div>
+              <p class="font-weight-bold" id="machineSkill">{{item.Maker.MakerName}}</p>
+              <div class="check-container">
+                <div class="form-check" *ngFor="let subitem of listMachineSkill">
+                  <input value="{{subitem.MSId}}" (change)="onFilterChange($event,item)" class="form-check-input"
+                    id="installation" type="checkbox">
+                  <label class="form-check-label" for="bg1">{{subitem.MSName}}</label>
+                </div>
+              </div>
+              <textarea name="comment" (ngModel)="item.Comment" (ngModelChange)="onTextChange($event, item)"
+                placeholder="Please write your comment for this machine skill">{{item.Comment}}</textarea>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 form-footer">
+            <button (click)="BackHome()" class="btn btn-o btn-cancel" type="button">
+              <span aria-hidden="true">Cancel</span>
+            </button>
+            <button (click)="SubmitEngineer()" [disabled]="ValidateSubmitEngineer()" style="margin-left: 5px;"
+              id="addEngineerId" type="button" class="btn btn-default">
+              <i class="fa fa-plus"></i>
+              <span class="item-label">Add Engineer</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<ngx-spinner bdOpacity=0.6 bdColor="rgba(245,240,240,0)" size="medium" color="#b52d2d" type="ball-clip-rotate">
+  <p style="color: white"> Loading... </p>
+</ngx-spinner>

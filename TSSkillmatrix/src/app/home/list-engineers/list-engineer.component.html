@@ -1,0 +1,198 @@
+<section class="container top-container">
+  <form>
+    <div class="row form-header">
+      <div class="col-12 right-box d-flex">
+        <div class="top-drop">
+          <input class="input-icon" type="text" placeholder="&#61442;  Search engineer name" [(ngModel)]="asyncSelected"
+            [typeahead]="dataSource" (typeaheadLoading)="changeTypeaheadLoading($event)"
+            (typeaheadOnSelect)="typeaheadOnSelect($event)" [typeaheadOptionsLimit]="10" typeaheadWaitMs="1000"
+            typeaheadOptionField="UserName" autocomplete="off" (typeaheadNoResults)="typeaheadNoResults($event)"
+            name="asyncSelected" (ngModelChange)="onChange($event)" />
+          <!-- <mat-form-field class="example-form-field">
+            <mat-icon matSuffix>search</mat-icon>
+            <mat-label>search name</mat-label>
+            <input matInput type="text" [(ngModel)]="asyncSelected" [typeahead]="dataSource"
+              (typeaheadLoading)="changeTypeaheadLoading($event)" (typeaheadOnSelect)="typeaheadOnSelect($event)"
+              [typeaheadOptionsLimit]="10" typeaheadWaitMs="1000" typeaheadOptionField="UserName" autocomplete="off"
+              (typeaheadNoResults)="typeaheadNoResults($event)" name="asyncSelected" (ngModelChange)="onChange($event)">
+          </mat-form-field> -->
+        </div>
+        <div class="d-flex right-box-btn">
+          <div class="top-add">
+            <button type="button" class="btn btn-default btn-o" (click)="openFilerModal()"><i
+                class="fa fa-filter"></i><span class="item-label">Filters</span>
+            </button>
+          </div>
+          <div class="top-add" *ngIf="canEdit">
+            <button id="addId" (click)="gotoAddEngineer()" type="button" class="btn btn-default" data-toggle="modal"
+              data-target="#addMachineModal">
+              <i class="fa fa-plus"></i>
+              <span class="item-label">Add Engineer</span>
+            </button>
+          </div>
+          <div class="top-export">
+            <button type="button" class="btn btn-default btn-export">
+              <i class="fa fa-download"></i>
+              <span class="item-label">Export to excel</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="table-list table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Initial</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Title</th>
+                <th>Industry</th>
+                <th>Stationed</th>
+                <th>Skills <i class="fa fa-info-circle" data-toggle="tooltip"
+                    title="More info at skill explanation page"></i></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="shadow-sm" *ngFor="let item of listEngineer">
+                <td><a [routerLink]="['/home/engineer-detail',item.TechId]">{{item.Initials}}</a></td>
+                <td>{{item.DisplayName}}</td>
+                <td>{{item.EmailAddress}}</td>
+                <td>{{item.Title}}</td>
+                <td>{{item.IndustryName}}</td>
+                <td>{{item.StationName}}</td>
+                <td>
+                  <p><span *ngFor="let subitem of item.Professionals;let i = index"
+                      tooltip="{{subitem.Explain}}">{{subitem.SkillCode}}<span
+                        *ngIf="i < item.Professionals.length -1">,</span></span></p>
+                </td>
+                <td class="action"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <pagination [totalItems]="totalItem" name="currentPage" [(ngModel)]="currentPage"
+              (pageChanged)="pageChanged($event)"></pagination>
+          </div>
+          <div class="col-6">
+            <button type="button" *ngIf="isClear" (click)="ClearFilter()"
+              class="btn btn-secondary pull-right">Clear</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form><!-- Modal -->
+
+  <ng-template #template>
+    <div aria-hidden="true" aria-labelledby="searchModalLAbel" class="search-modal" id="searchModal" role="dialog"
+      tabindex="-1">
+      <form class="search-form">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button aria-label="Close" class="close" type="button" (click)="modalRef.hide()"><span aria-hidden="true"><i
+                  class="fa fa-times-circle"></i></span></button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-12">
+                <h5 class="modal-title" id="searchModalLabel">SEARCH ENGINEER</h5>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <div class="form-group">
+                  <label for="username">Username/Fullname</label>
+                  <input name="filtername" [(ngModel)]="filter.name" class="form-control" id="username" type="text">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="username">Professional Skills</label>
+                  <div class="form-check-fix" *ngFor="let item of listProskill">
+                    <p-checkbox (change)="changeProskillMachines($event)" name="animation" [value]="item.SkillId"
+                      outline="true" shape="curve" color="primary" animation="smooth">
+                      {{item.SkillName}}
+                    </p-checkbox>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="username">Machine Skills</label>
+                  <div class="form-check-fix" *ngFor="let item of listMachineSkill">
+                    <p-checkbox (change)="changeSkillMachines($event)" name="animation" [value]="item.MSId"
+                      outline="true" shape="curve" color="primary" animation="smooth">
+                      {{item.MSCode}}
+                    </p-checkbox>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <div class="form-group option-list">
+                  <label for="username">Industry</label>
+                  <select name="industry" class="shadow-sm" [(ngModel)]="filter.Industry"
+                    (ngModelChange)='onOptionsSelected($event)'>
+                    <option *ngFor="let item of listIndustries" value="{{item.IndId}}">
+                      {{item.Description}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <div class="form-group option-list">
+                  <label for="username">Stationed</label>
+                  <select name="stationed" class="shadow-sm" [(ngModel)]="filter.Stationed"
+                    (ngModelChange)='onOptionsStationSelected($event)'>
+                    <option *ngFor="let item of listStationed" value="{{item.StationId}}">
+                      {{item.StationName}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="row">
+                            <div class="col-12">
+                                <div class="form-group option-list">
+                                    <label for="username">Machine</label>
+                                    <input class="form-control input-icon" id="initial" type="text"
+                                    placeholder="&#61442;  Search machine maker"
+                                    [(ngModel)]="machineasyncSelected"
+                                    [typeahead]="machineDataSource"
+                                    (typeaheadLoading)="changeTypeaheadMachineLoading($event)"
+                                    (typeaheadOnSelect)="typeaheadMachineOnSelect($event)"
+                                    [typeaheadOptionsLimit]="10"
+                                    typeaheadWaitMs="1000"
+                                    typeaheadOptionField="MakerName" autocomplete="off"
+                                    (typeaheadNoResults)="typeaheadNoResults($event)" 
+                                    name="asyncSelected"
+                                    placeholder="&#61442; i.e Korsch">
+                                </div>
+                            </div>
+                        </div> -->
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-o" data-dismiss="modal" (click)="modalRef.hide()" type="button">Close</button>
+            <button class="btn btn-default" (click)="SubmitFilter()" type="button"><i class="fa fa-search"></i>
+              Search</button>
+          </div>
+        </div>
+      </form>
+    </div><!-- Modal End-->
+  </ng-template>
+</section>
+
+
+<ngx-spinner bdOpacity=0.6 bdColor="rgba(245,240,240,0)" size="medium" color="#b52d2d" type="ball-clip-rotate">
+  <p style="color: white"> Loading... </p>
+</ngx-spinner>
