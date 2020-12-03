@@ -1,0 +1,102 @@
+.form-check-fix {
+  margin-bottom: 10px;
+}
+
+.top-container {
+  margin-top: 50px;
+}
+
+li {
+  cursor: pointer;
+}
+
+.example-form-field {
+  width: 200px;
+}
+
+.table-engineers{
+  padding-top: 50px;
+  margin-bottom: 50px;
+}
+
+.search-engineer{
+  background-color: #fff;
+}
+.p-column-filter{
+  width: 100% !important;
+}
+
+.row-expanded{
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px,
+  rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+.customer-badge {
+  border-radius: 2px;
+  padding: .25em .5rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: .3px;
+  margin-right: 5px
+}
+
+.customer-badge.status-proposal {
+  background-color: #ffd8b2;
+  color: #805b36;
+}
+
+.customer-badge.status-info {
+  background-color: #4bc5f5;
+  color: #3f3e3c;
+}
+
+:host ::ng-deep .p-multiselect {
+  min-width: 15rem;
+}
+
+:host ::ng-deep .multiselect-custom-virtual-scroll .p-multiselect {
+  min-width: 20rem;
+}
+
+:host ::ng-deep .multiselect-custom .p-multiselect-label {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+:host ::ng-deep .multiselect-custom .country-item-value {
+  padding: 0.25rem 0.5rem;
+  margin-bottom: 2px;
+  border-radius: 3px;
+
+  margin-right: 0.5rem;
+  background-color:#f4fa9c;
+  /* color: var(--primary-color-text); */
+}
+
+:host ::ng-deep .multiselect-custom .country-item-machine-value {
+  padding: 0.25rem 0.5rem;
+  margin-bottom: 2px;
+  border-radius: 3px;
+  margin-right: 0.5rem;
+  background-color: #88bef5;
+  /* color: var(--primary-color-text); */
+}
+
+:host ::ng-deep .multiselect-custom .country-item-country-value {
+  padding: 0.25rem 0.5rem;
+  margin-bottom: 2px;
+  border-radius: 3px;
+  margin-right: 0.5rem;
+  background-color:#dee1ec;
+  /* color: var(--primary-color-text); */
+}
+
+
+:host ::ng-deep .multiselect-custom .country-item-value img.flag {
+  width: 17px;
+}
+
+:host ::ng-deep .multiselect-custom .country-placeholder {
+  padding: 0.25rem;
+}

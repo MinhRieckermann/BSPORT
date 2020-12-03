@@ -1,0 +1,29 @@
+i {
+  cursor: pointer;
+}
+
+.pretty {
+  line-height: 13px;
+}
+
+.top-container {
+  margin-top: 50px;
+}
+
+@media only screen and (max-width: 600px) {
+  .pretty {
+    line-height: 12px;
+  }
+}
+
+.green-text {
+  color: #39bdc8
+}
+
+.purple-text {
+  color: #3f51b5;
+}
+
+.red-text {
+  color: #d72323;
+}

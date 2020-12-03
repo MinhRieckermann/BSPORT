@@ -1,0 +1,359 @@
+<p-toast></p-toast>
+<header>
+    <mat-sidenav-container class="sidenav-container">
+      <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+        [ngClass]="{ hidden: !(isHandset$ | async) }" [mode]="(isHandset$ | async) ? 'over' : 'side'"
+        [opened]="(isHandset$ | async) === false" (click)="drawer.toggle()">
+        <mat-toolbar>
+          <img class="logo" src="assets/img/logo.png" />
+        </mat-toolbar>
+        <mat-nav-list>
+          <!-- <mat-list-item routerLinkActive="mobile-active" routerLink="/home/dashboard">
+            <mat-icon>home</mat-icon>DASHBOARD
+          </mat-list-item> -->
+          <mat-list-item routerLinkActive="mobile-active" routerLink="/home/skill-explaination">
+            <mat-icon>home</mat-icon>SKILL EXPLAINATION
+          </mat-list-item>
+          <!-- <a mat-list-item routerLinkActive="mobile-active" routerLink="/home/list-engineer">ENGINEERS</a>
+          <a mat-list-item routerLinkActive="mobile-active" routerLink="/home/add-skill">
+            <mat-icon>build_circle</mat-icon>MANAGE ENGINEERS
+          </a>
+          <a mat-list-item routerLinkActive="mobile-active" routerLink="/home/machine-maker">MACHINE MAKER</a> -->
+
+        </mat-nav-list>
+      </mat-sidenav>
+      <mat-sidenav-content>
+        <mat-toolbar>
+          <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
+            *ngIf="isHandset$ | async">
+            <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+          </button>
+
+          <img class="logo" src="assets/img/logo.png" />
+
+          <div [ngClass]="{hidden: isHandset$ | async }" class="containerflex">
+
+          </div>
+
+          <span class="example-spacer"></span>
+          <span class="header-user-name">
+          </span>
+          <div
+        fxLayout="row"
+        fxLayoutGap="20px"
+        fxLayoutAlign="end center"
+      ><button mat-icon-button class="close-icon" [mat-dialog-close]="false">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+        </mat-toolbar>
+        <!-- Add Content Here -->
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </header>
+
+
+<div fxLayout="column" fxLayoutGap="25px" fxLayoutAlign="space-around stretch">
+  <h3 class="header-title text-center">Register Form</h3>
+
+  <!-- registerForm -->
+  <div fxFlex="100" xLayout="row" fxLayoutAlign="center center">
+    <mat-horizontal-stepper [linear]="false" #stepper class="form-register">
+      <mat-step [stepControl]="firstFormGroup">
+        
+        <form [formGroup]="firstFormGroup" >
+          <ng-template matStepLabel>Fill out basic information</ng-template>
+            <div fxLayout="column" fxLayoutAlign="space-between stretch">      
+              <p>Please fill in all the engineer details below</p>    
+              <div fxFlex="100" fxLayout="column" fxLayoutGap="15px" fxLayoutAlign="center stretch">
+                <div fxFlex="100" fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="center stretch">
+                  <div fxFlex="50">
+                    <mat-form-field class="form-element">
+                      <mat-label>Full Name</mat-label>
+                      <input matInput [errorStateMatcher]="matcher"  formControlName="FullName" required>
+                      <mat-error *ngIf="
+                !firstFormGroup.controls['FullName'].valid
+              ">
+              Required field.
+            </mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="form-element">
+                      <mat-label>Email</mat-label>
+                      <input matInput [errorStateMatcher]="matcher"  formControlName="Email" required>
+                      <mat-error *ngIf="
+                !firstFormGroup.controls['Email'].valid
+              ">
+              Required field.
+            </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div fxFlex="50">                 
+                    <mat-form-field class="form-element">
+                      <mat-label>Country</mat-label>
+                      <mat-select [errorStateMatcher]="matcher" [(ngModel)]="selectedValue" formControlName="Country" required>
+                        <mat-option *ngFor="let country of listStationed" [value]="country.StationId">
+                          {{country.StationName}}
+                        </mat-option>
+                      </mat-select>
+                       <mat-error *ngIf="firstFormGroup.controls['Country'].hasError('required')">Please choose country</mat-error>
+                      
+                    </mat-form-field>
+                    <mat-form-field class="form-element">
+                      <mat-label>Title</mat-label>
+                      <input matInput [errorStateMatcher]="matcher" formControlName="Title" required>
+                      <mat-error *ngIf="
+                !firstFormGroup.controls['Title'].valid
+              ">
+              Required field
+            </mat-error>
+                    </mat-form-field>                  
+                  </div>
+                </div>                                         
+                <div fxFlex="100">
+                  <mat-form-field class="form-element">
+                    <mat-label>Remark</mat-label>
+                    <textarea formControlName="Remark" [errorStateMatcher]="matcher" [errorStateMatcher]="matcher" matInput placeholder="Ex. It makes me feel..."></textarea>
+                    <mat-error *ngIf="
+                !firstFormGroup.controls['Remark'].valid
+              ">
+              Required field, must be between 15 and 500 characters.
+            </mat-error>
+                  </mat-form-field>
+                </div>
+                                              
+              </div>
+              <div fxFlex="100" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="space-around center">
+
+              </div>              
+              
+              <p class="bold">Please select engineer professional background</p>
+              <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="center center">
+                <div *ngFor="let item of listProskill">
+                  <mat-checkbox [color]="primary" [checked]="CheckProSkills(item.SkillId)" [value]="item.SkillId" (change)="changeProfessionalSkillLevel($event)">
+                    {{item.SkillName}}
+                  </mat-checkbox>
+                </div>
+                
+              </div>
+              <div fxFlex="100" fxLayout="row" fxLayoutAlign="center center">
+                <mat-error class="text-center" *ngIf="
+                technician.ProSkill === 0
+              ">
+              Please select at least one machine skill
+            </mat-error>
+              </div>
+              <div fxFlex="100" fxLayout="row" fxLayoutAlign="end end">
+                <button [disabled]="!firstFormGroup.valid || technician.ProSkill == 0" mat-stroked-button color="primary" (click)="AddBasicInformation()" matStepperNext>Next</button>
+               
+              </div>
+            </div>        
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="secondFormGroup" label="Select Machine Maker">
+        
+        <form [formGroup]="secondFormGroup">
+          <ng-template matStepLabel>Select Machine Maker</ng-template>
+          <div fxLayout="column" fxLayoutAlign="space-between stretch">
+            <p>Please fill in all the engineer details below</p> 
+            <div fxLayout="column" fxLayoutGap="15px" fxLayoutAlign="stretch stretch">
+              <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="space-around center">
+                <mat-form-field class="form-element" fxFlex="50">
+                  <mat-label>Search Machine Maker</mat-label>
+                  <input [disabled]="isSelectMaker" matInput placeholder="Search" aria-label="State" [matAutocomplete]="auto" [formControl]="searchMachinesCtrl">
+                      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="addOption($event)" [displayWith]="displayFn">
+                        <mat-option *ngIf="isLoading" class="is-loading">Loading...</mat-option>
+                        <ng-container *ngIf="!isLoading">
+                          <mat-option *ngFor="let machine of filteredMachines" [value]="machine">
+                            <span><b>{{machine.MakerName}}</b></span>
+                          </mat-option>
+                        </ng-container>
+                      </mat-autocomplete>
+                </mat-form-field>   
+                <mat-form-field fxFlex="50">
+                  <mat-label>Industry</mat-label>
+                  <mat-select [disabled]="isSelectMaker" [(value)]="selectedInd">
+                    <mat-option *ngFor="let industry of listIndustries" [value]="industry">
+                      {{industry.Description}}
+                    </mat-option>
+                  </mat-select>
+                  
+                </mat-form-field> 
+                <button mat-raised-button color="primary" [disabled]="selectedMachine.Maker.MaId == 0 || isSelectMaker" (click) = "SelectMaker()">Select</button>
+              </div>
+              <div *ngIf="isSelectMaker">
+              <p class="text-center">Please assign machine skill to machine</p>
+              <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="center center">
+             
+                <div *ngFor="let item of listMachineSkill">
+                  <mat-checkbox (change)="OptionSelectChange($event)" [value]="item.MSId" [color]="primary" matTooltip="{{item.Explain}}">
+                    {{item.MSName}}
+                  </mat-checkbox>
+                </div>
+                
+              </div>
+              <mat-error class="text-center" *ngIf="
+              selectedMachine.MachineSkill.length === 0
+              ">
+              Please select at least one machine skill
+            </mat-error>
+              <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="start center">            
+                <mat-form-field fxFlex="25">                
+                  <mat-label>Application</mat-label>
+                  <input matInput [errorStateMatcher]="matcher" formControlName="application"
+                         >
+                </mat-form-field> 
+                <mat-form-field fxFlex="75">                
+                  <mat-label>Description</mat-label>
+                  <input matInput [errorStateMatcher]="matcher" formControlName="Description" placeholder="Ex. 1 Main St, New York, NY">
+                  <mat-error *ngIf="
+                !secondFormGroup.controls['Description'].valid
+              ">
+              Required field, must be between 15 and 500 characters.
+            </mat-error>
+                </mat-form-field> 
+                <button  (click)="AddMachineSkill()" mat-icon-button  mat-raised-button color="primary" [disabled]="!secondFormGroup.valid || selectedMachine.MachineSkill.length === 0">
+                  <mat-icon>done</mat-icon>
+                  </button>
+                  <button (click)="cancelAdding()" mat-icon-button  mat-raised-button>
+                    <mat-icon>clear</mat-icon>
+                    </button>
+              </div> 
+            </div>
+            </div>
+            <p>List Machine Maker</p>  
+            <div fxFlex="100" fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="center stretch">
+              <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+                <!--- Note that these columns can be defined in any order.
+                      The actual rendered columns are set as a property on the row definition" -->
+              
+                <!-- Position Column -->
+                <ng-container matColumnDef="name">
+                  <th mat-header-cell *matHeaderCellDef> Machine Name </th>
+                  <td mat-cell *matCellDef="let element"> {{element.Maker.MakerName}} </td>
+                </ng-container>
+              
+                <!-- Name Column -->
+                <ng-container matColumnDef="application">
+                  <th mat-header-cell *matHeaderCellDef> Application </th>
+                  <td mat-cell *matCellDef="let element"> {{element.Maker.Model}} </td>
+                </ng-container>
+              
+                <!-- Weight Column -->
+                <ng-container matColumnDef="comment">
+                  <th mat-header-cell *matHeaderCellDef> Comment </th>
+                  <td mat-cell *matCellDef="let element"> {{element.Comment}} </td>
+                </ng-container>
+              
+                <!-- Weight Column -->
+              <ng-container matColumnDef="skill">
+                <th mat-header-cell *matHeaderCellDef> Skill </th>
+                <td mat-cell *matCellDef="let element"> 
+                    <mat-list role="list">
+                        <mat-list-item *ngFor="let item of element.MachineSkill" role="listitem">{{item.MSName}}</mat-list-item>
+                    </mat-list> 
+                </td>
+              </ng-container>
+                <!-- Action Column -->
+                <ng-container matColumnDef="action">
+                  <th mat-header-cell *matHeaderCellDef> Action </th>
+                  <td mat-cell *matCellDef="let element"> 
+                    <button (click)="RemoveMakerAction(element)" matTooltip="Remove Machine" mat mat-icon-button color="primary"
+                    aria-label="Example icon-button with a heart icon">
+                    <mat-icon>remove_circle</mat-icon>
+                  </button>
+                  </td>
+                </ng-container>
+              
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+            </div>
+            <div class="footer-gr" fxFlex="100" fxLayoutGap="10px" fxLayout="row" fxLayoutAlign="end end">
+              <button mat-stroked-button matStepperPrevious>Back</button>
+              <button mat-stroked-button matStepperNext [disabled]="listAssignmachine.length === 0">Next</button>
+            </div>  
+          </div>
+             
+        </form>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Confirm</ng-template>
+        <h4 class="font-weight-normal">Technician Information</h4>
+        <mat-divider></mat-divider>
+        <div fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="start stretch">
+          <div fxLayout="row" fxLayoutAlign="space-evenly start">
+            <div fxFlex="50" fxFlexOffset="2">
+              <p class="font-weight-bold">Full Name</p>
+              <p>{{technician.DisplayName}}</p>
+              <p class="font-weight-bold">Email</p>
+              <p>{{technician.EmailAddress}}</p>
+              <p class="font-weight-bold">Title</p>
+              <p>{{technician.Title}}</p>
+            </div>
+            <div fxFlex="50">
+              <p class="font-weight-bold">Country</p>
+              <p>{{technician.StationName}}</p>
+              <p class="font-weight-bold">Professtional Skill</p>
+              <p><span *ngFor="let subitem of listTechProSKill;let i = index"
+                matTooltip="{{subitem.Explain}}">{{subitem.SkillCode}}<span
+                  *ngIf="i < listTechProSKill.length -1">,</span></span></p>
+            </div>             
+          </div>
+          
+          <h4 class="font-weight-normal">Machine Maker Information</h4>
+          <mat-divider></mat-divider>
+          <div fxFlex="100" fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="center stretch">
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+              <!--- Note that these columns can be defined in any order.
+                    The actual rendered columns are set as a property on the row definition" -->
+            
+              <!-- Position Column -->
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Machine Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.Maker.MakerName}} </td>
+              </ng-container>
+            
+              <!-- Name Column -->
+              <ng-container matColumnDef="application">
+                <th mat-header-cell *matHeaderCellDef> Application </th>
+                <td mat-cell *matCellDef="let element"> {{element.Maker.Model}} </td>
+              </ng-container>
+            
+              <!-- Weight Column -->
+              <ng-container matColumnDef="comment">
+                <th mat-header-cell *matHeaderCellDef> Comment </th>
+                <td mat-cell *matCellDef="let element"> {{element.Comment}} </td>
+              </ng-container>
+              <!-- Weight Column -->
+              <ng-container matColumnDef="skill">
+                <th mat-header-cell *matHeaderCellDef> Skill </th>
+                <td mat-cell *matCellDef="let element"> 
+                    <mat-list role="list">
+                        <mat-list-item *ngFor="let item of element.MachineSkill" role="listitem">{{item.MSName}}</mat-list-item>
+                    </mat-list> 
+                </td>
+              </ng-container>
+            
+              <!-- Action Column -->
+              <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef>  </th>
+                <td mat-cell *matCellDef="let element"> 
+                </td>
+              </ng-container>
+            
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+          </div>
+          <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="end center">
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button color="primary" (click)="submitTechnician()">Update</button>
+          </div>
+        </div>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </div>
+  
+</div>

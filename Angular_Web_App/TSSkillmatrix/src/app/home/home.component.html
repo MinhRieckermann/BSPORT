@@ -1,0 +1,72 @@
+<body class="main">
+  <header>
+    <mat-sidenav-container class="sidenav-container">
+      <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+        [ngClass]="{ hidden: !(isHandset$ | async) }" [mode]="(isHandset$ | async) ? 'over' : 'side'"
+        [opened]="(isHandset$ | async) === false" (click)="drawer.toggle()">
+        <mat-toolbar>
+          <img class="logo" src="assets/img/logo.png" />
+        </mat-toolbar>
+        <mat-nav-list>
+          <!-- <mat-list-item routerLinkActive="mobile-active" routerLink="/home/dashboard">
+            <mat-icon>home</mat-icon>DASHBOARD
+          </mat-list-item> -->
+          <mat-list-item routerLinkActive="mobile-active" routerLink="/home/skill-explaination">
+            <mat-icon>home</mat-icon>SKILL EXPLAINATION
+          </mat-list-item>
+          <a mat-list-item routerLinkActive="mobile-active" routerLink="/home/list-engineer">ENGINEERS</a>
+          <a mat-list-item routerLinkActive="mobile-active" routerLink="/home/add-skill">
+            <mat-icon>build_circle</mat-icon>MANAGE ENGINEERS
+          </a>
+          <a mat-list-item routerLinkActive="mobile-active" routerLink="/home/machine-maker">MACHINE MAKER</a>
+
+        </mat-nav-list>
+      </mat-sidenav>
+      <mat-sidenav-content>
+        <mat-toolbar>
+          <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
+            *ngIf="isHandset$ | async">
+            <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+          </button>
+
+          <img class="logo" src="assets/img/logo.png" />
+
+          <div [ngClass]="{hidden: isHandset$ | async }" class="containerflex">
+            <!-- <a mat-list-item routerLinkActive="active" routerLink="/home/dashboard">DASHBOARD
+            </a> -->
+            <a mat-list-item routerLinkActive="active" routerLink="/home/list-engineer">SEARCH ENGINEERS</a>
+            <a *ngIf="canEdit" mat-list-item routerLinkActive="active" routerLink="/home/add-skill">ADD/MANAGE ENGINEERS</a>           
+            <a *ngIf="canEdit" mat-list-item routerLinkActive="active" routerLink="/home/machine-maker">ADD/MANAGE MACHINE MAKER</a>
+
+          </div>
+
+          <span class="example-spacer"></span>
+          <span class="header-user-name">
+          </span>
+          <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="end center" >
+            <a  routerLinkActive="active" routerLink="/home/skill-explaination">HELP        
+            </a>
+            <a  *ngIf="canEdit" routerLink="/home/list-register" mat-icon-button aria-label="Example icon button with a menu icon">
+              <mat-icon style="margin-bottom: 15px;" matBadge="{{registerCount}}" matBadgeColor="warn">view_list</mat-icon>
+            </a>
+            
+            <!-- <a  *ngIf="!canEdit" routerLink="/home/list-register" mat-icon-button aria-label="Example icon button with a menu icon">
+              <mat-icon style="margin-bottom: 15px;"  matBadgeColor="warn">portrait</mat-icon>
+            </a> -->
+            <button color="accent" matTooltip="Logout" (click)="Logout()" mat-icon-button class="example-icon"
+              aria-label="Example icon-button with menu icon">
+              <mat-icon>login</mat-icon>
+            </button>
+          </div>
+          
+        </mat-toolbar>
+        <!-- Add Content Here -->
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </header>
+
+
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+</body>

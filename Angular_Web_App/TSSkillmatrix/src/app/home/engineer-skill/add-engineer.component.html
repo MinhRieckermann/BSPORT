@@ -1,0 +1,467 @@
+<p-toast position="top-center"></p-toast>
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+<div class="container add-technician">
+   <mat-horizontal-stepper [linear]="false" #stepper>
+      <mat-step>
+         <ng-template matStepLabel>Add Technician</ng-template>
+         <div>
+            <div class="container">
+               <form class="form-engineer">
+                  <div class="form-section">
+                     <div class="row">
+                        <div class="col-12">
+                           <h3>Engineer Details</h3>
+                           <p>Please fill in all the engineer details below</p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="form-section">
+                  </div>
+                  <div fxLayout="column" fxLayoutGap="15px" fxLayoutAlign="space-around start">
+                     <div fxFlex="100">
+                        <p-button [label]="'List Technician'" [disabled]="targetTechnicians.length < 1"
+                           icon="pi pi-align-justify" (click)="op.toggle($event)"></p-button>
+                        <p-overlayPanel #op [showCloseIcon]="true" [style]="{width: '960px'}">
+                           <ng-template pTemplate>
+                              <p-table [value]="targetTechnicians" selectionMode="single"
+                                 [(selection)]="selectedProduct" (onRowSelect)="onRowSelect($event)" [paginator]="true"
+                                 [rows]="5">
+                                 <ng-template pTemplate="header">
+                                    <tr>
+                                       <th pSortableColumn="name">
+                                          Name
+                                          <p-sortIcon field="DisplayName"></p-sortIcon>
+                                       </th>
+                                       <th>
+                                          Email Address
+                                       </th>
+                                       <th>
+                                          Background Skills
+                                       </th>
+                                       <th>
+                                          Remove
+                                       </th>
+                                    </tr>
+                                 </ng-template>
+                                 <ng-template pTemplate="body" let-rowData let-product>
+                                    <tr [pSelectableRow]="rowData">
+                                       <td>{{product.DisplayName}}</td>
+                                       <td>{{product.EmailAddress}}</td>
+                                       <td> <span *ngFor="let item of product.Professionals"
+                                             [class]="'customer-badge status-proposal'">{{item.SkillCode}}</span></td>
+                                       <td><button [disabled]="CheckConditionToDelete(product)" class="text-center"
+                                             type="button" class="p-button-rounded" pButton pRipple icon="pi pi-times"
+                                             (click)="removeTechnician(product)"></button>
+                                       </td>
+                                    </tr>
+                                 </ng-template>
+                              </p-table>
+                           </ng-template>
+                        </p-overlayPanel>
+                     </div>
+                     <div fxFlex="100">
+                        <p-tabView>
+                           <p-tabPanel header="List employees">
+                              <p-table [value]="sourceTechnicians" dataKey="TechId" styleClass="p-datatable-gridlines"
+                                 [metaKeySelection]="true" [filterDelay]="2000" [paginator]="true" [rows]="rows"
+                                 [showCurrentPageReport]="true" [lazy]="true"
+                                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                                 [totalRecords]="totalRecords" [loading]="loading" [rowsPerPageOptions]="[5,10,15]"
+                                 (onLazyLoad)="loadCustomers($event)">
+                                 <ng-template pTemplate="caption">
+                                    <p class="text-center">Total Employees select : {{sourceTechnicians.length}}</p>
+                                 </ng-template>
+                                 <ng-template pTemplate="header">
+                                    <tr>
+                                       <th>Display Name</th>
+                                       <th>Initials</th>
+                                       <th>Email</th>
+                                       <th style="width:4rem"></th>
+                                    </tr>
+                                    <tr>
+                                       <th>
+                                          <input pInputText type="text" (input)="FilterByName($event.target.value)"
+                                             placeholder="Search by Name" class="p-column-filter">
+                                       </th>
+                                       <th>
+                                          <input pInputText type="text" (input)="FilterByName($event.target.value)"
+                                             placeholder="Search by Initials" class="p-column-filter">
+                                       </th>
+                                       <th>
+                                       </th>
+                                       <th>
+                                       </th>
+                                    </tr>
+                                 </ng-template>
+                                 <ng-template pTemplate="body" let-product let-rowIndex="rowIndex">
+                                    <tr [pSelectableRow]="product" [pSelectableRowIndex]="rowIndex">
+                                       <td>{{product.DisplayName}}</td>
+                                       <td>{{product.Initials}}</td>
+                                       <td>{{product.EmailAddress}}</td>
+                                       <td>
+                                          <button type="button" [disabled]="disabledAddTechnician(product)"
+                                             class="p-button-rounded p-button-outlined" pButton pRipple
+                                             icon="pi pi-plus" (click)="selectProduct(product)"></button>
+                                       </td>
+                                    </tr>
+                                 </ng-template>
+                              </p-table>
+                           </p-tabPanel>
+                           <p-tabPanel header="List Technicians">
+                              <p-table [value]="sourceTechnicians" dataKey="TechId" styleClass="p-datatable-gridlines"
+                                 [metaKeySelection]="true" [filterDelay]="2000" [paginator]="true" [rows]="rows"
+                                 [showCurrentPageReport]="true" [lazy]="true"
+                                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                                 [totalRecords]="totalRecords" [loading]="loading" [rowsPerPageOptions]="[5,10,15]"
+                                 (onLazyLoad)="loadCustomers($event)">
+                                 <ng-template pTemplate="caption">
+                                    <p class="text-center">Total Technicians select : {{sourceTechnicians.length}}</p>
+                                 </ng-template>
+                                 <ng-template pTemplate="header">
+                                    <tr>
+                                       <th>Display Name</th>
+                                       <th>Initials</th>
+                                       <th>Email</th>
+                                       <th style="width:4rem"></th>
+                                    </tr>
+                                    <tr>
+                                       <th>
+                                          <input pInputText type="text" (input)="FilterByName($event.target.value)"
+                                             placeholder="Search by Name" class="p-column-filter">
+                                       </th>
+                                       <th>
+                                          <input pInputText type="text" (input)="FilterByName($event.target.value)"
+                                             placeholder="Search by Initials" class="p-column-filter">
+                                       </th>
+                                       <th>
+                                       </th>
+                                       <th>
+                                       </th>
+                                    </tr>
+                                 </ng-template>
+                                 <ng-template pTemplate="body" let-product let-rowIndex="rowIndex">
+                                    <tr [pSelectableRow]="product" [pSelectableRowIndex]="rowIndex">
+                                       <td>{{product.DisplayName}}</td>
+                                       <td>{{product.Initials}}</td>
+                                       <td>{{product.EmailAddress}}</td>
+                                       <td>
+                                          <button type="button" [disabled]="disabledAddTechnician(product)"
+                                             class="p-button-rounded p-button-outlined" pButton pRipple
+                                             icon="pi pi-plus" (click)="selectProduct(product)"></button>
+                                       </td>
+                                    </tr>
+                                 </ng-template>
+                              </p-table>
+                           </p-tabPanel>
+                        </p-tabView>
+                     </div>
+                  </div>
+                  <div div fxLayout="row" fxLayoutAlign="end center" class="footer-submit">
+                     <button [disabled]="targetTechnicians.length < 1 " matStepperNext mat-raised-button
+                        color="primary">Next</button>
+                  </div>
+               </form>
+            </div>
+         </div>
+      </mat-step>
+      <mat-step>
+         <ng-template matStepLabel>Add Machine</ng-template>
+         <form class="form-engineer">
+            <div class="form-section">
+               <div div fxLayout="row" fxLayoutAlign="end center">
+                  <div class="col-12">
+                     <h3>Machine Maker</h3>
+                     <p>Please add maker machine to list engineer</p>
+                  </div>
+                  <div fxFlex="100" fxLayout="row" fxLayoutAlign="end center">
+                     <p-button [label]="''" class="p-button-outlined" [disabled]="listAssignmachine.length < 1"
+                        icon="pi pi-align-justify" (click)="listmaker.toggle($event)"></p-button>
+                     <p-overlayPanel #listmaker [showCloseIcon]="true" [style]="{width: '960px'}">
+                        <ng-template pTemplate>
+                           <p-table [value]="listAssignmachine" dataKey="RelTechId" [paginator]="true" [rows]="5">
+                              <ng-template pTemplate="header">
+                                 <tr>
+                                    <th></th>
+                                    <th pSortableColumn="DisplayName">
+                                       Machine Name
+                                       <p-sortIcon field="DisplayName"></p-sortIcon>
+                                    </th>
+                                    <th>
+                                       Machine Application
+                                    </th>
+                                    <th>
+                                       Description
+                                    </th>
+                                    <th>
+                                       Machine Skills
+                                    </th>
+                                    <th>
+                                       Action
+                                    </th>
+                                 </tr>
+                              </ng-template>
+                              <ng-template pTemplate="body" let-rowData let-product let-expanded="expanded">
+                                 <tr [pSelectableRow]="rowData">
+                                    <td>
+                                       <button type="button" pButton pRipple [pRowToggler]="product"
+                                          class="p-button-text p-button-rounded p-button-plain"
+                                          [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+                                    </td>
+                                    <td>{{product.Maker.MakerName}}</td>
+                                    <td>{{product.Maker.Model}}</td>
+                                    <td>{{product.Maker.MakerDescription}}</td>
+                                    <td> <span *ngFor="let item of product.MachineSkill"
+                                          [class]="'customer-badge status-proposal'">{{item.MSCode}}</span></td>
+                                    <td><button class="text-center" type="button" class="p-button-rounded" pButton
+                                          pRipple icon="pi pi-times"
+                                          (click)="removeMachineAssignments(product)"></button></td>
+                                 </tr>
+                              </ng-template>
+                              <ng-template pTemplate="rowexpansion" let-product>
+                                 <tr>
+                                    <td colspan="7">
+                                       <div class="p-p-3">
+                                          <p-table [value]="product.Technicians" dataKey="TechId">
+                                             <ng-template pTemplate="header">
+                                 <tr>
+                                    <th pSortableColumn="TechId">Name <p-sortIcon field="TechId"></p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="EmailAddress">Email <p-sortIcon field="EmailAddress">
+                                       </p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="StationName">Country <p-sortIcon field="Title"></p-sortIcon>
+                                    </th>
+                                 </tr>
+                              </ng-template>
+                              <ng-template pTemplate="body" let-order>
+                                 <tr>
+                                    <td>{{order.DisplayName}}</td>
+                                    <td>{{order.EmailAddress}}</td>
+                                    <td>{{order.StationName}}</td>
+                                 </tr>
+                              </ng-template>
+                              <ng-template pTemplate="emptymessage">
+                                 <tr>
+                                    <td colspan="6">There are no technician for this machine maker yet.</td>
+                                 </tr>
+                              </ng-template>
+                           </p-table>
+                  </div>
+                  </td>
+                  </tr>
+                  </ng-template>
+                  </p-table>
+                  </ng-template>
+                  </p-overlayPanel>
+               </div>
+            </div>
+</div>
+</form>
+<form [formGroup]="secondFormGroup">
+   <ng-template matStepLabel>Select Machine Maker</ng-template>
+   <div fxLayout="column" fxLayoutAlign="space-between stretch">
+      <div fxLayout="column" fxLayoutGap="15px" fxLayoutAlign="stretch stretch">
+         <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="space-around center">
+            <mat-form-field fxFlex="50">
+               <mat-label>Industry</mat-label>
+               <mat-select [disabled]="isSelectMaker" [(value)]="selectedInd">
+                  <mat-option *ngFor="let industry of listIndustries" [value]="industry">
+                     {{industry.Description}}
+                  </mat-option>
+               </mat-select>
+            </mat-form-field>
+            <mat-form-field class="form-element" fxFlex="50">
+               <mat-label>Search Machine Maker</mat-label>
+               <input [disabled]="isSelectMaker" matInput placeholder="Search" aria-label="State"
+                  [matAutocomplete]="auto" [formControl]="searchMachinesCtrl">
+               <mat-autocomplete #auto="matAutocomplete" (optionSelected)="addOption($event)" [displayWith]="displayFn">
+                  <mat-option *ngIf="isLoading" class="is-loading">Loading...</mat-option>
+                  <ng-container *ngIf="!isLoading">
+                     <mat-option *ngFor="let machine of filteredMachines" [value]="machine">
+                        <span><b>{{machine.MakerName}}</b></span>
+                     </mat-option>
+                  </ng-container>
+               </mat-autocomplete>
+            </mat-form-field>
+            <button mat-raised-button color="primary"
+               [disabled]="selectedMachineAssignments.Maker.MaId == 0 || isSelectMaker"
+               (click)="SelectMaker()">Select</button>
+         </div>
+         <div *ngIf="isSelectMaker">
+            <p class="text-center">Please assign machine skill to machine</p>
+            <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="center center">
+               <div *ngFor="let item of listMachineSkill">
+                  <mat-checkbox (change)="OptionSelectChange($event)" [disabled]="isSelectMachine" [value]="item.MSId"
+                     [color]="primary" matTooltip="{{item.Explain}}">
+                     {{item.MSName}}
+                  </mat-checkbox>
+               </div>
+            </div>
+            <mat-error class="text-center" *ngIf="
+                     selectedMachineAssignments.MachineSkill.length === 0
+                     ">
+               Please select at least one machine skill
+            </mat-error>
+            <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="start center">
+               <mat-form-field fxFlex="25">
+                  <mat-label>Application</mat-label>
+                  <input matInput [errorStateMatcher]="matcher" formControlName="application">
+               </mat-form-field>
+               <mat-form-field fxFlex="75">
+                  <mat-label>Description</mat-label>
+                  <input matInput [errorStateMatcher]="matcher" formControlName="Description"
+                     placeholder="Ex. 1 Main St, New York, NY">
+                  <mat-error *ngIf="
+                           !secondFormGroup.controls['Description'].valid
+                           ">
+                     Required field, must be between 15 and 500 characters.
+                  </mat-error>
+               </mat-form-field>
+               <button (click)="AddMachineSkill()" mat-icon-button mat-raised-button color="primary" [disabled]="!secondFormGroup.valid || selectedMachineAssignments.MachineSkill.length === 0 
+                     || isSelectMachine">
+                  <mat-icon>done</mat-icon>
+               </button>
+               <button (click)="ClearMachineSKill()" mat-icon-button mat-raised-button>
+                  <mat-icon>clear</mat-icon>
+               </button>
+            </div>
+         </div>
+      </div>
+      <div fxFlex="100" fxLayout="column" fxLayoutGap="15px" fxLayoutAlign="center stretch">
+         <p-table [value]="targetTechnicians" selectionMode="multiple" [(selection)]="selectedTechnicians"
+            (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)"
+            styleClass="p-datatable-gridlines" [paginator]="true" [rows]="5">
+            <ng-template pTemplate="caption">
+               <p class="text-center">List Technician</p>
+               <p *ngIf="selectedTechnicians.length < 1 && isSelectMachine" class="text-center error">Please select at
+                  least one technician</p>
+            </ng-template>
+            <ng-template pTemplate="header">
+               <tr>
+                  <th pSortableColumn="name">
+                     Name
+                     <p-sortIcon field="DisplayName"></p-sortIcon>
+                  </th>
+                  <th>
+                     Email Address
+                  </th>
+                  <th>
+                     Professional Skills
+                  </th>
+               </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-product>
+               <tr [pSelectableRow]="rowData"
+                  [pSelectableRowDisabled]="!isSelectMachine || sourceTechnicians.length < 1">
+                  <td>{{product.DisplayName}}</td>
+                  <td>{{product.EmailAddress}}</td>
+                  <td> <span *ngFor="let item of product.Professionals"
+                        [class]="'customer-badge status-proposal'">{{item.SkillCode}}</span></td>
+               </tr>
+            </ng-template>
+         </p-table>
+         <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="end center">
+            <button pButton type="button" label="Cancel" (click)="cancelAddMaker()" class="p-button-outlined"></button>
+            <button pButton type="button" [disabled]="selectedMachineAssignments.Technicians.length < 1"
+               label="Add Maker" (click)="AddMaker()" class="p-button-outlined" color="primary"></button>
+         </div>
+      </div>
+      <div class="footer-submit" fxFlex="100" fxLayoutGap="10px" fxLayout="row" fxLayoutAlign="end end"
+         [hidden]="listAssignmachine.length === 0">
+         <button mat-stroked-button matStepperPrevious>Back</button>
+         <button mat-stroked-button matStepperNext>Next</button>
+      </div>
+   </div>
+</form>
+</mat-step>
+<mat-step>
+   <ng-template matStepLabel>Confirm</ng-template>
+   <div class="row">
+      <div fxLayout="column" fxLayoutGap="15px" fxLayoutAlign="space-between stretch" class="table-engineers">
+         <p-table [value]="targetTechnicians" dataKey="UserName" styleClass="p-datatable-striped" [paginator]="true"
+            [rows]="5" [showCurrentPageReport]="true" [lazy]="true"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            [totalRecords]="targetTechnicians.length" [loading]="loading" [rowsPerPageOptions]="[3,5,10]">
+            <ng-template pTemplate="header">
+               <tr>
+                  <th style="width: 3rem"></th>
+                  <th pSortableColumn="name">
+                     Name
+                     <p-sortIcon field="name"></p-sortIcon>
+                  </th>
+                  <th pSortableColumn="price">
+                     Title
+                     <p-sortIcon field="price"></p-sortIcon>
+                  </th>
+                  <th pSortableColumn="rating">
+                     Country
+                     <p-sortIcon field="rating"></p-sortIcon>
+                  </th>
+                  <th pSortableColumn="inventoryStatus">
+                     Skills
+                     <p-sortIcon field="inventoryStatus"></p-sortIcon>
+                  </th>
+               </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-product let-expanded="expanded">
+               <tr>
+                  <td>
+                     <button type="button" pButton pRipple [pRowToggler]="product"
+                        class="p-button-text p-button-rounded p-button-plain"
+                        [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+                  </td>
+                  <td>{{product.DisplayName}}</td>
+                  <td>{{product.Title}}</td>
+                  <td>{{product.StationName}}</td>
+                  <td>
+                     <p><span *ngFor="let subitem of product.Professionals;let i = index"
+                           tooltip="{{subitem.Explain}}">{{subitem.SkillCode}}<span
+                              *ngIf="i < product.Professionals.length -1">,</span></span></p>
+                  </td>
+               </tr>
+            </ng-template>
+            <ng-template pTemplate="rowexpansion" let-product>
+               <tr>
+                  <td colspan="7">
+                     <div class="p-p-3">
+                        <p-table [value]="product.listAssign" dataKey="SkillName">
+                           <ng-template pTemplate="header">
+               <tr>
+                  <th pSortableColumn="customer">Machine </th>
+                  <th pSortableColumn="date">Machine Application </th>
+                  <th pSortableColumn="amount">Description </th>
+                  <th pSortableColumn="stats">Skill List</th>
+               </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-machine>
+               <tr>
+                  <td>{{machine.Maker.MakerName}}</td>
+                  <td>{{machine.Maker.Model}}</td>
+                  <td>{{machine.Comment}}</td>
+                  <td><span *ngFor="let item of machine.MachineSkill"
+                        [class]="'customer-badge status-proposal'">{{item.MSCode}}</span></td>
+               </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+               <tr>
+                  <td colspan="6">There are no machine maker for this technician yet.</td>
+               </tr>
+            </ng-template>
+         </p-table>
+      </div>
+      </td>
+      </tr>
+      </ng-template>
+      </p-table>
+      <div class="footer-submit" fxFlex="100" fxLayoutGap="10px" fxLayout="row" fxLayoutAlign="end end">
+         <button mat-stroked-button matStepperPrevious>Back</button>
+         <button mat-stroked-button matStepperNext (click)="confirm()">Confirm & Save</button>
+      </div>
+   </div>
+   </div>
+</mat-step>
+</mat-horizontal-stepper>
+</div>
+<ngx-spinner bdOpacity=0.6 bdColor="rgba(245,240,240,0)" size="medium" color="#b52d2d" type="ball-clip-rotate">
+   <p style="color: white"> Loading... </p>
+</ngx-spinner>

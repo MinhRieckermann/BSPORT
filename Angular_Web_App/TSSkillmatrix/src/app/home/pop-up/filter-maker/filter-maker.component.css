@@ -1,0 +1,61 @@
+.fill-remaining-space {
+  /* This fills the remaining space, by using flexbox. 
+           Every toolbar row uses a flexbox row layout. */
+  flex: 1 1 auto;
+}
+
+.container {
+  padding: 10px;
+}
+
+.form {
+  width: 100%;
+}
+
+.form-element {
+  padding: 5px 0px 25px 2px;
+  width: 100%;
+}
+
+.button {
+  margin-left: 3%;
+}
+
+
+.footer-submit {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.footer-group {
+  margin: 10px 0 10px 0;
+}
+
+.working-time {
+  margin-top: 20px;
+}
+
+table {
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.mat-dialog-content {
+  font-size: 14px;
+}
+
+.mat-list-text {
+  font-size: 14px !important;
+}
+
+.stationId {
+  max-width: 550px;
+}

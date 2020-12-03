@@ -1,0 +1,28 @@
+<div mat-dialog-content>
+    <mat-toolbar color="primary">
+        <span class="fill-remaining-space text-center">DOWNLOAD MACHINE MAKER</span>
+        <button mat-icon-button class="close-icon" [mat-dialog-close]="false">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-toolbar>
+      <div class="header-download" fxLayout="column" fxLayoutGap="20px" fxLayoutAlign="space-between stretch">
+        <p class="text-center">Please choose Industry of Machine Macker</p>
+        <mat-form-field appearance="fill">
+            <mat-label>Select an industry</mat-label>
+            <mat-select [(value)]="selected" cdkFocusInitial>
+                <mat-option *ngFor="let industry of listIndustries" [value]="industry">
+                    {{industry.Description}}
+                  </mat-option>
+            </mat-select>
+          </mat-form-field>
+      </div>
+    
+  </div>
+  <br>
+  <div mat-dialog-actions class="confirm-dialog">
+    <div class="col-md-12 text-center footer-group">
+        <button mat-flat-button (click)="closeDialog()" class="no-button" [mat-dialog-close]="false">Cancel</button>
+        <button mat-flat-button color="primary" (click)="save()">Download</button>
+    </div> 
+  </div>
+  

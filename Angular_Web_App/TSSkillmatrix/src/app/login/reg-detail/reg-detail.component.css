@@ -1,0 +1,156 @@
+.ui-steps .ui-steps-item {
+    width: 25%;
+}
+
+.ui-steps.steps-custom {
+    margin-bottom: 30px;
+}
+
+.ui-steps.steps-custom .ui-steps-item .ui-menuitem-link {
+    padding: 0 1em;
+    overflow: visible;
+}
+
+.ui-steps.steps-custom .ui-steps-item .ui-steps-number {
+    background-color: #0081c2;
+    color: #FFFFFF;
+    display: inline-block;
+    width: 36px;
+    border-radius: 50%;
+    margin-top: -14px;
+    margin-bottom: 10px;
+}
+
+.ui-steps.steps-custom .ui-steps-item .ui-steps-title {
+    color: #555555;
+}
+
+.form-element {
+    width: 100%;
+  }
+
+  .header-title{
+      padding-top: 30px;
+  }
+
+  .form-register{
+      width:60%
+  }
+
+  table {
+      width : 100%;
+  }
+
+  .footer-gr{
+      padding-top: 30px;
+  }
+
+  .font-weight-normal{
+    font-weight: 400;
+    color: #2b2929
+  }
+
+  .sidenav-container {
+    height: 100%;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16),
+      0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  }
+  
+  .sidenav {
+    width: 150px;
+    box-shadow: 3px 0 6px rgba(0, 0, 0, 0.24);
+  }
+  
+  mat-toolbar {
+    background-color: #3f51b5;
+  }
+  
+  mat-toolbar a {
+    display: inline-block;
+    margin: 0 15px;
+    padding: 5px;
+    font-size: 13.5px;
+    font-weight: 200;
+  }
+  
+  .active {
+    display: inline-block;
+    margin: 0 10px;
+    font-size: 13.5px;
+    font-weight: 400;
+    color: rgb(253, 253, 253);
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .mobile-active,
+  .mobile-active:focus,
+  ::after {
+    display: inline-block;
+    margin: 0 10px;
+    font-size: 13.5px;
+    font-weight: 400;
+    background-color: rgba(189, 31, 31, 0.2);
+  }
+  
+  
+  
+  
+  
+  mat-toolbar img {
+    padding: 15px;
+    overflow: hidden;
+  }
+  
+  mat-nav-list a {
+    display: inline-block;
+    margin: 0 10px;
+    font-size: 14.5px;
+  }
+  
+  img {
+    max-width: 100%;
+    max-height: 100%;
+  }
+  
+  span {
+    display: inline-block;
+    margin: 0 10px;
+    font-size: 12px;
+  }
+  
+  .logo {
+    background-size: cover;
+  }
+  
+  a {
+    text-decoration: none;
+    font-size: 14.5px;
+    color: rgb(255, 255, 255);
+  }
+  
+  
+  
+  .hidden {
+    display: none;
+  }
+  
+  .containerflex {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: stretch;
+  }
+  
+  .example-spacer {
+    flex: 1 1 auto;
+  }
+  
+  
+  
+  .header-user-name {
+    color: #ffffff;
+  }
+  

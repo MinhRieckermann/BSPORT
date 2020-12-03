@@ -1,0 +1,49 @@
+<div mat-dialog-content>
+  <mat-toolbar color="primary">
+    <span class="fill-remaining-space text-center"></span>
+    <div
+        fxLayout="row"
+        fxLayoutGap="20px"
+        fxLayoutAlign="end center"
+      ><button mat-icon-button class="close-icon" [mat-dialog-close]="false">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </mat-toolbar>
+  <div fxLayout="column" fxLayoutGap="20px" fxLayoutAlign="space-between stretch">
+    <!-- full name -->
+    <div class="working-time" fxFlex="100">
+      <mat-form-field class="example-full-width">
+        <input matInput [(ngModel)]="filter.name" placeholder="Machine Maker Name" cdkFocusInitial />
+      </mat-form-field>
+    </div>
+    <div fxFlex="100">
+      <mat-selection-list (selectionChange)="UpdateListIndustry($event)" #Industry1 fxFlex="50" fxLayout="column"
+        fxLayoutAlign="start center">
+        <mat-list-option color="primary" checkboxPosition="before" [selected]="IndustriesSelected(item)"
+          *ngFor="let item of listIndustries1" [value]="item">
+          {{ item.Description }}
+        </mat-list-option>
+      </mat-selection-list>
+      <mat-selection-list (selectionChange)="UpdateListIndustry($event)" #Industry2 fxFlex="50" fxLayout="column"
+        fxLayoutAlign="start center">
+        <mat-list-option color="primary" checkboxPosition="before" *ngFor="let item of listIndustries2"
+          [selected]="IndustriesSelected(item)" [value]="item">
+          {{ item.Description }}
+        </mat-list-option>
+      </mat-selection-list>
+    </div>
+  </div>
+
+  <div class="col-md-12 text-center footer-group">
+    <button mat-raised-button class="no-button" [mat-dialog-close]="false">
+      Cancel
+    </button>
+    <button [disabled]="filter.listIndustry.length === 0 || filter.name === null" mat-raised-button color="primary"
+      type="button" class="button" (click)="save()">
+      Submit
+    </button>
+  </div>
+</div>
+
+

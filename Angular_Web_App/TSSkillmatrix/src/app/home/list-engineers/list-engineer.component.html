@@ -1,0 +1,188 @@
+<section class="container top-container search-engineer">
+  <div class="row form-header" fxLayout="column" fxLayoutAlign="center center">
+    <!-- Section heading -->
+    <h3 class="text-center font-weight-bold">LIST TECHNICIAN</h3>
+    <hr class="w-header">
+  </div>
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <mat-form-field>
+      <mat-label>Select status</mat-label>
+      <mat-select (selectionChange)="GetlistEngineer()" [(ngModel)]="selected">
+        <mat-option value="1">Active</mat-option>
+        <mat-option value="2">Inactive</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="end center">
+      <div class="top-drop">
+        <p-autoComplete [(ngModel)]="asyncSelected" placeholder="Search Technician" [suggestions]="results"
+          (onSelect)="onSelect($event)" (completeMethod)="search($event)" field="DisplayName"></p-autoComplete>
+      </div>
+      <button pTooltip="Clear Filter" tooltipPosition="top" (click)="ClearFilter()" [hidden]="!isFilter" pButton
+        icon="pi pi-times" class="p-button-outlined p-button-rounded" aria-label="Example icon button with a home icon">
+      </button>
+      <!-- <button (click)="openFilerModal()" pButton type="button" icon="pi pi-search" label="Filters"
+        class="p-button-raised"></button> -->
+      <button (click)="ExportListEngineers()" [disabled]="listEngineer.length <1" pButton icon="pi pi-download"
+        class="p-button-outlined p-button-rounded" aria-label="Example icon button with a home icon">
+      </button>
+    </div>
+
+  </div>
+  <mat-divider></mat-divider>
+  <!-- <div fxLayout="row" fxLayoutAlign="end center">
+    <p-autoComplete [(ngModel)]="texts" [suggestions]="results2" (completeMethod)="search($event)" [multiple]="true">
+    </p-autoComplete>
+  </div> -->
+  <div class="row">
+    <div fxLayout="row" fxLayoutAlign="space-between stretch" class="table-engineers">
+      <p-table [value]="listEngineer" dataKey="TechId" [paginator]="true" [rows]="rows" [showCurrentPageReport]="true"
+        [lazy]="true" [first]="first" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [totalRecords]="totalRecords" [loading]="loading" [rowsPerPageOptions]="[3,5,10]"
+        (onLazyLoad)="loadCustomers($event)"
+        [globalFilterFields]="['DisplayName','Initials','listProskill.SkillName','listMachineSkill.MSName']">
+        <ng-template pTemplate="header">
+          <tr>
+            <th style="width: 3rem"></th>
+            <th pSortableColumn="DisplayName">Name <p-sortIcon field="name"></p-sortIcon>
+            </th>
+            <th>Title <p-sortIcon field="Initials"></p-sortIcon>
+            </th>
+            <th pSortableColumn="category">Professional Skills <p-sortIcon field="category"></p-sortIcon>
+            </th>
+            <th>Country <p-sortIcon field="rating"></p-sortIcon>
+            </th>
+            <th>Machine <p-sortIcon field="inventoryStatus"></p-sortIcon>
+            </th>
+          </tr>
+          <tr>
+            <th></th>
+            <th>
+              <input [disabled]="loading" pInputText type="text"
+                (input)="dt.filter($event.target.value, 'country.name', 'contains')" placeholder="Search by name"
+                class="p-column-filter">
+            </th>
+            <th></th>
+            <th>
+
+              <p-multiSelect [disabled]="loading" [options]="listProskill" [(ngModel)]="selectedCities"
+                defaultLabel="Select a Skills" optionLabel="SkillName" [style]="{'width': '100%'}" [filter]="false"
+                (onChange)="onRepresentativeChange($event)" class="multiselect-custom">
+                <ng-template let-value pTemplate="selectedItems">
+                  <div class="country-item country-item-value" *ngFor="let option of selectedCities">
+                    <div>{{option.SkillName}}</div>
+                  </div>
+                  <div *ngIf="!selectedCities || selectedCities.length === 0" class="country-placeholder">
+                    Select professional skills
+                  </div>
+                </ng-template>
+                <ng-template let-country pTemplate="item">
+                  <div class="country-item">
+                    <div>{{country.value.SkillName}}</div>
+                  </div>
+                </ng-template>
+              </p-multiSelect>
+            </th>
+            <th>
+              <p-multiSelect [disabled]="loading" [options]="listStationed" [virtualScroll]="true"
+                [showToggleAll]="false" [(ngModel)]="selectedStation" defaultLabel="Select a Country"
+                [maxSelectedLabels]="4" optionLabel="StationName" [style]="{'width':
+                '100%'}" [filter]="false" (onChange)="onCountryChange($event)" class="multiselect-custom">
+                <ng-template let-value pTemplate="selectedItems">
+                  <div class="country-item country-item-country-value" *ngFor="let option of selectedStation">
+                    <div>{{option.StationName}}</div>
+                  </div>
+                  <div *ngIf="!selectedStation || selectedStation.length === 0" class="country-placeholder">
+                    Select a country
+                  </div>
+                </ng-template>
+                <ng-template let-country pTemplate="item">
+                  <div class="country-item">
+                    <div>{{country.value.StationName}}</div>
+                  </div>
+                </ng-template>
+              </p-multiSelect>
+            </th>
+            <th>
+              <p-multiSelect [disabled]="loading" [options]="listMachineSkill" [virtualScroll]="true"
+                [(ngModel)]="selectedMachine" defaultLabel="Select a Machine Skill" optionLabel="MSName"
+                [style]="{'width': '100%'}" [filter]="false" (onChange)="onMachineSkillChange($event)"
+                class="multiselect-custom">
+                <ng-template let-value pTemplate="selectedItems">
+                  <div class="country-item-machine-value" *ngFor="let option of selectedMachine">
+                    <div>{{option.MSName}}</div>
+                  </div>
+                  <div *ngIf="!selectedMachine || selectedMachine.length === 0" class="country-placeholder">
+                    Select a machine skills
+                  </div>
+                </ng-template>
+                <ng-template let-country pTemplate="item">
+                  <div class="country-item">
+                    <div>{{country.value.MSName}}</div>
+                  </div>
+                </ng-template>
+              </p-multiSelect>
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product let-expanded="expanded">
+          <tr>
+            <td>
+              <button type="button" pButton pRipple [pRowToggler]="product"
+                class="p-button-text p-button-rounded p-button-plain"
+                [icon]="expanded ? 'pi pi-arrow-circle-down' : 'pi pi-arrow-circle-right'"></button>
+            </td>
+            <td><a [routerLink]="['/home/engineer-detail',product.TechId]">{{product.DisplayName}}</a></td>
+            <td>{{product.Title}}</td>
+            <td>
+              <span *ngFor="let subitem of product.Professionals;let i = index"
+                [class]="'customer-badge status-proposal'" pTooltip="{{subitem.Explain}}"
+                tooltipPosition="top">{{subitem.SkillCode}}</span></td>
+            <td>{{product.StationName}}</td>
+            <td>{{product.listAssign.length}}</td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="6">There are no technician yet.</td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="rowexpansion" let-product>
+          <tr>
+            <td colspan="7">
+              <div class="p-p-3" class="row-expanded">
+                <p-table [value]="product.listAssign" dataKey="SkillName">
+                  <ng-template pTemplate="header">
+          <tr>
+            <th pSortableColumn="customer">Machine </th>
+            <th pSortableColumn="date">Machine Application </th>
+            <th pSortableColumn="amount">Description </th>
+            <th pSortableColumn="stats">Skill List</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-machine>
+          <tr>
+            <td>{{machine.Maker.MakerName}}</td>
+            <td>{{machine.Maker.Model}}</td>
+            <td>{{machine.Comment}}</td>
+            <td><span *ngFor="let item of machine.MachineSkill" pTooltip="{{item.MSName}}"
+                [class]="'customer-badge status-info'">{{item.MSCode}}</span></td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="6">There are no machine maker for this technician yet.</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+    </td>
+    </tr>
+    </ng-template>
+    </p-table>
+  </div>
+  </div>
+</section>
+
+<ngx-spinner bdOpacity=0.6 bdColor="rgba(245,240,240,0)" size="medium" color="#b52d2d" type="ball-clip-rotate">
+  <p style="color: white"> Loading... </p>
+</ngx-spinner>

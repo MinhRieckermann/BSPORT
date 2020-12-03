@@ -1,0 +1,156 @@
+<div mat-dialog-content>
+  <mat-toolbar color="primary">
+    <span class="fill-remaining-space text-center"></span>
+    <div
+        fxLayout="row"
+        fxLayoutGap="20px"
+        fxLayoutAlign="end center"
+      ><button mat-icon-button class="close-icon" [mat-dialog-close]="false">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    
+  </mat-toolbar>
+  <mat-tab-group>
+    <mat-tab label="Machine/Maker">
+      <div
+        fxLayout="column"
+        fxLayoutGap="20px"
+        fxLayoutAlign="space-between stretch"
+      >
+
+        <div  class="working-time"  fxFlex="100" fxLayout="row" fxLayoutAlign="space-around start">
+          <!-- Professional Skills -->
+          <div fxFlex="50" fxLayout="column" fxLayoutAlign="start stretch">
+            <p class="title">Professional Skills</p>
+            <mat-selection-list
+              (selectionChange)="onProSkillChanged($event)"
+              #proskills
+            >
+              <mat-list-option
+                color="primary"
+                [selected]="ProSkillIsSelected(proskill)"
+                checkboxPosition="before"
+                *ngFor="let proskill of listProskill"
+                [value]="proskill"
+              >
+                {{ proskill.SkillName }}
+              </mat-list-option>
+            </mat-selection-list>
+          </div>
+          <!-- Machine SKills -->
+          <div fxFlex="50" fxLayout="column" fxLayoutAlign="start stretch">
+            <p class="title">Machine Skills</p>
+            <mat-selection-list
+              (selectionChange)="onMachineSkillChanged($event)"
+              #machineskill
+            >
+              <mat-list-option
+                color="primary"
+                [selected]="MachineIsSelected(machine)"
+                checkboxPosition="before"
+                *ngFor="let machine of listMachineSkill"
+                [value]="machine"
+              >
+                {{ machine.MSName }}
+              </mat-list-option>
+            </mat-selection-list>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Industry">
+      <div fxFlex="100">
+        <mat-selection-list
+          (selectionChange)="UpdateListIndustry($event)"
+          #Industry1
+          fxFlex="50"
+          fxLayout="column"
+          fxLayoutAlign="start center"
+        >
+          <mat-list-option
+            color="primary"
+            checkboxPosition="before"
+            [selected]="IndustriesSelected(item)"
+            *ngFor="let item of listIndustries1"
+            [value]="item"
+          >
+            {{ item.Description }}
+          </mat-list-option>
+        </mat-selection-list>
+        <mat-selection-list
+          (selectionChange)="UpdateListIndustry($event)"
+          #Industry2
+          fxFlex="50"
+          fxLayout="column"
+          fxLayoutAlign="start center"
+        >
+          <mat-list-option
+            color="primary"
+            checkboxPosition="before"
+            *ngFor="let item of listIndustries2"
+            [selected]="IndustriesSelected(item)"
+            [value]="item"
+          >
+            {{ item.Description }}
+          </mat-list-option>
+        </mat-selection-list>
+      </div>
+    </mat-tab>
+    <mat-tab label="Stationed">
+      <!-- Stationed -->
+      <div fxFlex="100">
+        <mat-selection-list
+          (selectionChange)="UpdateStationed($event)"
+          #Stationed1
+          fxFlex="50"
+          fxLayout="column"
+          fxLayoutAlign="start center"
+        >
+          <mat-list-option
+            color="primary"
+            [selected]="StationedSelected(item)"
+            checkboxPosition="before"
+            *ngFor="let item of list1"
+            [value]="item"
+          >
+            {{ item.StationName }}
+          </mat-list-option>
+        </mat-selection-list>
+        <mat-selection-list
+          #Stationed2
+          (selectionChange)="UpdateStationed($event)"
+          fxFlex="50"
+          fxLayout="column"
+          fxLayoutAlign="start center"
+        >
+          <mat-list-option
+            color="primary"
+            [selected]="StationedSelected(item)"
+            checkboxPosition="before"
+            *ngFor="let item of list2"
+            [value]="item"
+          >
+            {{ item.StationName }}
+          </mat-list-option>
+        </mat-selection-list>
+      </div>
+    </mat-tab>
+    
+  </mat-tab-group>
+
+  <div class="col-md-12 text-center footer-group">
+    <button mat-raised-button class="no-button" [mat-dialog-close]="false">
+      Cancel
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      type="button"
+      class="button"
+      (click)="save()"
+    >
+      Submit
+    </button>
+  </div>
+</div>

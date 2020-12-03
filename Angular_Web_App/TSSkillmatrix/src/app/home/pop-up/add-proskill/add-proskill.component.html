@@ -1,0 +1,85 @@
+<form [formGroup]="firstFormGroup">
+  <div fxLayout="column" fxLayoutAlign="space-between stretch">
+    <div fxFlex="100" fxLayout="column" fxLayoutGap="15px" fxLayoutAlign="center stretch">
+      <div fxFlex="100" fxLayout="row" fxLayoutAlign="start center">
+        <h5 class="font-weight-bold">Full Name :</h5>
+        <h5> {{technician.DisplayName}}</h5>
+      </div>
+      <div fxFlex="100" fxLayout="row" fxLayoutAlign="start center">
+        <p class="font-weight-bold">Email : </p>
+        <p>{{technician.EmailAddress}}</p>
+      </div>
+      <div fxFlex="100">
+        <mat-form-field class="form-element">
+          <mat-label>Title</mat-label>
+          <input matInput [errorStateMatcher]="matcher" formControlName="Title" required>
+          <mat-error *ngIf="
+                     !firstFormGroup.controls['Title'].valid
+                     ">
+            Required field
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div fxFlex="100">
+        <mat-form-field class="form-element">
+          <mat-label>Remark</mat-label>
+          <textarea formControlName="Remark" [errorStateMatcher]="matcher" [errorStateMatcher]="matcher" matInput
+            placeholder="Ex. It makes me feel..."></textarea>
+          <mat-error *ngIf="
+                  !firstFormGroup.controls['Remark'].valid
+                  ">
+            Required field, must be between 15 and 500 characters.
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div fxFlex="100">
+        <mat-form-field class="form-element">
+          <mat-label>Industry</mat-label>
+          <mat-select [errorStateMatcher]="matcher" [(ngModel)]="technician.IndustryId" formControlName="Industry"
+            required>
+            <mat-option *ngFor="let induster of listIndustries" [value]="induster.IndId">
+              {{induster.Description}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="firstFormGroup.controls['Industry'].hasError('required')">Please choose Industry</mat-error>
+        </mat-form-field>
+      </div>
+      <div fxFlex="100">
+        <mat-form-field class="form-element">
+          <mat-label>Country</mat-label>
+          <mat-select [errorStateMatcher]="matcher" [(ngModel)]="technician.StationId" formControlName="Country"
+            required>
+            <mat-option *ngFor="let country of listStationed" [value]="country.StationId">
+              {{country.StationName}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="firstFormGroup.controls['Country'].hasError('required')">Please choose country
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div fxFlex="100" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="space-around center">
+      <p class="bold">Please select engineer professional background</p>
+    </div>
+    <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="center center">
+      <div *ngFor="let item of listProskill">
+        <mat-checkbox [color]="primary" [value]="item.SkillId" (change)="changeProfessionalSkillLevel($event)">
+          {{item.SkillName}}
+        </mat-checkbox>
+      </div>
+    </div>
+    <div fxFlex="100" fxLayout="row" fxLayoutAlign="center center">
+      <mat-error class="text-center" *ngIf="
+            technician.ProSkill === 0
+            ">
+        Please select at least one professional background
+      </mat-error>
+    </div>
+    <div class="footer-submit" fxFlex="100" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="end end">
+      <button mat-stroked-button color="primary" [mat-dialog-close]="false">Cancel</button>
+      <button [disabled]="!firstFormGroup.valid || technician.ProSkill == 0" mat-stroked-button color="primary"
+        (click)="save()">Save</button>
+    </div>
+  </div>
+</form>

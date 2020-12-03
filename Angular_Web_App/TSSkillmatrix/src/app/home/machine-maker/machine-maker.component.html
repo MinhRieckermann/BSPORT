@@ -1,0 +1,241 @@
+<main>
+  <section class="container top-container">
+    <form>
+      <div class="row form-header">
+        <div class="col-12 right-box d-flex">
+          <div class="top-drop">
+            <input class="input-icon" type="text" placeholder="&#61442;  Search machine maker"
+              [(ngModel)]="asyncSelected" [typeahead]="dataSource" (typeaheadLoading)="changeTypeaheadLoading($event)"
+              (typeaheadOnSelect)="typeaheadOnSelect($event)" [typeaheadOptionsLimit]="10" typeaheadWaitMs="1000"
+              typeaheadOptionField="MakerName" autocomplete="off" (typeaheadNoResults)="typeaheadNoResults($event)"
+              name="asyncSelected" (ngModelChange)="onChange($event)" />
+          </div>
+          <div class="d-flex right-box-btn">
+            <div class="top-add">
+              <button type="button" class="btn btn-default btn-o" (click)="openFilerModal()"><i
+                  class="fa fa-filter"></i><span class="item-label">Filters</span>
+              </button>
+            </div>
+           
+            <div class="top-add" *ngIf="canEdit">
+              <button type="button" class="btn btn-default" data-toggle="modal" data-target="#addMachineModal">
+                <i class="fa fa-plus"></i>
+                <span class="item-label">Add Machine/Maker</span>
+              </button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="table-list table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Maker Name</th>
+                  <th>Industry</th>
+                  <th>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="shadow-sm" *ngFor="let item of jsonIndustry">
+                  <td>{{ item.MakerName }}</td>
+                  <td>{{ item.industries }}</td>
+                  <td class="action">
+                    <button *ngIf="canEdit" (click)="openModal(template, item.MaId)" mat-icon-button
+                      aria-label="Example icon-button with a heart icon">
+                      <mat-icon class="icon-title green-text">edit</mat-icon>
+                    </button>
+                    <button *ngIf="canEdit" (click)="openConfirmDeleteMachineMaker(item.MaId)" mat-icon-button
+                      aria-label="Example icon-button with a heart icon">
+                      <mat-icon class="icon-title red-text">delete</mat-icon>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="col-6">
+            <pagination [totalItems]="totalItem" name="currentPage" [(ngModel)]="currentPage"
+              (pageChanged)="pageChanged($event)"></pagination>
+          </div>
+          <div class="col-6">
+            <button type="button" *ngIf="isFilter" (click)="ClearFilter()"
+              class="btn btn-secondary pull-right">Clear</button>
+          </div>
+        </div>
+      </div>
+    </form>
+    <!-- Modal -->
+    <div class="modal fade search-modal" id="addMachineModal" tabindex="-1" role="dialog"
+      aria-labelledby="searchModalLAbel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <form class="search-form" #machinemakerForm="ngForm">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true"><i class="fa fa-times-circle"></i></span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-12">
+                  <h5 class="modal-title" id="searchModalLabel">
+                    ADD MACHINE MAKER
+                  </h5>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <div class="form-group">
+                    <label for="machineMaker">Machine/Maker Name</label>
+                    <input class="form-control" name="MakerName" id="machineMaker" #MakerName="ngModel" required
+                      [(ngModel)]="listMachineMaker.MakerName" />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <div class="form-group">
+                    <label for="username">Description</label>
+                    <textarea class="form-control" id="desc" name="MakerDescription" #MakerDescription="ngModel"
+                      required [(ngModel)]="listMachineMaker.MakerDescription"></textarea>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-12">
+                  <div class="form-group">
+                    <label for="username">Industry</label>
+                    <div class="row">
+                      <div class="col-6">
+                        <div class="form-check" *ngFor="let item of listIndustries1">
+                          <input type="checkbox" class="form-check-input" id="pharma"
+                            (change)="onFilterChange($event, item)" />
+                          <label class="form-check-label" for="pharma">{{
+                            item.Description
+                          }}</label>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <div class="form-check" *ngFor="let item of listIndustries2">
+                          <input type="checkbox" class="form-check-input" id="oilgas"
+                            (change)="onFilterChange($event, item)" />
+                          <label class="form-check-label" for="oilgas">{{
+                            item.Description
+                          }}</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-o" data-dismiss="modal">
+                Close
+              </button>
+              <button [disabled]="
+                  !machinemakerForm.form.valid ||
+                  listMachineMaker.industries.length < 1
+                " (click)="onSubmit()" id="addNewId" type="submit" data-dismiss="modal" class="btn btn-default">
+                <i class="fa fa-plus"></i> Add machine
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- Modal End-->
+
+    <!-- Modal -->
+
+    <ng-template #template>
+      <div class="search-modal" id="addMachineModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLAbel"
+        aria-hidden="true">
+        <form class="search-form" #UpdatemachinemakerForm="ngForm">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" aria-label="Close" (click)="modalRef.hide()">
+                <span aria-hidden="true"><i class="fa fa-times-circle"></i></span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-12">
+                  <h5 class="modal-title" id="searchModalLabel">
+                    UPDATE MACHINE MAKER
+                  </h5>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <div class="form-group">
+                    <label for="machineMaker">Machine/Maker Name</label>
+                    <input class="form-control" name="MakerName" id="machineMaker" #MakerName="ngModel" required
+                      [(ngModel)]="selectedMaker.MakerName" />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <div class="form-group">
+                    <label for="username">Description</label>
+                    <textarea class="form-control" id="desc" name="MakerDescription" #MakerDescription="ngModel"
+                      required [(ngModel)]="selectedMaker.MakerDescription"></textarea>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-12">
+                  <div class="form-group">
+                    <label for="username">Industry</label>
+                    <div class="row">
+                      <div class="col-6">
+                        <div *ngFor="let item of listIndustriesUpdate1">
+                          <p-checkbox name="animation" (change)="changeSkillMachines($event)"
+                            [checked]="CheckCondition(item.IndId)" [value]="item.IndId" outline="true" shape="curve"
+                            color="primary" animation="smooth">
+                            {{ item.Description }}
+                          </p-checkbox>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <div *ngFor="let item of listIndustriesUpdate2">
+                          <p-checkbox name="animation" (change)="changeSkillMachines($event)"
+                            [checked]="CheckCondition(item.IndId)" [value]="item.IndId" outline="true" shape="curve"
+                            color="primary" animation="smooth">
+                            {{ item.Description }}
+                          </p-checkbox>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" (click)="modalRef.hide()" class="btn btn-o" data-dismiss="modal">
+                Close
+              </button>
+              <button [disabled]="
+                  !UpdatemachinemakerForm.form.valid ||
+                  selectedMaker.industries.length < 1
+                " (click)="UpdateMaker()" id="addNewId" type="submit" data-dismiss="modal" class="btn btn-default">
+                <i class="fa fa-plus"></i> Update machine
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </ng-template>
+    <!-- Modal End-->
+  </section>
+</main>
+<ngx-spinner bdOpacity="0.6" bdColor="rgba(245,240,240,0)" size="medium" color="#b52d2d" type="ball-clip-rotate">
+  <p style="color: white">Loading...</p>
+</ngx-spinner>
