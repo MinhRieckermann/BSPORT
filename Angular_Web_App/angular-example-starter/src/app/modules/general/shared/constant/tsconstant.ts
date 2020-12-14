@@ -5,7 +5,7 @@ import { QuerySearch } from './../models/query-search.model';
 
 export class AppSettings {
 
-//public static API_service      ='http://skillmatrix.local/';
+//public static API_service      ='http://localhost:6110/';
 
   /* server test */
   //public static API_service      ='http://10.99.1.43:81';
@@ -13,6 +13,7 @@ export class AppSettings {
   //* server staging */
   //public static API_service = "http://10.99.1.44:82";
   public static API_service ="http://localhost:63687"
+
   public static Role_Admin = 11;
   public static Role_Manager = 12;
   public static Role_Technician = 13;
@@ -40,11 +41,15 @@ export class AppSettings {
     country:string,
     tournament:string,
     season:string,
+    pagesize: number,
+    pagenumber:number
   ) {
     let query = new QueryOddModel();
     query.country = country;
     query.tournament = tournament;
     query.season = season;
+    query.pagesize = pagesize;
+    query.pagenumber = pagenumber;
     
 
     return query;

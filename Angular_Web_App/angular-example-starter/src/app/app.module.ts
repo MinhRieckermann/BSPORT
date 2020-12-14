@@ -16,9 +16,11 @@ import { AuthGuard } from './modules/general/auth/auth.guard';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent
+   
   ],
   imports: [
     BrowserModule,

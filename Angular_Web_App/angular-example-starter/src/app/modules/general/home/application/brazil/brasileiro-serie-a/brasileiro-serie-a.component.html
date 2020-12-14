@@ -1,0 +1,148 @@
+<p>brasileiro-serie-a works!</p>
+<div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-7">
+          <h5 class="card-title text-center text-info">FormControl</h5>
+          <form>
+            <div class="form-row">
+              <div class="form-group col-md-12">
+                <label for="name">Week</label>
+                <input type="text" class="form-control" id="name" [formControl]="Week">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="releaseDate">tournament</label>
+                <input type="text" class="form-control" id="releaseDate" [formControl]="tournament">
+              </div>
+              <div class="form-group col-md-4">
+                <label for="budget">season</label>
+                <input type="text" class="form-control" id="budget" [formControl]="season">
+              </div>
+              <div class="form-group col-md-4">
+                <label for="worldwide">country</label>
+                <input type="text" class="form-control" id="worldwide" [formControl]="country">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-12">
+                <label for="summary">TypeBet</label>
+                <input type="text" class="form-control" id="name" [formControl]="TypeBet">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-12">
+                <label for="summary">Match</label>
+                <input type="text" class="form-control" id="name" [formControl]="Match">
+              </div>
+            </div>
+           
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="summary">Home</label>
+                <input type="text" class="form-control" id="name" [formControl]="Home">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="summary">HomeOdd</label>
+                <input type="text" class="form-control" id="name" [formControl]="HomeOdd">
+              </div>
+            </div>
+           
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="summary">Away</label>
+                <input type="text" class="form-control" id="name" [formControl]="Away">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="summary">AwayOdd</label>
+                <input type="text" class="form-control" id="name" [formControl]="AwayOdd">
+              </div>
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group col-md-12">
+                <label for="summary">Result</label>
+                <input type="text" class="form-control" id="name" [formControl]="Result">
+              </div>
+            </div>
+           
+            <!--
+            <div class="form-group">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="franchise" [formControl]="franchise">
+                <label class="form-check-label" for="franchise">
+                  Franchise
+                </label>
+              </div>
+            </div>
+            -->
+            <button type="submit" (click)="resetControls()" class="btn btn-info mr-2">Reset Controls</button>
+            <button type="submit" (click)="updateControls()" class="btn btn-info mr-2">Update Controls</button>
+            <button type="submit" (click)="saveControls()" class="btn btn-info mr-2">Save Controls</button>
+          </form>
+        </div>
+        <div class="col-5">
+          <h5 class="card-title text-center text-info">FormControl Result</h5>
+          <strong>country</strong> : {{ country.value }}<br>
+          <strong>tournament</strong> : {{ tournament.value }}<br>
+          <strong>season</strong> : {{ season.value }}<br>
+          <strong>Week</strong> : {{ Week.value }}<br>
+          <strong>TypeBet</strong> : {{ TypeBet.value }}<br>
+          <strong>Match</strong> : {{ Match.value }}<br>
+          <strong>Home</strong> : {{ Home.value }}<br>
+          <strong>HomeOdd</strong> : {{ HomeOdd.value }}<br>
+          <strong>Away</strong> : {{ Away.value }}<br>
+          <strong>AwayOdd</strong> : {{ AwayOdd.value }}<br>
+          <strong>Result</strong> : {{ Result.value }}<br>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>country</th>
+              <th>tournament</th>
+              <th>season</th>
+              <th>Week</th>
+              <th>Match</th>
+              <th>TypeBet</th>
+              <th>Home</th>
+              <th>HomeOdd</th>
+              <th>Away</th>
+              <th>AwayOdd</th>
+              <th>Result</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="shadow-sm" *ngFor="let item of data_Oddanalysis">
+              <td>{{item.Id}}</td>
+              <td>{{item.country}}</td>
+              <td>{{item.tournament}}</td>
+              <td>{{item.season}}</td>
+              <td>{{item.Week}}</td>
+              <td>{{item.Match}}</td>
+              <td>{{item.TypeBet}}</td>
+              <td>{{item.Home}}</td>
+              <td>{{item.HomeOdd}}</td>
+              <td>{{item.Away}}</td>
+              <td>{{item.AwayOdd}}</td>
+              <td>{{item.Result}}</td>
+              
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <pagination [totalItems]="totalItem" name="currentPage" [(ngModel)]="currentPage"
+            (pageChanged)="pageChanged($event)"></pagination>
+        </div>
+    </div>
+  </div>

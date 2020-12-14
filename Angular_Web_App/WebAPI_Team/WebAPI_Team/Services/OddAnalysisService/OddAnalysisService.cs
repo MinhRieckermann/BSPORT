@@ -33,13 +33,14 @@ namespace WebAPI_Team.Services.OddAnalysisService
         }
 
         // Get  with Specify
-        public JsonObject GetListOddAnalysis(string country, string tournament, string season)
+        public JsonObject GetListOddAnalysis(QueryOddModel model)
         {
             try
             {
 
-                var ListOddAnalysis = _unitOfWork.OddAnalysisRepository.Get(x => x.country.Equals(country) && x.tournament.Equals(tournament) && x.season.Equals(season)).OrderBy(x=>x.Week);
+                var ListOddAnalysis = _unitOfWork.OddAnalysisRepository.Get(x => x.country.Equals(model.country) && x.tournament.Equals(model.tournament) && x.season.Equals(model.season)).OrderBy(x => x.Week);
                 var total = ListOddAnalysis.Count();
+                ListOddAnalysis = ListOddAnalysis.Skip(model.pagesize * (model.pagenumber - 1)).Take(model.pagesize).OrderBy(x => x.Week);
                 JsonObject json = new JsonObject()
                 {
                     objects = ListOddAnalysis,

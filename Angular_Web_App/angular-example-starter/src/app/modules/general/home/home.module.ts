@@ -4,7 +4,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { HomeRoutingModule } from './home-routing.module';
-
+import {ModalModule } from "ngx-bootstrap/modal";
+import{ TooltipModule } from "ngx-bootstrap/tooltip"
+import{TypeaheadModule} from "ngx-bootstrap/typeahead"
 
 
 @NgModule({
@@ -14,7 +16,7 @@ import { HomeRoutingModule } from './home-routing.module';
   imports: [
     CommonModule,
     HomeRoutingModule,
-    HttpClientModule
+    HttpClientModule,ModalModule.forRoot(),TooltipModule.forRoot(),TypeaheadModule.forRoot()
   ]
 })
 export class HomeModule { }

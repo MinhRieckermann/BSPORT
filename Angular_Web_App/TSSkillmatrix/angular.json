@@ -27,10 +27,10 @@
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/css/style.css",
               "node_modules/ngx-toastr/toastr.css",
-			  "node_modules/primeng/resources/themes/mdc-light-indigo/theme.css",			 
-			  "node_modules/primeng/resources/primeng.min.css",
-			   "node_modules/primeflex/primeflex.css",
-			  "node_modules/primeicons/primeicons.css",
+              "node_modules/primeng/resources/themes/mdc-light-indigo/theme.css",
+              "node_modules/primeng/resources/primeng.min.css",
+              "node_modules/primeflex/primeflex.css",
+              "node_modules/primeicons/primeicons.css"
             ],
             "scripts": []
           },
@@ -128,5 +128,8 @@
       }
     }
   },
-  "defaultProject": "TSSkillmatrix"
+  "defaultProject": "TSSkillmatrix",
+  "cli": {
+    "analytics": "f436593e-b9ba-4a0b-a053-cebc48e8e3b3"
+  }
 }

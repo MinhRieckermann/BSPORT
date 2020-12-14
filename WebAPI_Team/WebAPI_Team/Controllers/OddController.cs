@@ -116,7 +116,7 @@ namespace WebAPI_Team.Controllers
         {
 
             OddAnalysisService oddService = new OddAnalysisService(unitOfWork);
-            var result = oddService.GetListOddAnalysis(model.country, model.tournament, model.season);
+            var result = oddService.GetListOddAnalysis(model);
 
             if (result != null)
             {

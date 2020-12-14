@@ -1,0 +1,124 @@
+<p>ecuador works!</p>
+<div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-7">
+          <h5 class="card-title text-center text-success">FormBuilder</h5>
+          <form [formGroup]="exampleForm">
+            <div class="form-row">
+              <div class="form-group col-md-12">
+                <label for="name">Week</label>
+                <input type="text" class="form-control" id="name" formControlName="Week">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="releaseDate">tournament</label>
+                <input type="text" class="form-control" id="releaseDate" formControlName="tournament">
+              </div>
+              <div class="form-group col-md-4">
+                <label for="budget">season</label>
+                <input type="text" class="form-control" id="budget" formControlName="season">
+              </div>
+              <div class="form-group col-md-4">
+                <label for="worldwide">country</label>
+                <input type="text" class="form-control" id="worldwide" formControlName="country">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-12">
+                <label for="name">TypeBet</label>
+                <input type="text" class="form-control" id="name" formControlName="TypeBet">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-12">
+                <label for="name">Match</label>
+                <input type="text" class="form-control" id="name" formControlName="Match">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="summary">Home</label>
+                <input type="text" class="form-control" id="name" formControlName="Home">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="summary">HomeOdd</label>
+                <input type="text" class="form-control" id="name" formControlName="HomeOdd">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="summary">Away</label>
+                <input type="text" class="form-control" id="name" formControlName="Away">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="summary">AwayOdd</label>
+                <input type="text" class="form-control" id="name" formControlName="AwayOdd">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-12">
+                <label for="summary">Result</label>
+                <input type="text" class="form-control" id="name" formControlName="Result">
+              </div>
+            </div>
+            <button type="submit" (click)="resetControls()" class="btn btn-success mr-2">Reset Controls</button>
+            <button type="submit" (click)="saveControls()" class="btn btn-success mr-2">Update Controls</button>
+          </form>
+        </div>
+        <div class="col-5">
+          <h5 class="card-title text-center text-success">FormBuilder Result</h5>
+          <strong>Valid</strong> : {{ exampleForm.valid }}<br>
+          <strong>Value</strong>
+          <!--div [innerHTML]="exampleForm.value | prettyjson"></div-->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>country</th>
+              <th>tournament</th>
+              <th>season</th>
+              <th>Week</th>
+              <th>Match</th>
+              <th>TypeBet</th>
+              <th>Home</th>
+              <th>HomeOdd</th>
+              <th>Away</th>
+              <th>AwayOdd</th>
+              <th>Result</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="shadow-sm" *ngFor="let item of data_Oddanalysis">
+              <td>{{item.Id}}</td>
+              <td>{{item.country}}</td>
+              <td>{{item.tournament}}</td>
+              <td>{{item.season}}</td>
+              <td>{{item.Week}}</td>
+              <td>{{item.Match}}</td>
+              <td>{{item.TypeBet}}</td>
+              <td>{{item.Home}}</td>
+              <td>{{item.HomeOdd}}</td>
+              <td>{{item.Away}}</td>
+              <td>{{item.AwayOdd}}</td>
+              <td>{{item.Result}}</td>
+              
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <pagination [totalItems]="totalItem" name="currentPage" [(ngModel)]="currentPage"
+            (pageChanged)="pageChanged($event)"></pagination>
+        </div>
+    </div>
+  </div>
